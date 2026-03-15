@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Athish Vikraman — FPGA · Embedded · Firmware · Hardware</title>
+<meta name="description" content="Athish Vikraman — FPGA/SoC design, embedded firmware, hardware engineering. RV32IM CPU designer. Seeking co-op.">
+<meta name="theme-color" content="#050810">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<style>
+:root{
+  --void:#050810;--deep:#0a0f1c;--surf:#0e1528;--card:#131b30;
+  --card2:#182240;--bdr:#1c2847;--bdr-a:#0d9488;
+  --w:#edf0f7;--body:#94a3bf;--dim:#586b85;
+  --ac:#0d9488;--ac2:#2dd4bf;--ac-g:rgba(13,148,136,.10);--ac-g2:rgba(13,148,136,.22);
+  --gld:#dba63a;--gld-g:rgba(219,166,58,.08);
+  --purp:#818cf8;--purp-g:rgba(129,140,248,.10);
+  --dsp:'Fraunces',Georgia,serif;--sn:'Manrope',system-ui,sans-serif;--mn:'JetBrains Mono',monospace;
+  --mx:1140px;--r:12px;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;font-size:16px;-webkit-font-smoothing:antialiased}
+body{font-family:var(--sn);background:var(--void);color:var(--w);line-height:1.7;overflow-x:hidden}
+::selection{background:var(--ac);color:#fff}
+a{color:var(--ac2);text-decoration:none;transition:color .2s}a:hover{color:var(--gld)}
+code{font-family:var(--mn);font-size:.82em;color:var(--ac2);background:var(--ac-g);padding:1px 6px;border-radius:3px}
+
+.w{max-width:var(--mx);margin:0 auto;padding:0 28px}
+.sec{padding:100px 0}
+
+/* ═══ REVEAL ═══ */
+.rv{opacity:0;transform:translateY(24px);transition:opacity .65s cubic-bezier(.22,1,.36,1),transform .65s cubic-bezier(.22,1,.36,1)}
+.rv.v{opacity:1;transform:none}
+.d1{transition-delay:.06s}.d2{transition-delay:.12s}.d3{transition-delay:.18s}.d4{transition-delay:.24s}.d5{transition-delay:.3s}
+
+/* ═══ SECTION HEADER ═══ */
+.sh-n{font-family:var(--mn);font-size:.66rem;letter-spacing:3px;text-transform:uppercase;color:var(--ac);display:block;margin-bottom:10px}
+.sh-t{font-family:var(--dsp);font-size:clamp(1.9rem,4vw,2.8rem);font-weight:600;line-height:1.12;margin-bottom:10px;letter-spacing:-.3px}
+.sh-t em{font-style:italic;color:var(--ac2);font-weight:400}
+.sh-d{color:var(--body);font-size:.95rem;max-width:520px;margin-bottom:48px;font-weight:300;line-height:1.8}
+
+/* ═══ DIVIDER ═══ */
+.divider{display:flex;align-items:center;gap:14px;margin-bottom:28px}
+.divider .pill{padding:4px 14px;border-radius:20px;font-size:.68rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#fff;flex-shrink:0}
+.divider .pill-g{background:linear-gradient(135deg,var(--ac),var(--ac2))}
+.divider .pill-u{background:linear-gradient(135deg,#6366f1,var(--purp))}
+.divider h3{font-size:1.1rem;font-weight:700;white-space:nowrap}
+.divider .rule{flex:1;height:1px;background:var(--bdr)}
+
+/* ═══════════════════════════════════════════════════
+   NAV
+   ═══════════════════════════════════════════════════ */
+.nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:14px 0;transition:all .3s}
+.nav.stuck{background:rgba(5,8,16,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--bdr);padding:10px 0}
+.nav .w{display:flex;justify-content:space-between;align-items:center}
+.n-logo{font-family:var(--dsp);font-size:1.3rem;font-weight:600;color:var(--w)}.n-logo span{color:var(--ac2)}
+.n-links{display:flex;gap:24px;list-style:none}
+.n-links a{color:var(--dim);font-size:.78rem;font-weight:600;letter-spacing:.5px;text-transform:uppercase;transition:color .2s}
+.n-links a:hover{color:var(--ac2)}
+.n-mob{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px}
+.n-mob span{display:block;width:22px;height:1.5px;background:var(--w)}
+
+/* ═══════════════════════════════════════════════════
+   HERO
+   ═══════════════════════════════════════════════════ */
+.hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden}
+#hc{position:absolute;inset:0;z-index:0}
+.hero-fade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,8,16,.15) 0%,rgba(5,8,16,.55) 55%,var(--void) 100%);z-index:1;pointer-events:none}
+.hero-c{position:relative;z-index:2;padding-top:80px}
+
+/* Role targeting banner */
+.role-bar{
+  display:flex;gap:10px;flex-wrap:wrap;margin-bottom:28px;
+}
+.role-tag{
+  padding:6px 16px;border-radius:4px;font-family:var(--mn);font-size:.72rem;
+  font-weight:500;letter-spacing:1px;text-transform:uppercase;
+  background:var(--ac-g);border:1px solid rgba(13,148,136,.2);color:var(--ac2)
+}
+.role-tag.primary{background:var(--ac);border-color:var(--ac);color:#fff;font-weight:700}
+
+.hero-name{
+  font-family:var(--dsp);font-size:clamp(2.8rem,7.5vw,5rem);
+  font-weight:600;line-height:1.04;letter-spacing:-2px;margin-bottom:20px
+}
+.hero-name .it{font-style:italic;color:var(--ac2);font-weight:400}
+.hero-desc{font-size:1.05rem;color:var(--body);max-width:560px;margin-bottom:36px;font-weight:300;line-height:1.85}
+.hero-desc strong{color:var(--w);font-weight:600}
+.hero-btns{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:64px}
+.btn{
+  display:inline-flex;align-items:center;gap:7px;padding:10px 22px;
+  border-radius:6px;font-size:.8rem;font-weight:700;font-family:var(--sn);
+  cursor:pointer;transition:all .25s;border:none;letter-spacing:.3px
+}
+.btn-f{background:var(--ac);color:#fff}
+.btn-f:hover{background:var(--ac2);color:#000;transform:translateY(-2px);box-shadow:0 8px 28px var(--ac-g2)}
+.btn-o{background:transparent;color:var(--w);border:1px solid var(--bdr)}
+.btn-o:hover{border-color:var(--ac);color:var(--ac2);transform:translateY(-2px)}
+
+.hero-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;padding-top:36px;border-top:1px solid var(--bdr)}
+.hero-card{
+  background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);
+  padding:18px 20px;transition:border-color .2s
+}
+.hero-card:hover{border-color:var(--ac)}
+.hero-card .val{font-family:var(--dsp);font-size:1.5rem;font-weight:600;color:var(--ac2);line-height:1.2}
+.hero-card .lbl{font-size:.7rem;color:var(--dim);font-weight:500;margin-top:2px}
+
+/* ═══════════════════════════════════════════════════
+   ABOUT
+   ═══════════════════════════════════════════════════ */
+.ab-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:48px;align-items:start}
+.ab-text p{color:var(--body);margin-bottom:14px;font-weight:300;font-size:.92rem;line-height:1.85}
+.ab-text strong{color:var(--w);font-weight:600}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:18px}
+.tg{padding:4px 13px;background:var(--card);border:1px solid var(--bdr);border-radius:20px;font-size:.73rem;font-weight:500;color:var(--body);transition:all .2s}
+.tg:hover{border-color:var(--ac);color:var(--ac2)}
+.ab-cards{display:flex;flex-direction:column;gap:10px}
+.ac{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:20px;transition:all .3s;transform-style:preserve-3d}
+.ac:hover{border-color:var(--ac);transform:perspective(800px) rotateY(-1.5deg) translateX(3px);box-shadow:-4px 4px 20px rgba(0,0,0,.2)}
+.ac .mono{font-family:var(--mn);font-size:.62rem;color:var(--ac);letter-spacing:1px}
+.ac h4{font-size:.88rem;font-weight:700;margin:2px 0 1px}
+.ac p{font-size:.78rem;color:var(--dim)}
+
+/* ═══════════════════════════════════════════════════
+   PROJECTS
+   ═══════════════════════════════════════════════════ */
+.pg{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:20px;perspective:1400px}
+.pc{
+  background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);
+  padding:26px;position:relative;overflow:hidden;
+  transform-style:preserve-3d;
+  transition:transform .4s cubic-bezier(.22,1,.36,1),border-color .3s,box-shadow .4s
+}
+.pc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;opacity:0;transition:opacity .3s}
+.pc.gc::before{background:linear-gradient(90deg,var(--ac),var(--ac2))}
+.pc.uc::before{background:linear-gradient(90deg,#6366f1,var(--purp))}
+.pc:hover{border-color:var(--bdr-a);box-shadow:0 16px 40px rgba(0,0,0,.3),0 0 30px var(--ac-g)}
+.pc:hover::before{opacity:1}
+
+.pc.feat{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:28px;border-color:rgba(219,166,58,.15);background:linear-gradient(135deg,var(--card),rgba(219,166,58,.02))}
+.pc.feat::before{opacity:1;background:linear-gradient(90deg,var(--gld),var(--ac2))}
+.pc.feat:hover{border-color:var(--gld);box-shadow:0 16px 40px rgba(0,0,0,.35),0 0 30px var(--gld-g)}
+
+.fb{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;background:var(--gld-g);border:1px solid rgba(219,166,58,.2);border-radius:4px;font-size:.64rem;font-weight:700;color:var(--gld);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px}
+.pl{font-family:var(--mn);font-size:.64rem;color:var(--ac);letter-spacing:1px;text-transform:uppercase;margin-bottom:7px}
+.pc h3{font-size:1.05rem;font-weight:700;margin-bottom:8px;line-height:1.3}
+.pd{font-size:.84rem;color:var(--body);margin-bottom:12px;line-height:1.75;font-weight:300}
+
+/* Results box */
+.pr{
+  font-size:.82rem;color:var(--body);line-height:1.7;font-weight:300;
+  padding:12px 14px;background:rgba(13,148,136,.035);
+  border-left:2px solid var(--ac);
+  border-radius:0 var(--r) var(--r) 0;margin-bottom:14px
+}
+.pr strong{color:var(--w);font-weight:600}
+
+.pt{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:14px}
+.pt span{padding:2px 8px;background:var(--ac-g);border:1px solid rgba(13,148,136,.12);border-radius:3px;font-family:var(--mn);font-size:.64rem;color:var(--ac2)}
+.plinks{display:flex;gap:12px}
+.plinks a{font-size:.76rem;font-weight:600}
+
+/* ═══════════════════════════════════════════════════
+   SKILLS
+   ═══════════════════════════════════════════════════ */
+.sk-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px}
+.sk{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:22px;transition:all .3s;position:relative;overflow:hidden}
+.sk::after{content:'';position:absolute;top:-40%;left:-40%;width:180%;height:180%;background:radial-gradient(circle,var(--ac-g) 0%,transparent 60%);opacity:0;transition:opacity .35s;pointer-events:none}
+.sk:hover{border-color:var(--ac);transform:translateY(-2px)}.sk:hover::after{opacity:1}
+.sk-t{font-family:var(--mn);font-size:.64rem;color:var(--ac);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px;font-weight:500}
+.sk ul{list-style:none}.sk li{font-size:.82rem;color:var(--body);padding:3px 0;border-bottom:1px solid rgba(28,40,71,.4);font-weight:300}.sk li:last-child{border:none}
+
+/* ═══════════════════════════════════════════════════
+   COURSEWORK
+   ═══════════════════════════════════════════════════ */
+.cw-g{display:grid;grid-template-columns:1fr 1fr;gap:36px}
+.cw-b h4{font-size:.9rem;font-weight:700;margin-bottom:3px;display:flex;align-items:center;gap:7px}
+.cw-b .dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.cw-b .dot-g{background:var(--ac2)}.cw-b .dot-u{background:var(--purp)}
+.cw-b .sub{font-size:.72rem;color:var(--dim);margin-bottom:12px}
+.cw-p{display:flex;flex-wrap:wrap;gap:5px}
+.cw-p span{padding:4px 11px;background:var(--card);border:1px solid var(--bdr);border-radius:5px;font-size:.76rem;color:var(--body);transition:all .2s}
+.cw-p span:hover{border-color:var(--ac);color:var(--ac2)}
+
+/* ═══════════════════════════════════════════════════
+   TIMELINE
+   ═══════════════════════════════════════════════════ */
+.tl{position:relative;padding-left:26px}
+.tl::before{content:'';position:absolute;left:4px;top:5px;bottom:5px;width:1px;background:var(--bdr)}
+.ti{position:relative;padding-bottom:28px}.ti:last-child{padding-bottom:0}
+.ti::before{content:'';position:absolute;left:-25px;top:6px;width:8px;height:8px;border-radius:50%;background:var(--void);border:2px solid var(--ac)}
+.ti .dt{font-family:var(--mn);font-size:.66rem;color:var(--ac);letter-spacing:1px;margin-bottom:3px}
+.ti h3{font-size:.92rem;font-weight:700;margin-bottom:1px}
+.ti h4{font-size:.8rem;color:var(--dim);font-weight:400;font-style:italic;margin-bottom:6px}
+.ti ul{list-style:none}.ti li{font-size:.82rem;color:var(--body);padding:1px 0 1px 12px;position:relative;font-weight:300}.ti li::before{content:'▸';position:absolute;left:0;color:var(--ac)}
+
+/* ═══════════════════════════════════════════════════
+   CONTACT
+   ═══════════════════════════════════════════════════ */
+.ct-g{display:grid;grid-template-columns:1fr 1fr;gap:48px}
+.ct-info p{color:var(--body);margin-bottom:24px;font-weight:300;line-height:1.8;font-size:.92rem}
+.ct-ls{display:flex;flex-direction:column;gap:8px}
+.ct-l{display:block;padding:12px 16px;background:var(--card);border:1px solid var(--bdr);border-radius:8px;color:var(--w);font-size:.84rem;transition:all .2s}
+.ct-l:hover{border-color:var(--ac);transform:translateX(3px);color:var(--ac2)}
+.ct-l .lb{font-size:.66rem;color:var(--dim);display:block;font-weight:500;margin-bottom:1px}
+.ct-f{display:flex;flex-direction:column;gap:10px}
+.ct-f input,.ct-f textarea{padding:11px 14px;background:var(--card);border:1px solid var(--bdr);border-radius:8px;color:var(--w);font-family:var(--sn);font-size:.84rem;transition:border .2s;outline:none}
+.ct-f input:focus,.ct-f textarea:focus{border-color:var(--ac)}
+.ct-f textarea{min-height:110px;resize:vertical}
+.ct-f input::placeholder,.ct-f textarea::placeholder{color:var(--dim)}
+
+.footer{padding:28px 0;border-top:1px solid var(--bdr);text-align:center}
+.footer p{font-size:.72rem;color:var(--dim)}
+
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:768px){
+  .n-links{display:none}.n-mob{display:flex}
+  .n-links.open{display:flex;flex-direction:column;position:absolute;top:50px;left:0;right:0;background:rgba(5,8,16,.96);backdrop-filter:blur(20px);padding:18px 28px;gap:10px;border-bottom:1px solid var(--bdr)}
+  .hero-grid{grid-template-columns:1fr 1fr;gap:12px}
+  .ab-grid,.ct-g,.cw-g{grid-template-columns:1fr}
+  .pg{grid-template-columns:1fr}.pc.feat{grid-template-columns:1fr}
+  .sec{padding:64px 0}.hero-name{letter-spacing:-1px}
+  .role-bar{gap:6px}.role-tag{font-size:.64rem;padding:4px 10px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav"><div class="w">
+  <a href="#" class="n-logo">athish<span>.</span></a>
+  <ul class="n-links" id="nL">
+    <li><a href="#about">About</a></li><li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li><li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="n-mob" id="nM" aria-label="Menu"><span></span><span></span><span></span></button>
+</div></nav>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section class="hero" id="hero">
+  <canvas id="hc"></canvas>
+  <div class="hero-fade"></div>
+  <div class="w hero-c">
+
+    <!-- ROLE TARGETING — first thing recruiters see -->
+    <div class="role-bar rv">
+      <span class="role-tag primary">FPGA / SoC Design</span>
+      <span class="role-tag">Embedded Systems</span>
+      <span class="role-tag">Firmware Engineering</span>
+      <span class="role-tag">Hardware Design</span>
+    </div>
+
+    <h1 class="hero-name rv d1">Athish<br><span class="it">Vikraman</span></h1>
+
+    <p class="hero-desc rv d2">
+      I designed a <strong>5-stage pipelined RISC-V CPU</strong> with a
+      <strong>4×4 systolic array coprocessor</strong>, synthesized at 100 MHz on Zynq
+      UltraScale+. M.S. Electrical Engineering at CWRU — building from
+      RTL to board-level.
+    </p>
+
+    <div class="hero-btns rv d3">
+      <a href="#" class="btn btn-f">↓ Resume</a>
+      <a href="https://github.com/athish22072003/rv32im-systolic-coprocessor" target="_blank" class="btn btn-o">GitHub</a>
+      <a href="https://linkedin.com/in/" target="_blank" class="btn btn-o">LinkedIn</a>
+      <a href="#contact" class="btn btn-o">Contact</a>
+    </div>
+
+    <div class="hero-grid rv d4">
+      <div class="hero-card"><div class="val">100 MHz</div><div class="lbl">RV32IM SoC — Zynq</div></div>
+      <div class="hero-card"><div class="val">32/32</div><div class="lbl">Verification Checks</div></div>
+      <div class="hero-card"><div class="val">3,808</div><div class="lbl">LUTs — Full SoC</div></div>
+      <div class="hero-card"><div class="val">346 MHz</div><div class="lbl">Pipelined Fmax</div></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════ ABOUT ═══════════ -->
+<section class="sec" id="about">
+<div class="w">
+  <span class="sh-n rv">01 — About</span>
+  <h2 class="sh-t rv">Engineering hardware<br>that <em>works.</em></h2>
+  <div class="ab-grid">
+    <div class="ab-text rv">
+      <p>M.S. Electrical Engineering student at <strong>Case Western Reserve University</strong> where I designed a <strong>5-stage pipelined RISC-V CPU with a systolic array coprocessor</strong>, synthesized at 100 MHz on Zynq UltraScale+.</p>
+      <p>My graduate work includes a 3-mode dot-product accelerator at 121.4 MHz, parameterized pipelined datapaths reaching <strong>346 MHz</strong>, and an event-driven embedded surveillance system on Raspberry Pi.</p>
+      <p>B.Tech in <strong>Electronics &amp; Instrumentation</strong> from Manipal Institute of Technology — 8051 medical monitors, ESP32 IoT platforms, and Arduino control systems.</p>
+      <div class="tags">
+        <span class="tg">RISC-V / CPU Design</span><span class="tg">Systolic Arrays</span>
+        <span class="tg">FPGA / RTL</span><span class="tg">Embedded Firmware</span>
+        <span class="tg">Analog Circuits</span><span class="tg">Test &amp; Measurement</span>
+        <span class="tg">Microcontrollers</span><span class="tg">Semiconductor Devices</span>
+      </div>
+    </div>
+    <div class="ab-cards rv d2">
+      <div class="ac"><span class="mono">2025 — Present</span><h4>Case Western Reserve University</h4><p>M.S. Electrical Engineering · 3.25/4.0</p></div>
+      <div class="ac"><span class="mono">2021 — 2025</span><h4>Manipal Institute of Technology</h4><p>B.Tech E&amp;I · 3.30/4.0 (WES)</p></div>
+      <div class="ac"><span class="mono">Seeking</span><h4>Fall 2026 Co-op</h4><p>FPGA · Embedded · Firmware · Hardware</p></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ═══════════ PROJECTS ═══════════ -->
+<section class="sec" id="projects" style="background:var(--deep)">
+<div class="w">
+  <span class="sh-n rv">02 — Projects</span>
+  <h2 class="sh-t rv">What I've <em>built.</em></h2>
+  <p class="sh-d rv">Every project below is verified, synthesized, or deployed. Results are real.</p>
+
+  <!-- GRADUATE -->
+  <div class="divider rv"><span class="pill pill-g">Graduate</span><h3>Graduate-Level Work</h3><span class="rule"></span></div>
+
+  <div class="pg">
+
+    <!-- ★ RV32IM -->
+    <div class="pc feat gc rv">
+      <div>
+        <div class="fb">★ Featured</div>
+        <div class="pl">ECSE 417 · SystemVerilog</div>
+        <h3>RV32IM Pipelined CPU + 4×4 INT8 Systolic Array</h3>
+        <p class="pd">5-stage pipelined RISC-V processor with full RV32IM ISA, zero-penalty data forwarding, load-use stall, branch flush, and a custom <code>md_result_captured</code> latch resolving M-extension pipeline hazards.</p>
+        <div class="pt"><span>SystemVerilog</span><span>Vivado</span><span>Zynq UltraScale+</span><span>RISC-V</span><span>RoCC ISA</span></div>
+      </div>
+      <div>
+        <div class="pr">
+          <strong>Coprocessor:</strong> 16-PE weight-stationary systolic array, row-skewed activation, INT32 accumulation, 7-cycle compute. 6 custom RoCC instructions.<br><br>
+          <strong>Results:</strong> <strong>100 MHz</strong> on xczu3eg (WNS +1.85 ns) · 3,808 LUTs · 10 DSPs · <strong>32/32 checks</strong> across 11 test categories
+        </div>
+        <div class="plinks"><a href="https://github.com/athish22072003/rv32im-systolic-coprocessor" target="_blank">GitHub →</a><a href="#">Report →</a></div>
+      </div>
+    </div>
+
+    <!-- Dot-Product -->
+    <div class="pc gc rv">
+      <div class="pl">ECSE 417 · Verilog</div>
+      <h3>Dot-Product Accelerator &amp; Pipelined Datapath</h3>
+      <p class="pd">3-mode engine (sequential/parallel MAC/early-exit) with 5-state FSM, stall handling, backpressure, and hardware performance counters.</p>
+      <div class="pr"><strong>121.4 MHz</strong>, 496 LUTs. Pipelined variant: <strong>346 MHz</strong> at depth 4. 7 automated testcases.</div>
+      <div class="pt"><span>Verilog</span><span>Vivado</span><span>FSM</span><span>Pipelining</span><span>Timing Closure</span></div>
+      <div class="plinks"><a href="#">GitHub →</a><a href="#">Report →</a></div>
+    </div>
+
+    <!-- Warehouse -->
+    <div class="pc gc rv">
+      <div class="pl">ECSE 488 · C · Embedded Linux</div>
+      <h3>Warehouse Video Surveillance System</h3>
+      <p class="pd">Event-driven surveillance on Raspberry Pi. 4-state FSM classifies motion levels using frame-differencing and adaptive thresholds.</p>
+      <div class="pr"><strong>Features:</strong> JPEG/H.264 recording, GPIO alerts, remote override, timestamped storage indexing.</div>
+      <div class="pt"><span>Raspberry Pi</span><span>C</span><span>OpenCV</span><span>FSM</span><span>H.264</span><span>GPIO</span></div>
+      <div class="plinks"><a href="#">GitHub →</a></div>
+    </div>
+
+    <!-- HfO2 -->
+    <div class="pc gc rv">
+      <div class="pl">ECSE 422 · Semiconductor Devices</div>
+      <h3>HfO₂ Ferroelectric Devices for Memory &amp; Logic</h3>
+      <p class="pd">Research on hafnium-oxide ferroelectric architectures (FeRAM, FeFET, NCFET) for non-volatile memory and steep-slope logic applications.</p>
+      <div class="pt"><span>Solid-State Physics</span><span>FeRAM</span><span>FeFET</span><span>NCFET</span><span>CMOS Scaling</span></div>
+      <div class="plinks"><a href="#">Paper →</a></div>
+    </div>
+
+  </div>
+
+  <!-- UNDERGRADUATE -->
+  <div class="divider rv" style="margin-top:56px"><span class="pill pill-u">Undergrad</span><h3>Undergraduate Work</h3><span class="rule"></span></div>
+
+  <div class="pg">
+
+    <div class="pc uc rv">
+      <div class="pl">Hardware · 8051</div>
+      <h3>Blood Level Monitoring System</h3>
+      <p class="pd">Hand-soldered analog circuit (op-amp + LDR) interfaced to 8051 via ADC for fluid-level detection in medical IV bottles.</p>
+      <div class="pr"><strong>Validated</strong> with oscilloscope and DMM. Components selected from datasheets. Noise resolved via bypass capacitors.</div>
+      <div class="pt"><span>8051</span><span>Op-Amp</span><span>Soldering</span><span>Oscilloscope</span></div>
+      <div class="plinks"><a href="#">GitHub →</a></div>
+    </div>
+
+    <div class="pc uc rv">
+      <div class="pl">IoT · ESP32</div>
+      <h3>Cloud Control Hub</h3>
+      <p class="pd">Remote monitoring over MQTT/TLS to AWS IoT. Actuator control via cloud-triggered GPIO callbacks with I²C interfacing.</p>
+      <div class="pt"><span>ESP32</span><span>AWS IoT</span><span>MQTT/TLS</span><span>I²C</span><span>GPIO</span></div>
+      <div class="plinks"><a href="#">GitHub →</a></div>
+    </div>
+
+    <div class="pc uc rv">
+      <div class="pl">IoT · ESP8266</div>
+      <h3>E-Smart Board</h3>
+      <p class="pd">Wi-Fi notice board with ThingSpeak cloud logging and real-time LCD updates via web interface.</p>
+      <div class="pt"><span>ESP8266</span><span>ThingSpeak</span><span>LCD</span></div>
+      <div class="plinks"><a href="#">GitHub →</a></div>
+    </div>
+
+    <div class="pc uc rv">
+      <div class="pl">Embedded · Arduino</div>
+      <h3>Temperature-Controlled Fan</h3>
+      <p class="pd">Closed-loop fan controller with LM35 sensor and PWM regulation. Hand-soldered breadboard prototype.</p>
+      <div class="pt"><span>Arduino</span><span>LM35</span><span>PWM</span><span>Soldering</span></div>
+      <div class="plinks"><a href="#">GitHub →</a></div>
+    </div>
+
+  </div>
+</div>
+</section>
+
+<!-- ═══════════ SKILLS ═══════════ -->
+<section class="sec" id="skills">
+<div class="w">
+  <span class="sh-n rv">03 — Skills</span>
+  <h2 class="sh-t rv">Technical <em>toolkit.</em></h2>
+  <div class="sk-grid">
+    <div class="sk rv"><div class="sk-t">Languages</div><ul><li>C / C++</li><li>Python</li><li>SystemVerilog / Verilog / VHDL</li><li>RISC-V Assembly</li><li>Assembly (8051, ARM)</li></ul></div>
+    <div class="sk rv d1"><div class="sk-t">FPGA &amp; EDA</div><ul><li>Vivado (synth, P&amp;R, timing)</li><li>XSim (simulation)</li><li>Zynq UltraScale+ / 7-series</li><li>LTSpice / Multisim</li><li>MATLAB / Simulink</li></ul></div>
+    <div class="sk rv d2"><div class="sk-t">Architecture</div><ul><li>RISC-V RV32IM pipeline</li><li>Systolic arrays</li><li>Custom ISA (RoCC)</li><li>Forwarding / hazard logic</li><li>FSM design</li></ul></div>
+    <div class="sk rv d3"><div class="sk-t">Embedded</div><ul><li>8051 / LPC2148 (ARM7)</li><li>Arduino / ESP32 / ESP8266</li><li>Raspberry Pi</li></ul></div>
+    <div class="sk rv d4"><div class="sk-t">Protocols</div><ul><li>I²C, SPI, UART, AXI4-Lite</li><li>GPIO / ADC / PWM</li><li>MQTT / TLS</li></ul></div>
+    <div class="sk rv d5"><div class="sk-t">Lab</div><ul><li>Oscilloscopes / Logic Analyzers</li><li>DMMs</li><li>SMD &amp; TH Soldering</li><li>Breadboard / PCB</li></ul></div>
+  </div>
+</div>
+</section>
+
+<!-- ═══════════ COURSEWORK ═══════════ -->
+<section class="sec" id="coursework" style="background:var(--deep)">
+<div class="w">
+  <span class="sh-n rv">04 — Coursework</span>
+  <h2 class="sh-t rv">Academic <em>depth.</em></h2>
+  <div class="cw-g">
+    <div class="cw-b rv"><h4><span class="dot dot-g"></span>Graduate — CWRU</h4><p class="sub">M.S. Electrical Engineering</p><div class="cw-p"><span>Computer Design — FPGAs</span><span>Embedded System Design</span><span>Solid-State Electronics II</span><span>Robotics I</span></div></div>
+    <div class="cw-b rv d1"><h4><span class="dot dot-u"></span>Undergraduate — MIT Manipal</h4><p class="sub">B.Tech Electronics &amp; Instrumentation</p><div class="cw-p"><span>Microcontrollers</span><span>Analog Circuits</span><span>Digital Circuits</span><span>Sensors &amp; Transducers</span><span>Control Systems</span><span>DSP</span><span>Linear ICs</span><span>Industrial Automation</span><span>Cyber-Physical Systems</span><span>Industrial IoT</span></div></div>
+  </div>
+</div>
+</section>
+
+<!-- ═══════════ EXPERIENCE ═══════════ -->
+<section class="sec" id="experience">
+<div class="w">
+  <span class="sh-n rv">05 — Experience</span>
+  <h2 class="sh-t rv">Professional <em>path.</em></h2>
+  <div class="tl">
+    <div class="ti rv"><div class="dt">Jun — Jul 2023</div><h3>Instrumentation &amp; Control Engineering Intern</h3><h4>ONGC — Karaikal, India</h4><ul><li>Designed industrial control circuits in Multisim; selected components via datasheet analysis</li><li>Troubleshot live instrumentation with oscilloscopes and DMMs in active petroleum plant</li><li>Calibrated temperature/pressure transducers; performed analog signal conditioning</li></ul></div>
+    <div class="ti rv"><div class="dt">Dec 2023 — Apr 2025</div><h3>Software Engineering Intern</h3><h4>Hiranya Pathaye Technologies — Coimbatore</h4><ul><li>Built full-stack CRM (ReactJS, Django, MySQL) with automated lead tracking</li><li>Wrote Python test scripts for backend data integrity validation</li></ul></div>
+    <div class="ti rv"><div class="dt">Jan 2023</div><h3>PLC Workshop Instructor</h3><h4>Manipal Institute of Technology</h4><ul><li>Led 3-day hands-on PLC workshop for 30+ undergraduates</li></ul></div>
+    <div class="ti rv"><div class="dt">2023</div><h3>CISCON 2023 — Key Speaker</h3><h4>Control Instrumentation Systems Conference</h4><ul><li>Presented research; paper "Power ICs with Energy Saving" (in review)</li></ul></div>
+  </div>
+</div>
+</section>
+
+<!-- ═══════════ CONTACT ═══════════ -->
+<section class="sec" id="contact" style="background:var(--deep)">
+<div class="w">
+  <span class="sh-n rv">06 — Contact</span>
+  <h2 class="sh-t rv">Let's <em>connect.</em></h2>
+  <div class="ct-g">
+    <div class="ct-info rv">
+      <p>Seeking Fall 2026 co-op opportunities in FPGA design, embedded systems, firmware, and hardware engineering. Based in Cleveland, OH.</p>
+      <div class="ct-ls">
+        <a href="mailto:athishvikraman22@gmail.com" class="ct-l"><span class="lb">Email</span>athishvikraman22@gmail.com</a>
+        <a href="https://linkedin.com/in/" target="_blank" class="ct-l"><span class="lb">LinkedIn</span>linkedin.com/in/athishvikraman</a>
+        <a href="https://github.com/athish22072003" target="_blank" class="ct-l"><span class="lb">GitHub</span>github.com/athish22072003</a>
+        <a href="tel:+12162144366" class="ct-l"><span class="lb">Phone</span>+1 (216) 214-4366</a>
+      </div>
+    </div>
+    <div class="rv d1">
+      <form class="ct-f" action="https://formspree.io/f/mlgpdgnb" method="POST">
+        <input type="text" name="name" placeholder="Your name" required>
+        <input type="email" name="email" placeholder="Your email" required>
+        <input type="text" name="subject" placeholder="Subject">
+        <textarea name="message" placeholder="Message" required></textarea>
+        <button type="submit" class="btn btn-f" style="width:100%;justify-content:center">Send Message →</button>
+      </form>
+    </div>
+  </div>
+</div>
+</section>
+
+<footer class="footer"><div class="w"><p>© 2026 Athish Vikraman</p></div></footer>
+
+<!-- ═══════════ THREE.JS ═══════════ -->
+<script>
+(function(){
+  const C=document.getElementById('hc'),R=new THREE.WebGLRenderer({canvas:C,antialias:true,alpha:true});
+  R.setPixelRatio(Math.min(devicePixelRatio,2));R.setSize(innerWidth,innerHeight);
+  const S=new THREE.Scene(),cam=new THREE.PerspectiveCamera(55,innerWidth/innerHeight,.1,100);
+  cam.position.set(0,0,5);
+
+  const ico=new THREE.Mesh(new THREE.IcosahedronGeometry(2,1),new THREE.MeshBasicMaterial({color:0x0d9488,wireframe:true,transparent:true,opacity:.12}));
+  ico.position.set(2.5,.2,0);S.add(ico);
+
+  const core=new THREE.Mesh(new THREE.IcosahedronGeometry(.6,0),new THREE.MeshBasicMaterial({color:0x0d9488,transparent:true,opacity:.03}));
+  core.position.copy(ico.position);S.add(core);
+
+  const rg=new THREE.TorusGeometry(2.6,.005,8,120),rm=new THREE.MeshBasicMaterial({color:0x0d9488,transparent:true,opacity:.08});
+  const r1=new THREE.Mesh(rg,rm);r1.position.copy(ico.position);r1.rotation.x=Math.PI/3;S.add(r1);
+  const r2=r1.clone();r2.rotation.x=-Math.PI/4.5;r2.rotation.z=Math.PI/5;S.add(r2);
+
+  const N=200,pg=new THREE.BufferGeometry(),ps=new Float32Array(N*3);
+  for(let i=0;i<N*3;i++)ps[i]=(Math.random()-.5)*14;
+  pg.setAttribute('position',new THREE.BufferAttribute(ps,3));
+  S.add(new THREE.Points(pg,new THREE.PointsMaterial({color:0x0d9488,size:.015,transparent:true,opacity:.35})));
+
+  let mx=0,my=0;
+  document.addEventListener('mousemove',e=>{mx=(e.clientX/innerWidth-.5)*2;my=(e.clientY/innerHeight-.5)*2});
+  addEventListener('resize',()=>{cam.aspect=innerWidth/innerHeight;cam.updateProjectionMatrix();R.setSize(innerWidth,innerHeight)});
+
+  !function t(){requestAnimationFrame(t);const s=performance.now()*.001;
+    ico.rotation.x=s*.06+my*.1;ico.rotation.y=s*.09+mx*.1;
+    core.rotation.x=-s*.08;core.rotation.y=-s*.12;
+    r1.rotation.z=s*.035;r2.rotation.z=-s*.03;
+    cam.position.x+=(mx*.2-cam.position.x)*.02;cam.position.y+=(-my*.12-cam.position.y)*.02;
+    cam.lookAt(1.8,0,0);R.render(S,cam);
+  }();
+})();
+
+// Reveal
+const ob=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('v')})},{threshold:.05,rootMargin:'0px 0px -15px 0px'});
+document.querySelectorAll('.rv').forEach(el=>ob.observe(el));
+
+// Nav
+addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('stuck',scrollY>40));
+document.getElementById('nM').addEventListener('click',()=>document.getElementById('nL').classList.toggle('open'));
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',function(e){e.preventDefault();const t=document.querySelector(this.getAttribute('href'));if(t){t.scrollIntoView({behavior:'smooth'});document.getElementById('nL').classList.remove('open')}})});
+
+// 3D card tilt
+document.querySelectorAll('.pc').forEach(c=>{
+  c.addEventListener('mousemove',e=>{const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.transform=`perspective(900px) rotateX(${-y*4}deg) rotateY(${x*4}deg) translateY(-3px)`});
+  c.addEventListener('mouseleave',()=>{c.style.transform=''});
+});
+</script>
+</body>
+</html>
