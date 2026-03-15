@@ -11,18 +11,18 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <style>
 :root{
-  /* Royal Obsidian & Gold Palette */
-  --void: #050505; --deep: #0a0a0a; --surf: #121212; --card: #181818;
-  --card-up: #222222; --bdr: #3a2e16; --bdr-h: #d4af37;
-  --wht: #fdfbf7; --txt: #c2b9aa; --dim: #8c8270; --faint: #544c40;
-  
-  /* Mapping original teal to Royal Gold for consistency without HTML changes */
-  --teal: #d4af37; --teal-lt: #fceda6; --teal-g: rgba(212,175,55,.08); --teal-g2: rgba(212,175,55,.18);
-  --gold: #e6c57a; --gold-dim: #a68c4a; --gold-g: rgba(230,197,122,.06);
-  --purp: #8a1c1c; /* Royal Crimson */
-  
-  --dsp: 'Fraunces', Georgia, serif; --sans: 'Manrope', system-ui, sans-serif; --mono: 'JetBrains Mono', monospace;
-  --mx: 1080px; --r: 16px;
+  /* Royal Obsidian & Gold Palette */
+  --void: #050505; --deep: #0a0a0a; --surf: #121212; --card: #181818;
+  --card-up: #222222; --bdr: #3a2e16; --bdr-h: #d4af37;
+  --wht: #fdfbf7; --txt: #c2b9aa; --dim: #8c8270; --faint: #544c40;
+  
+  /* Mapping original teal to Royal Gold for consistency without HTML changes */
+  --teal: #d4af37; --teal-lt: #fceda6; --teal-g: rgba(212,175,55,.08); --teal-g2: rgba(212,175,55,.18);
+  --gold: #e6c57a; --gold-dim: #a68c4a; --gold-g: rgba(230,197,122,.06);
+  --purp: #8a1c1c; /* Royal Crimson */
+  
+  --dsp: 'Fraunces', Georgia, serif; --sans: 'Manrope', system-ui, sans-serif; --mono: 'JetBrains Mono', monospace;
+  --mx: 1080px; --r: 16px;
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth;font-size:17.5px;-webkit-font-smoothing:antialiased}
@@ -30,7 +30,7 @@ body{font-family:var(--sans);background:var(--void);color:var(--wht);line-height
 
 /* Luxurious noise overlay */
 body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.035;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 
 ::selection{background:var(--teal);color:#000}
 a{color:var(--teal-lt);text-decoration:none;transition:color .3s, text-shadow .3s}
@@ -65,7 +65,7 @@ code{font-family:var(--mono);font-size:.85em;color:var(--teal-lt);background:lin
 .nav .w{display:flex;justify-content:space-between;align-items:center}
 .n-logo{display:flex;align-items:center;gap:12px;text-decoration:none}
 .n-mark{font-family:var(--dsp);font-size:1.1rem;font-weight:500;color:var(--void); background:linear-gradient(135deg, var(--teal-lt), var(--gold-dim));letter-spacing:2px;
-  border:1px solid rgba(255,255,255,.3);padding:6px 12px;border-radius:4px;line-height:1;transition:all .4s; box-shadow: 0 4px 15px rgba(212,175,55,.2)}
+  border:1px solid rgba(255,255,255,.3);padding:6px 12px;border-radius:4px;line-height:1;transition:all .4s; box-shadow: 0 4px 15px rgba(212,175,55,.2)}
 .n-logo:hover .n-mark{transform: scale(1.05); box-shadow: 0 6px 20px rgba(212,175,55,.4), inset 0 0 10px rgba(255,255,255,.5)}
 .n-label{font-family:var(--dsp);font-size:.85rem;font-weight:300;color:var(--wht);letter-spacing:2px;text-transform:uppercase}
 .n-links{display:flex;gap:35px;list-style:none}
@@ -78,9 +78,9 @@ code{font-family:var(--mono);font-size:.85em;color:var(--teal-lt);background:lin
 .hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden}
 #hc{position:absolute;inset:0;z-index:0}
 .hero-fade{position:absolute;inset:0;z-index:1;pointer-events:none;
-  background:radial-gradient(ellipse 80% 60% at 50% 50%,transparent 0%,rgba(5,5,5,.6) 50%,var(--void) 100%)}
+  background:radial-gradient(ellipse 80% 60% at 50% 50%,transparent 0%,rgba(5,5,5,.6) 50%,var(--void) 100%)}
 .hero-vignette{position:absolute;inset:0;z-index:1;pointer-events:none;
-  background:linear-gradient(to bottom, rgba(5,5,5,.8) 0%, transparent 20%, transparent 80%, var(--void) 100%)}
+  background:linear-gradient(to bottom, rgba(5,5,5,.8) 0%, transparent 20%, transparent 80%, var(--void) 100%)}
 .hero-c{position:relative;z-index:2;padding-top:100px; text-shadow: 0 4px 15px rgba(0,0,0,.9)}
 
 /* Cinematic intro */
@@ -93,8 +93,8 @@ code{font-family:var(--mono);font-size:.85em;color:var(--teal-lt);background:lin
 
 /* Glow pulse */
 .hero-glow{position:absolute;top:50%;left:50%;width:800px;height:800px;transform:translate(-50%,-50%);
-  background:radial-gradient(circle,rgba(212,175,55,.05) 0%,transparent 70%);z-index:0;pointer-events:none;
-  animation:glowPulse 8s ease-in-out infinite}
+  background:radial-gradient(circle,rgba(212,175,55,.05) 0%,transparent 70%);z-index:0;pointer-events:none;
+  animation:glowPulse 8s ease-in-out infinite}
 @keyframes glowPulse{0%,100%{opacity:.4;transform:translate(-50%,-50%) scale(1)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.1)}}
 
 .role-bar{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:36px}
@@ -128,9 +128,9 @@ code{font-family:var(--mono);font-size:.85em;color:var(--teal-lt);background:lin
 .ab-text strong{color:var(--teal-lt);font-weight:500}
 .ab-cards{display:flex;flex-direction:column;gap:20px}
 .ac{
-  background:linear-gradient(145deg, var(--card), var(--deep));border:1px solid var(--bdr);border-radius:var(--r);
-  padding:32px;transition:all .5s cubic-bezier(.22,1,.36,1);transform-style:preserve-3d;
-  box-shadow: 0 10px 30px rgba(0,0,0,.6), inset 0 1px 2px rgba(255,255,255,.05); position:relative; overflow:hidden
+  background:linear-gradient(145deg, var(--card), var(--deep));border:1px solid var(--bdr);border-radius:var(--r);
+  padding:32px;transition:all .5s cubic-bezier(.22,1,.36,1);transform-style:preserve-3d;
+  box-shadow: 0 10px 30px rgba(0,0,0,.6), inset 0 1px 2px rgba(255,255,255,.05); position:relative; overflow:hidden
 }
 .ac::after{content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg, transparent, var(--teal), transparent); opacity:0; transition:opacity .5s}
 .ac:hover{border-color:var(--teal);transform:perspective(1000px) rotateY(-3deg) translateX(8px);box-shadow:-12px 15px 40px rgba(0,0,0,.7), 0 0 25px rgba(212,175,55,.1), inset 0 1px 2px rgba(255,255,255,.1)}
@@ -142,37 +142,37 @@ code{font-family:var(--mono);font-size:.85em;color:var(--teal-lt);background:lin
 /* ═══ PROJECTS ═══ */
 .pg{display:grid;grid-template-columns:repeat(auto-fill,minmax(350px,1fr));gap:32px;perspective:1500px}
 .pc{
-  background:linear-gradient(160deg, var(--card), var(--deep));border:1px solid var(--bdr);border-radius:var(--r);
-  padding:36px;position:relative;overflow:hidden;
-  transform-style:preserve-3d;
-  transition:transform .5s cubic-bezier(.22,1,.36,1),border-color .4s,box-shadow .5s;
-  box-shadow: 0 15px 35px rgba(0,0,0,.5), inset 0 1px 2px rgba(255,255,255,.03)
+  background:linear-gradient(160deg, var(--card), var(--deep));border:1px solid var(--bdr);border-radius:var(--r);
+  padding:36px;position:relative;overflow:hidden;
+  transform-style:preserve-3d;
+  transition:transform .5s cubic-bezier(.22,1,.36,1),border-color .4s,box-shadow .5s;
+  box-shadow: 0 15px 35px rgba(0,0,0,.5), inset 0 1px 2px rgba(255,255,255,.03)
 }
 .pc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;opacity:0;transition:opacity .4s}
 .pc.gc::before{background:linear-gradient(90deg,var(--teal),var(--teal-lt))}
 .pc.uc::before{background:linear-gradient(90deg,var(--purp), #ff4d4d)}
 .pc:hover{
-  border-color:rgba(212,175,55,.5);
-  transform:translateY(-8px);
-  box-shadow:0 25px 60px rgba(0,0,0,.7), 0 0 50px rgba(212,175,55,.08), inset 0 1px 3px rgba(255,255,255,.1)
+  border-color:rgba(212,175,55,.5);
+  transform:translateY(-8px);
+  box-shadow:0 25px 60px rgba(0,0,0,.7), 0 0 50px rgba(212,175,55,.08), inset 0 1px 3px rgba(255,255,255,.1)
 }
 .pc:hover::before{opacity:1}
 
 /* Featured card — premium royal treatment */
 .pc.feat{
-  grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:48px;
-  border-color:rgba(212,175,55,.3);
-  background:linear-gradient(135deg, var(--card) 0%, rgba(30,24,10,.8) 100%);
-  box-shadow: 0 20px 40px rgba(0,0,0,.6), inset 0 1px 2px rgba(255,255,255,.08)
+  grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:48px;
+  border-color:rgba(212,175,55,.3);
+  background:linear-gradient(135deg, var(--card) 0%, rgba(30,24,10,.8) 100%);
+  box-shadow: 0 20px 40px rgba(0,0,0,.6), inset 0 1px 2px rgba(255,255,255,.08)
 }
 .pc.feat::before{opacity:1;height:3px;background:linear-gradient(90deg,var(--gold),var(--teal-lt),var(--gold))}
 .pc.feat:hover{border-color:var(--teal);box-shadow:0 30px 70px rgba(0,0,0,.8),0 0 60px rgba(212,175,55,.15), inset 0 1px 3px rgba(255,255,255,.15)}
 
 .fb{
-  display:inline-flex;align-items:center;gap:8px;
-  padding:6px 16px;background:linear-gradient(90deg, var(--teal-g2), transparent);border-left:2px solid var(--teal-lt);
-  border-radius:0 6px 6px 0;font-size:.65rem;font-weight:700;color:var(--teal-lt);
-  letter-spacing:2px;text-transform:uppercase;margin-bottom:20px; text-shadow: 0 0 8px rgba(212,175,55,.4)
+  display:inline-flex;align-items:center;gap:8px;
+  padding:6px 16px;background:linear-gradient(90deg, var(--teal-g2), transparent);border-left:2px solid var(--teal-lt);
+  border-radius:0 6px 6px 0;font-size:.65rem;font-weight:700;color:var(--teal-lt);
+  letter-spacing:2px;text-transform:uppercase;margin-bottom:20px; text-shadow: 0 0 8px rgba(212,175,55,.4)
 }
 .pl{font-family:var(--mono);font-size:.68rem;color:var(--dim);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px}
 .pc h3{font-family:var(--dsp); font-size:1.35rem;font-weight:500;margin-bottom:16px;line-height:1.3; color:var(--wht)}
@@ -180,12 +180,12 @@ code{font-family:var(--mono);font-size:.85em;color:var(--teal-lt);background:lin
 
 /* Results box */
 .pr{
-  font-size:.9rem;color:var(--txt);line-height:1.9;font-weight:300;
-  padding:24px;background:linear-gradient(145deg, rgba(20,20,20,.8), rgba(10,10,10,.8));
-  border: 1px solid var(--bdr);
-  border-left:3px solid var(--teal);
-  border-radius:4px var(--r) var(--r) 4px;margin-bottom:24px;
-  box-shadow: inset 0 2px 10px rgba(0,0,0,.5)
+  font-size:.9rem;color:var(--txt);line-height:1.9;font-weight:300;
+  padding:24px;background:linear-gradient(145deg, rgba(20,20,20,.8), rgba(10,10,10,.8));
+  border: 1px solid var(--bdr);
+  border-left:3px solid var(--teal);
+  border-radius:4px var(--r) var(--r) 4px;margin-bottom:24px;
+  box-shadow: inset 0 2px 10px rgba(0,0,0,.5)
 }
 .pc.feat .pr{border-left-color:var(--teal-lt);background:linear-gradient(145deg, rgba(212,175,55,.05), rgba(10,10,10,.8))}
 .pr strong{color:var(--teal-lt);font-weight:500}
@@ -198,9 +198,9 @@ code{font-family:var(--mono);font-size:.85em;color:var(--teal-lt);background:lin
 /* ═══ SKILLS ═══ */
 .sk-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:24px}
 .sk{
-  background:linear-gradient(180deg, var(--card), var(--deep));border:1px solid var(--bdr);border-radius:var(--r);
-  padding:32px;transition:all .4s;position:relative;overflow:hidden;
-  box-shadow: 0 10px 25px rgba(0,0,0,.5), inset 0 1px 1px rgba(255,255,255,.03)
+  background:linear-gradient(180deg, var(--card), var(--deep));border:1px solid var(--bdr);border-radius:var(--r);
+  padding:32px;transition:all .4s;position:relative;overflow:hidden;
+  box-shadow: 0 10px 25px rgba(0,0,0,.5), inset 0 1px 1px rgba(255,255,255,.03)
 }
 .sk::after{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(212,175,55,.08) 0%,transparent 60%);opacity:0;transition:opacity .5s;pointer-events:none}
 .sk:hover{border-color:var(--teal);transform:translateY(-5px);box-shadow:0 15px 40px rgba(0,0,0,.6), inset 0 1px 2px rgba(255,255,255,.1)}.sk:hover::after{opacity:1}
@@ -236,17 +236,17 @@ code{font-family:var(--mono);font-size:.85em;color:var(--teal-lt);background:lin
 .ct-info p{color:var(--txt);margin-bottom:40px;font-weight:300;line-height:2.1;font-size:1.05rem}
 .ct-ls{display:flex;flex-direction:column;gap:16px}
 .ct-l{
-  display:block;padding:22px 28px;
-  background:linear-gradient(145deg, var(--card), var(--deep));border:1px solid var(--bdr);border-radius:var(--r);
-  color:var(--wht);font-size:.95rem;transition:all .4s; box-shadow: 0 8px 20px rgba(0,0,0,.4)
+  display:block;padding:22px 28px;
+  background:linear-gradient(145deg, var(--card), var(--deep));border:1px solid var(--bdr);border-radius:var(--r);
+  color:var(--wht);font-size:.95rem;transition:all .4s; box-shadow: 0 8px 20px rgba(0,0,0,.4)
 }
 .ct-l:hover{border-color:var(--teal);transform:translateX(8px);color:var(--teal-lt);box-shadow:10px 10px 30px rgba(0,0,0,.6), inset 0 1px 2px rgba(255,255,255,.1)}
 .ct-l .lb{font-family:var(--mono); font-size:.7rem;color:var(--teal);display:block;font-weight:600;margin-bottom:6px;text-transform:uppercase;letter-spacing:2px}
 .ct-f{display:flex;flex-direction:column;gap:20px}
 .ct-f input,.ct-f textarea{
-  padding:18px 24px;background:var(--deep);border:1px solid var(--bdr);border-radius:8px;
-  color:var(--wht);font-family:var(--sans);font-size:.95rem;transition:all .3s;outline:none;
-  box-shadow: inset 0 2px 8px rgba(0,0,0,.8)
+  padding:18px 24px;background:var(--deep);border:1px solid var(--bdr);border-radius:8px;
+  color:var(--wht);font-family:var(--sans);font-size:.95rem;transition:all .3s;outline:none;
+  box-shadow: inset 0 2px 8px rgba(0,0,0,.8)
 }
 .ct-f input:focus,.ct-f textarea:focus{border-color:var(--teal-lt);box-shadow:0 0 0 1px var(--teal-lt), inset 0 2px 8px rgba(0,0,0,.8)}
 .ct-f textarea{min-height:160px;resize:vertical}
@@ -257,258 +257,245 @@ code{font-family:var(--mono);font-size:.85em;color:var(--teal-lt);background:lin
 
 /* ═══ RESPONSIVE ═══ */
 @media(max-width:768px){
-  html, body { overflow-x: hidden; width: 100%; font-size: 16px; }
-  .w { padding: 0 20px; }
-  .n-links{display:none}.n-mob{display:flex}.n-label{display:none}
-  .n-links.open{display:flex;flex-direction:column;position:absolute;top:70px;left:0;right:0;background:rgba(5,5,5,.98);backdrop-filter:blur(30px);padding:24px 20px;gap:20px;border-bottom:1px solid var(--bdr)}
-  .hero-strip{grid-template-columns:1fr 1fr; gap: 8px;}
-  .hero-strip-item { padding: 16px 12px; }
-  .hero-strip-item .num { font-size: 1.5rem; }
-  .ab-grid,.ct-g,.cw-g{grid-template-columns:1fr}
-  .pg,.sk-grid{grid-template-columns:1fr}
-  .pc.feat{grid-template-columns:1fr; gap: 24px;}
-  .sec{padding:80px 0}
-  .hero-name{font-size: clamp(2.8rem, 11vw, 3.5rem); letter-spacing:-1.5px}
-  .hero-btns { margin-bottom: 40px; }
-  .role-bar{gap:8px}.role-tag{font-size:.65rem;padding:6px 14px}
-  .hero-glow{width:400px;height:400px}
-  .pc, .ac, .sk { padding: 20px; }
-  .pr { padding: 16px; margin-bottom: 16px;}
-  .btn { padding: 14px 24px; }
-  .divider { gap: 12px; }
-  .divider h3 { font-size: 1.1rem; white-space: normal; }
-  .ct-l { word-break: break-word; padding: 16px 20px; }
-  .ct-f input, .ct-f textarea { padding: 14px 16px; }
+  html{font-size:16px}
+  .n-links{display:none}.n-mob{display:flex}.n-label{display:none}
+  .n-links.open{display:flex;flex-direction:column;position:absolute;top:70px;left:0;right:0;background:rgba(5,5,5,.98);backdrop-filter:blur(30px);padding:24px 36px;gap:20px;border-bottom:1px solid var(--bdr)}
+  .hero-strip{grid-template-columns:1fr 1fr}
+  .ab-grid,.ct-g,.cw-g{grid-template-columns:1fr}
+  .pg{grid-template-columns:1fr}.pc.feat{grid-template-columns:1fr}
+  .sec{padding:90px 0}.hero-name{letter-spacing:-1.5px}
+  .role-bar{gap:8px}.role-tag{font-size:.65rem;padding:6px 14px}
+  .hero-glow{width:400px;height:400px}
 }
 </style>
 </head>
 <body>
 
 <nav class="nav" id="nav"><div class="w">
-  <a href="#" class="n-logo"><span class="n-mark">AV</span><span class="n-label">Athish Vikraman</span></a>
-  <ul class="n-links" id="nL">
-    <li><a href="#about">About</a></li><li><a href="#projects">Projects</a></li>
-    <li><a href="#skills">Skills</a></li><li><a href="#experience">Experience</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-  <button class="n-mob" id="nM" aria-label="Menu"><span></span><span></span><span></span></button>
+  <a href="#" class="n-logo"><span class="n-mark">AV</span><span class="n-label">Athish Vikraman</span></a>
+  <ul class="n-links" id="nL">
+    <li><a href="#about">About</a></li><li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li><li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="n-mob" id="nM" aria-label="Menu"><span></span><span></span><span></span></button>
 </div></nav>
 
 <section class="hero" id="hero">
-  <canvas id="hc"></canvas>
-  <div class="hero-glow"></div>
-  <div class="hero-fade"></div>
-  <div class="hero-vignette"></div>
-  <div class="w hero-c">
-    <div class="role-bar">
-      <span class="role-tag primary">FPGA / SoC Design</span>
-      <span class="role-tag">Embedded Systems</span>
-      <span class="role-tag">Firmware Engineering</span>
-      <span class="role-tag">Hardware Design</span>
-    </div>
-    <h1 class="hero-name">Athish<br><span class="it">Vikraman</span></h1>
-    <p class="hero-desc">
-      I'm a graduate Electrical Engineering student who loves building things
-      that actually work — from designing a <strong>RISC-V processor</strong> on
-      an FPGA to soldering circuits on a bench and debugging them with an oscilloscope.
-      Currently looking for co-op roles where I can contribute to real hardware and firmware teams.
-    </p>
-    <div class="hero-btns">
-      <a href="https://www.linkedin.com/in/athish-vikraman-aa0147363" target="_blank" class="btn btn-f">LinkedIn</a>
-      <a href="#contact" class="btn btn-o">Contact</a>
-    </div>
-    <div class="hero-strip">
-      <div class="hero-strip-item"><div class="num">M.S. EE</div><div class="lbl">Case Western Reserve University</div></div>
-      <div class="hero-strip-item"><div class="num">2</div><div class="lbl">Engineering Internships</div></div>
-      <div class="hero-strip-item"><div class="num">10+</div><div class="lbl">Hardware &amp; FPGA Projects</div></div>
-      <div class="hero-strip-item"><div class="num">F-1 CPT</div><div class="lbl">Work Authorized for Co-op</div></div>
-    </div>
-  </div>
+  <canvas id="hc"></canvas>
+  <div class="hero-glow"></div>
+  <div class="hero-fade"></div>
+  <div class="hero-vignette"></div>
+  <div class="w hero-c">
+    <div class="role-bar">
+      <span class="role-tag primary">FPGA / SoC Design</span>
+      <span class="role-tag">Embedded Systems</span>
+      <span class="role-tag">Firmware Engineering</span>
+      <span class="role-tag">Hardware Design</span>
+    </div>
+    <h1 class="hero-name">Athish<br><span class="it">Vikraman</span></h1>
+    <p class="hero-desc">
+      I'm a graduate Electrical Engineering student who loves building things
+      that actually work — from designing a <strong>RISC-V processor</strong> on
+      an FPGA to soldering circuits on a bench and debugging them with an oscilloscope.
+      Currently looking for co-op roles where I can contribute to real hardware and firmware teams.
+    </p>
+    <div class="hero-btns">
+      <a href="https://www.linkedin.com/in/athish-vikraman-aa0147363" target="_blank" class="btn btn-f">LinkedIn</a>
+      <a href="#contact" class="btn btn-o">Contact</a>
+    </div>
+    <div class="hero-strip">
+      <div class="hero-strip-item"><div class="num">M.S. EE</div><div class="lbl">Case Western Reserve University</div></div>
+      <div class="hero-strip-item"><div class="num">2</div><div class="lbl">Engineering Internships</div></div>
+      <div class="hero-strip-item"><div class="num">10+</div><div class="lbl">Hardware &amp; FPGA Projects</div></div>
+      <div class="hero-strip-item"><div class="num">F-1 CPT</div><div class="lbl">Work Authorized for Co-op</div></div>
+    </div>
+  </div>
 </section>
 
 <section class="sec" id="about">
 <div class="w">
-  <span class="sh-n rv">01 — About</span>
-  <h2 class="sh-t rv">A bit about <em>me.</em></h2>
-  <div class="ab-grid">
-    <div class="ab-text rv">
-      <p>I'm Athish — M.S. Electrical Engineering at <strong>Case Western Reserve University</strong>. I enjoy debugging timing paths in Vivado just as much as tracing signals on an oscilloscope.</p>
-      <p>At CWRU, I designed a <strong>pipelined RISC-V CPU with a systolic array coprocessor</strong> in SystemVerilog, built dot-product accelerators, embedded surveillance systems, and ran device simulations in <strong>COMSOL Multiphysics</strong>. Before that, I did my B.Tech at <strong>Manipal Institute of Technology</strong> — microcontrollers, analog circuits, IoT, and a lot of soldering. That's where I decided I wanted to build hardware, not just study it.</p>
-      <p>Looking for a <strong>Fall 2026 co-op</strong> in FPGA design, embedded firmware, or hardware engineering. I learn fast and I care about getting things right.</p>
-    </div>
-    <div class="ab-cards rv d2">
-      <div class="ac"><span class="mono">2025 — Present</span><h4>Case Western Reserve University</h4><p>M.S. Electrical Engineering · GPA: 3.25/4.0</p></div>
-      <div class="ac"><span class="mono">2021 — 2025</span><h4>Manipal Institute of Technology</h4><p>B.Tech Electronics &amp; Instrumentation · GPA: 3.30/4.0</p></div>
-      <div class="ac"><span class="mono">Seeking</span><h4>Fall 2026 Co-op</h4><p>FPGA · Embedded · Firmware · Hardware</p></div>
-    </div>
-  </div>
+  <span class="sh-n rv">01 — About</span>
+  <h2 class="sh-t rv">A bit about <em>me.</em></h2>
+  <div class="ab-grid">
+    <div class="ab-text rv">
+      <p>I'm Athish — M.S. Electrical Engineering at <strong>Case Western Reserve University</strong>. I enjoy debugging timing paths in Vivado just as much as tracing signals on an oscilloscope.</p>
+      <p>At CWRU, I designed a <strong>pipelined RISC-V CPU with a systolic array coprocessor</strong> in SystemVerilog, built dot-product accelerators, embedded surveillance systems, and ran device simulations in <strong>COMSOL Multiphysics</strong>. Before that, I did my B.Tech at <strong>Manipal Institute of Technology</strong> — microcontrollers, analog circuits, IoT, and a lot of soldering. That's where I decided I wanted to build hardware, not just study it.</p>
+      <p>Looking for a <strong>Fall 2026 co-op</strong> in FPGA design, embedded firmware, or hardware engineering. I learn fast and I care about getting things right.</p>
+    </div>
+    <div class="ab-cards rv d2">
+      <div class="ac"><span class="mono">2025 — Present</span><h4>Case Western Reserve University</h4><p>M.S. Electrical Engineering · GPA: 3.25/4.0</p></div>
+      <div class="ac"><span class="mono">2021 — 2025</span><h4>Manipal Institute of Technology</h4><p>B.Tech Electronics &amp; Instrumentation · GPA: 3.30/4.0</p></div>
+      <div class="ac"><span class="mono">Seeking</span><h4>Fall 2026 Co-op</h4><p>FPGA · Embedded · Firmware · Hardware</p></div>
+    </div>
+  </div>
 </div>
 </section>
 
 <section class="sec" id="projects" style="background:var(--deep)">
 <div class="w">
-  <span class="sh-n rv">02 — Projects</span>
-  <h2 class="sh-t rv">What I've <em>built.</em></h2>
-  <p class="sh-d rv">Every project below is verified, synthesized, or deployed. The results are real.</p>
+  <span class="sh-n rv">02 — Projects</span>
+  <h2 class="sh-t rv">What I've <em>built.</em></h2>
+  <p class="sh-d rv">Every project below is verified, synthesized, or deployed. The results are real.</p>
 
-  <div class="divider rv"><span class="pill pill-g">Graduate</span><h3>Graduate-Level Work</h3><span class="rule"></span></div>
-  <div class="pg">
-    <div class="pc feat gc rv">
-      <div>
-        <div class="fb">★ Featured Project</div>
-        <div class="pl">ECSE 417 · SystemVerilog</div>
-        <h3>RV32IM Pipelined CPU + 4×4 INT8 Systolic Array</h3>
-        <p class="pd">A complete SoC — 5-stage pipelined RISC-V processor with the full RV32IM instruction set, zero-penalty data forwarding, load-use stall detection, branch flush, and a custom <code>md_result_captured</code> latch that solves a tricky M-extension pipeline timing hazard.</p>
-        <div class="pt"><span>SystemVerilog</span><span>Vivado</span><span>Zynq UltraScale+</span><span>RISC-V</span><span>RoCC ISA</span></div>
-      </div>
-      <div>
-        <div class="pr">
-          <strong>Coprocessor:</strong> 16-PE weight-stationary systolic array with row-skewed activation input, INT32 accumulation, and 7-cycle compute latency. Controlled via 6 custom RoCC instructions.<br><br>
-          <strong>Results:</strong> Synthesized at <strong>100 MHz</strong> on Zynq UltraScale+ (WNS +1.85 ns). 3,808 LUTs · 2,883 FFs · 10 DSPs. <strong>32/32 verification checks passed</strong> across 11 test categories.
-        </div>
-        <div class="plinks"><a href="https://github.com/athish22072003/rv32im-systolic-coprocessor" target="_blank">GitHub →</a><a href="assets/RV32IM_Report.pdf" target="_blank">Full Report →</a></div>
-      </div>
-    </div>
-    <div class="pc gc rv">
-      <div class="pl">ECSE 417 · Verilog · Lab 1</div>
-      <h3>Parameterized Pipelined Arithmetic Datapath</h3>
-      <p class="pd">Designed a streaming datapath computing y = (a×b) + (c×d) + e on signed 16-bit fixed-point inputs with a valid-ready handshake interface. Built both an unpipelined single-cycle version and a parameterized pipelined version with configurable depth (2–5 stages).</p>
-      <div class="pr"><strong>Results:</strong> Swept pipeline depths 2–5 and analyzed Fmax vs. resource tradeoffs. Peak <strong>346 MHz</strong> at depth 4 (32 LUTs, 148 FFs, 2 DSPs). Unpipelined achieved 291 MHz. Verified with a self-checking testbench using 200+ seeded random vectors.</div>
-      <div class="pt"><span>Verilog</span><span>Vivado</span><span>Pipelining</span><span>Timing Analysis</span><span>Valid-Ready</span><span>Testbench</span></div>
-      <div class="plinks"><a href="#">GitHub →</a><a href="assets/Lab1_Report.pdf" target="_blank">Lab Report →</a></div>
-    </div>
-    <div class="pc gc rv">
-      <div class="pl">ECSE 417 · Verilog · Lab 2</div>
-      <h3>Dot-Product Accelerator with Multi-Mode FSM</h3>
-      <p class="pd">Three compute modes — sequential MAC, 4-way parallel MAC with an adder tree, and early-exit with a magnitude comparator. Controlled by a 5-state hybrid Moore/Mealy FSM with stall handling, output backpressure, and built-in hardware performance counters.</p>
-      <div class="pr"><strong>Results:</strong> Synthesized at <strong>121.4 MHz</strong>, 496 LUTs, 241 FFs, zero DSP blocks. Verified across 7 automated testcases including random stall injection and backpressure hold.</div>
-      <div class="pt"><span>Verilog</span><span>Vivado</span><span>FSM Design</span><span>MAC Unit</span><span>Stall Logic</span><span>Perf Counters</span></div>
-      <div class="plinks"><a href="#">GitHub →</a><a href="assets/Lab2_Report.pdf" target="_blank">Lab Report →</a></div>
-    </div>
-    <div class="pc gc rv">
-      <div class="pl">ECSE 488 · C · Embedded Linux</div>
-      <h3>Warehouse Video Surveillance System</h3>
-      <p class="pd">An event-driven surveillance system running on a Raspberry Pi. A 4-state finite state machine classifies motion into four activity levels using frame-differencing and adaptive thresholds, then automatically adjusts the recording mode.</p>
-      <div class="pr"><strong>Features:</strong> JPEG and H.264 video recording, GPIO-triggered alerts, remote manual override, and timestamped file indexing with a searchable log.</div>
-      <div class="pt"><span>Raspberry Pi</span><span>C</span><span>OpenCV</span><span>FSM</span><span>H.264</span><span>GPIO</span></div>
-      <div class="plinks"><a href="#">GitHub →</a></div>
-    </div>
-    <div class="pc gc rv">
-      <div class="pl">ECSE 422 · Semiconductor Devices</div>
-      <h3>HfO₂ Ferroelectric Devices for Memory &amp; Logic</h3>
-      <p class="pd">A research project exploring hafnium-oxide-based ferroelectric architectures — FeRAM, FeFET, and NCFET — for next-generation non-volatile memory and steep-slope logic applications.</p>
-      <div class="pt"><span>Solid-State Physics</span><span>FeRAM</span><span>FeFET</span><span>NCFET</span><span>CMOS Scaling</span></div>
-      <div class="plinks"><a href="#">Paper →</a></div>
-    </div>
-    <div class="pc gc rv">
-      <div class="pl">ECSE 422 · COMSOL Multiphysics</div>
-      <h3>1D Abrupt P-N Junction Simulation</h3>
-      <p class="pd">Modeled a one-dimensional abrupt p-n junction using COMSOL Multiphysics, simulating carrier concentration profiles, electric field distribution, and built-in potential across the depletion region for asymmetric doping (Nₐ = 1×10¹⁶ cm⁻³, Nₐ = 2×10¹⁶ cm⁻³).</p>
-      <div class="pr"><strong>Analysis:</strong> Computed theoretical built-in voltage analytically and validated against COMSOL numerical results. Studied the effect of doping asymmetry on depletion width and electric field peak.</div>
-      <div class="pt"><span>COMSOL Multiphysics</span><span>Semiconductor Physics</span><span>P-N Junction</span><span>Device Modeling</span></div>
-      <div class="plinks"><a href="#">Report →</a></div>
-    </div>
-  </div>
+  <div class="divider rv"><span class="pill pill-g">Graduate</span><h3>Graduate-Level Work</h3><span class="rule"></span></div>
+  <div class="pg">
+    <div class="pc feat gc rv">
+      <div>
+        <div class="fb">★ Featured Project</div>
+        <div class="pl">ECSE 417 · SystemVerilog</div>
+        <h3>RV32IM Pipelined CPU + 4×4 INT8 Systolic Array</h3>
+        <p class="pd">A complete SoC — 5-stage pipelined RISC-V processor with the full RV32IM instruction set, zero-penalty data forwarding, load-use stall detection, branch flush, and a custom <code>md_result_captured</code> latch that solves a tricky M-extension pipeline timing hazard.</p>
+        <div class="pt"><span>SystemVerilog</span><span>Vivado</span><span>Zynq UltraScale+</span><span>RISC-V</span><span>RoCC ISA</span></div>
+      </div>
+      <div>
+        <div class="pr">
+          <strong>Coprocessor:</strong> 16-PE weight-stationary systolic array with row-skewed activation input, INT32 accumulation, and 7-cycle compute latency. Controlled via 6 custom RoCC instructions.<br><br>
+          <strong>Results:</strong> Synthesized at <strong>100 MHz</strong> on Zynq UltraScale+ (WNS +1.85 ns). 3,808 LUTs · 2,883 FFs · 10 DSPs. <strong>32/32 verification checks passed</strong> across 11 test categories.
+        </div>
+        <div class="plinks"><a href="https://github.com/athish22072003/rv32im-systolic-coprocessor" target="_blank">GitHub →</a><a href="assets/RV32IM_Report.pdf" target="_blank">Full Report →</a></div>
+      </div>
+    </div>
+    <div class="pc gc rv">
+      <div class="pl">ECSE 417 · Verilog · Lab 1</div>
+      <h3>Parameterized Pipelined Arithmetic Datapath</h3>
+      <p class="pd">Designed a streaming datapath computing y = (a×b) + (c×d) + e on signed 16-bit fixed-point inputs with a valid-ready handshake interface. Built both an unpipelined single-cycle version and a parameterized pipelined version with configurable depth (2–5 stages).</p>
+      <div class="pr"><strong>Results:</strong> Swept pipeline depths 2–5 and analyzed Fmax vs. resource tradeoffs. Peak <strong>346 MHz</strong> at depth 4 (32 LUTs, 148 FFs, 2 DSPs). Unpipelined achieved 291 MHz. Verified with a self-checking testbench using 200+ seeded random vectors.</div>
+      <div class="pt"><span>Verilog</span><span>Vivado</span><span>Pipelining</span><span>Timing Analysis</span><span>Valid-Ready</span><span>Testbench</span></div>
+      <div class="plinks"><a href="#">GitHub →</a><a href="assets/Lab1_Report.pdf" target="_blank">Lab Report →</a></div>
+    </div>
+    <div class="pc gc rv">
+      <div class="pl">ECSE 417 · Verilog · Lab 2</div>
+      <h3>Dot-Product Accelerator with Multi-Mode FSM</h3>
+      <p class="pd">Three compute modes — sequential MAC, 4-way parallel MAC with an adder tree, and early-exit with a magnitude comparator. Controlled by a 5-state hybrid Moore/Mealy FSM with stall handling, output backpressure, and built-in hardware performance counters.</p>
+      <div class="pr"><strong>Results:</strong> Synthesized at <strong>121.4 MHz</strong>, 496 LUTs, 241 FFs, zero DSP blocks. Verified across 7 automated testcases including random stall injection and backpressure hold.</div>
+      <div class="pt"><span>Verilog</span><span>Vivado</span><span>FSM Design</span><span>MAC Unit</span><span>Stall Logic</span><span>Perf Counters</span></div>
+      <div class="plinks"><a href="#">GitHub →</a><a href="assets/Lab2_Report.pdf" target="_blank">Lab Report →</a></div>
+    </div>
+    <div class="pc gc rv">
+      <div class="pl">ECSE 488 · C · Embedded Linux</div>
+      <h3>Warehouse Video Surveillance System</h3>
+      <p class="pd">An event-driven surveillance system running on a Raspberry Pi. A 4-state finite state machine classifies motion into four activity levels using frame-differencing and adaptive thresholds, then automatically adjusts the recording mode.</p>
+      <div class="pr"><strong>Features:</strong> JPEG and H.264 video recording, GPIO-triggered alerts, remote manual override, and timestamped file indexing with a searchable log.</div>
+      <div class="pt"><span>Raspberry Pi</span><span>C</span><span>OpenCV</span><span>FSM</span><span>H.264</span><span>GPIO</span></div>
+      <div class="plinks"><a href="#">GitHub →</a></div>
+    </div>
+    <div class="pc gc rv">
+      <div class="pl">ECSE 422 · Semiconductor Devices</div>
+      <h3>HfO₂ Ferroelectric Devices for Memory &amp; Logic</h3>
+      <p class="pd">A research project exploring hafnium-oxide-based ferroelectric architectures — FeRAM, FeFET, and NCFET — for next-generation non-volatile memory and steep-slope logic applications.</p>
+      <div class="pt"><span>Solid-State Physics</span><span>FeRAM</span><span>FeFET</span><span>NCFET</span><span>CMOS Scaling</span></div>
+      <div class="plinks"><a href="#">Paper →</a></div>
+    </div>
+    <div class="pc gc rv">
+      <div class="pl">ECSE 422 · COMSOL Multiphysics</div>
+      <h3>1D Abrupt P-N Junction Simulation</h3>
+      <p class="pd">Modeled a one-dimensional abrupt p-n junction using COMSOL Multiphysics, simulating carrier concentration profiles, electric field distribution, and built-in potential across the depletion region for asymmetric doping (Nₐ = 1×10¹⁶ cm⁻³, Nₐ = 2×10¹⁶ cm⁻³).</p>
+      <div class="pr"><strong>Analysis:</strong> Computed theoretical built-in voltage analytically and validated against COMSOL numerical results. Studied the effect of doping asymmetry on depletion width and electric field peak.</div>
+      <div class="pt"><span>COMSOL Multiphysics</span><span>Semiconductor Physics</span><span>P-N Junction</span><span>Device Modeling</span></div>
+      <div class="plinks"><a href="#">Report →</a></div>
+    </div>
+  </div>
 
-  <div class="divider rv" style="margin-top:72px"><span class="pill pill-u">Undergrad</span><h3>Undergraduate Work</h3><span class="rule"></span></div>
-  <div class="pg">
-    <div class="pc uc rv">
-      <div class="pl">Hardware · 8051 Microcontroller</div>
-      <h3>Blood Level Monitoring System</h3>
-      <p class="pd">A hand-soldered analog signal conditioning circuit — op-amp gain stage plus LDR voltage divider — interfaced to an 8051 microcontroller via ADC. Built for fluid-level detection in medical IV bottles.</p>
-      <div class="pr"><strong>How I verified it:</strong> Oscilloscope for waveform analysis, DMM for DC bias measurements. Components selected from datasheets. Fixed noise issues with bypass capacitors.</div>
-      <div class="pt"><span>8051</span><span>Op-Amp</span><span>Soldering</span><span>Oscilloscope</span><span>DMM</span></div>
-      <div class="plinks"><a href="#">GitHub →</a></div>
-    </div>
-    <div class="pc uc rv">
-      <div class="pl">IoT Platform · ESP32</div>
-      <h3>Cloud Control Hub</h3>
-      <p class="pd">A remote monitoring system that publishes sensor data over MQTT with TLS encryption to AWS IoT. Supports actuator control through cloud-triggered GPIO callbacks and I²C sensor interfacing.</p>
-      <div class="pt"><span>ESP32</span><span>AWS IoT</span><span>MQTT/TLS</span><span>I²C</span><span>GPIO</span></div>
-      <div class="plinks"><a href="#">GitHub →</a></div>
-    </div>
-    <div class="pc uc rv">
-      <div class="pl">IoT · ESP8266</div>
-      <h3>E-Smart Board</h3>
-      <p class="pd">A Wi-Fi-enabled notice board that receives messages through a web interface and displays them on an LCD screen in real time. Uses ThingSpeak for cloud-based logging.</p>
-      <div class="pt"><span>ESP8266</span><span>ThingSpeak</span><span>LCD</span><span>Wi-Fi</span></div>
-      <div class="plinks"><a href="#">GitHub →</a></div>
-    </div>
-    <div class="pc uc rv">
-      <div class="pl">Embedded Control · Arduino</div>
-      <h3>Temperature-Controlled Fan</h3>
-      <p class="pd">A closed-loop fan speed controller built with an Arduino and an LM35 temperature sensor. PWM-regulated. Hand-soldered on a breadboard.</p>
-      <div class="pt"><span>Arduino</span><span>LM35</span><span>PWM</span><span>Soldering</span></div>
-      <div class="plinks"><a href="#">GitHub →</a></div>
-    </div>
-  </div>
+  <div class="divider rv" style="margin-top:72px"><span class="pill pill-u">Undergrad</span><h3>Undergraduate Work</h3><span class="rule"></span></div>
+  <div class="pg">
+    <div class="pc uc rv">
+      <div class="pl">Hardware · 8051 Microcontroller</div>
+      <h3>Blood Level Monitoring System</h3>
+      <p class="pd">A hand-soldered analog signal conditioning circuit — op-amp gain stage plus LDR voltage divider — interfaced to an 8051 microcontroller via ADC. Built for fluid-level detection in medical IV bottles.</p>
+      <div class="pr"><strong>How I verified it:</strong> Oscilloscope for waveform analysis, DMM for DC bias measurements. Components selected from datasheets. Fixed noise issues with bypass capacitors.</div>
+      <div class="pt"><span>8051</span><span>Op-Amp</span><span>Soldering</span><span>Oscilloscope</span><span>DMM</span></div>
+      <div class="plinks"><a href="#">GitHub →</a></div>
+    </div>
+    <div class="pc uc rv">
+      <div class="pl">IoT Platform · ESP32</div>
+      <h3>Cloud Control Hub</h3>
+      <p class="pd">A remote monitoring system that publishes sensor data over MQTT with TLS encryption to AWS IoT. Supports actuator control through cloud-triggered GPIO callbacks and I²C sensor interfacing.</p>
+      <div class="pt"><span>ESP32</span><span>AWS IoT</span><span>MQTT/TLS</span><span>I²C</span><span>GPIO</span></div>
+      <div class="plinks"><a href="#">GitHub →</a></div>
+    </div>
+    <div class="pc uc rv">
+      <div class="pl">IoT · ESP8266</div>
+      <h3>E-Smart Board</h3>
+      <p class="pd">A Wi-Fi-enabled notice board that receives messages through a web interface and displays them on an LCD screen in real time. Uses ThingSpeak for cloud-based logging.</p>
+      <div class="pt"><span>ESP8266</span><span>ThingSpeak</span><span>LCD</span><span>Wi-Fi</span></div>
+      <div class="plinks"><a href="#">GitHub →</a></div>
+    </div>
+    <div class="pc uc rv">
+      <div class="pl">Embedded Control · Arduino</div>
+      <h3>Temperature-Controlled Fan</h3>
+      <p class="pd">A closed-loop fan speed controller built with an Arduino and an LM35 temperature sensor. PWM-regulated. Hand-soldered on a breadboard.</p>
+      <div class="pt"><span>Arduino</span><span>LM35</span><span>PWM</span><span>Soldering</span></div>
+      <div class="plinks"><a href="#">GitHub →</a></div>
+    </div>
+  </div>
 </div>
 </section>
 
 <section class="sec" id="skills">
 <div class="w">
-  <span class="sh-n rv">03 — Skills</span>
-  <h2 class="sh-t rv">Technical <em>toolkit.</em></h2>
-  <p class="sh-d rv">The tools, languages, and platforms I use to design, simulate, build, and debug.</p>
-  <div class="sk-grid">
-    <div class="sk rv"><div class="sk-t">Languages</div><ul><li>C / C++</li><li>Python</li><li>SystemVerilog / Verilog / VHDL</li><li>RISC-V Assembly</li><li>Assembly (8051, ARM)</li></ul></div>
-    <div class="sk rv d1"><div class="sk-t">FPGA &amp; EDA</div><ul><li>Xilinx Vivado</li><li>XSim (simulation)</li><li>Zynq UltraScale+ / 7-series</li><li>COMSOL Multiphysics</li><li>LTSpice / Multisim</li><li>MATLAB / Simulink</li></ul></div>
-    <div class="sk rv d2"><div class="sk-t">Architecture</div><ul><li>RISC-V RV32IM pipeline</li><li>Systolic arrays</li><li>Custom ISA (RoCC)</li><li>Forwarding / hazard logic</li><li>FSM design</li></ul></div>
-    <div class="sk rv d3"><div class="sk-t">Embedded</div><ul><li>8051 / LPC2148 (ARM7)</li><li>Arduino / ESP32 / ESP8266</li><li>Raspberry Pi</li></ul></div>
-    <div class="sk rv d4"><div class="sk-t">Protocols</div><ul><li>I²C, SPI, UART, AXI4-Lite</li><li>GPIO / ADC / PWM</li><li>MQTT / TLS</li></ul></div>
-    <div class="sk rv d5"><div class="sk-t">Lab &amp; Fabrication</div><ul><li>Oscilloscopes / Logic Analyzers</li><li>Digital Multimeters</li><li>SMD &amp; through-hole soldering</li><li>Breadboard / PCB prototyping</li></ul></div>
-  </div>
+  <span class="sh-n rv">03 — Skills</span>
+  <h2 class="sh-t rv">Technical <em>toolkit.</em></h2>
+  <p class="sh-d rv">The tools, languages, and platforms I use to design, simulate, build, and debug.</p>
+  <div class="sk-grid">
+    <div class="sk rv"><div class="sk-t">Languages</div><ul><li>C / C++</li><li>Python</li><li>SystemVerilog / Verilog / VHDL</li><li>RISC-V Assembly</li><li>Assembly (8051, ARM)</li></ul></div>
+    <div class="sk rv d1"><div class="sk-t">FPGA &amp; EDA</div><ul><li>Xilinx Vivado</li><li>XSim (simulation)</li><li>Zynq UltraScale+ / 7-series</li><li>COMSOL Multiphysics</li><li>LTSpice / Multisim</li><li>MATLAB / Simulink</li></ul></div>
+    <div class="sk rv d2"><div class="sk-t">Architecture</div><ul><li>RISC-V RV32IM pipeline</li><li>Systolic arrays</li><li>Custom ISA (RoCC)</li><li>Forwarding / hazard logic</li><li>FSM design</li></ul></div>
+    <div class="sk rv d3"><div class="sk-t">Embedded</div><ul><li>8051 / LPC2148 (ARM7)</li><li>Arduino / ESP32 / ESP8266</li><li>Raspberry Pi</li></ul></div>
+    <div class="sk rv d4"><div class="sk-t">Protocols</div><ul><li>I²C, SPI, UART, AXI4-Lite</li><li>GPIO / ADC / PWM</li><li>MQTT / TLS</li></ul></div>
+    <div class="sk rv d5"><div class="sk-t">Lab &amp; Fabrication</div><ul><li>Oscilloscopes / Logic Analyzers</li><li>Digital Multimeters</li><li>SMD &amp; through-hole soldering</li><li>Breadboard / PCB prototyping</li></ul></div>
+  </div>
 </div>
 </section>
 
 <section class="sec" id="coursework" style="background:var(--deep)">
 <div class="w">
-  <span class="sh-n rv">04 — Coursework</span>
-  <h2 class="sh-t rv">Academic <em>foundation.</em></h2>
-  <div class="cw-g">
-    <div class="cw-b rv"><h4><span class="dot dot-g"></span>Graduate — CWRU</h4><p class="sub">M.S. Electrical Engineering</p><div class="cw-p"><span>Computer Design — FPGAs</span><span>Embedded System Design</span><span>Solid-State Electronics II</span><span>Robotics I</span></div></div>
-    <div class="cw-b rv d1"><h4><span class="dot dot-u"></span>Undergraduate — MIT Manipal</h4><p class="sub">B.Tech Electronics &amp; Instrumentation</p><div class="cw-p"><span>Microcontrollers</span><span>Analog Circuits</span><span>Digital Circuits</span><span>Sensors &amp; Transducers</span><span>Control Systems</span><span>DSP</span><span>Linear ICs</span><span>Industrial Automation</span><span>Cyber-Physical Systems</span><span>Industrial IoT</span></div></div>
-  </div>
+  <span class="sh-n rv">04 — Coursework</span>
+  <h2 class="sh-t rv">Academic <em>foundation.</em></h2>
+  <div class="cw-g">
+    <div class="cw-b rv"><h4><span class="dot dot-g"></span>Graduate — CWRU</h4><p class="sub">M.S. Electrical Engineering</p><div class="cw-p"><span>Computer Design — FPGAs</span><span>Embedded System Design</span><span>Solid-State Electronics II</span><span>Robotics I</span></div></div>
+    <div class="cw-b rv d1"><h4><span class="dot dot-u"></span>Undergraduate — MIT Manipal</h4><p class="sub">B.Tech Electronics &amp; Instrumentation</p><div class="cw-p"><span>Microcontrollers</span><span>Analog Circuits</span><span>Digital Circuits</span><span>Sensors &amp; Transducers</span><span>Control Systems</span><span>DSP</span><span>Linear ICs</span><span>Industrial Automation</span><span>Cyber-Physical Systems</span><span>Industrial IoT</span></div></div>
+  </div>
 </div>
 </section>
 
 <section class="sec" id="experience">
 <div class="w">
-  <span class="sh-n rv">05 — Experience</span>
-  <h2 class="sh-t rv">Professional <em>path.</em></h2>
-  <div class="tl">
-    <div class="ti rv"><div class="dt">Jun — Jul 2023</div><h3>Instrumentation &amp; Control Engineering Intern</h3><h4>Oil and Natural Gas Corporation (ONGC) — Karaikal, India</h4><ul><li>Designed industrial control circuits in Multisim and selected components through datasheet analysis</li><li>Troubleshot live instrumentation using oscilloscopes and DMMs in an active petroleum plant</li><li>Calibrated temperature and pressure transducers; performed analog signal conditioning</li></ul></div>
-    <div class="ti rv"><div class="dt">Dec 2023 — Apr 2025</div><h3>Software Engineering Intern</h3><h4>Hiranya Pathaye Technologies — Coimbatore, India</h4><ul><li>Built a full-stack CRM platform using ReactJS, Django, and MySQL with automated lead tracking</li><li>Wrote Python test scripts to validate backend data integrity</li></ul></div>
-    <div class="ti rv"><div class="dt">Jan 2023</div><h3>PLC Workshop Instructor</h3><h4>Manipal Institute of Technology</h4><ul><li>Led a 3-day hands-on workshop on Programmable Logic Controllers for 30+ undergraduates</li></ul></div>
-    <div class="ti rv"><div class="dt">2023</div><h3>CISCON 2023 — Key Speaker</h3><h4>Control Instrumentation Systems Conference</h4><ul><li>Presented research on power IC applications; paper currently in review</li></ul></div>
-  </div>
+  <span class="sh-n rv">05 — Experience</span>
+  <h2 class="sh-t rv">Professional <em>path.</em></h2>
+  <div class="tl">
+    <div class="ti rv"><div class="dt">Jun — Jul 2023</div><h3>Instrumentation &amp; Control Engineering Intern</h3><h4>Oil and Natural Gas Corporation (ONGC) — Karaikal, India</h4><ul><li>Designed industrial control circuits in Multisim and selected components through datasheet analysis</li><li>Troubleshot live instrumentation using oscilloscopes and DMMs in an active petroleum plant</li><li>Calibrated temperature and pressure transducers; performed analog signal conditioning</li></ul></div>
+    <div class="ti rv"><div class="dt">Dec 2023 — Apr 2025</div><h3>Software Engineering Intern</h3><h4>Hiranya Pathaye Technologies — Coimbatore, India</h4><ul><li>Built a full-stack CRM platform using ReactJS, Django, and MySQL with automated lead tracking</li><li>Wrote Python test scripts to validate backend data integrity</li></ul></div>
+    <div class="ti rv"><div class="dt">Jan 2023</div><h3>PLC Workshop Instructor</h3><h4>Manipal Institute of Technology</h4><ul><li>Led a 3-day hands-on workshop on Programmable Logic Controllers for 30+ undergraduates</li></ul></div>
+    <div class="ti rv"><div class="dt">2023</div><h3>CISCON 2023 — Key Speaker</h3><h4>Control Instrumentation Systems Conference</h4><ul><li>Presented research on power IC applications; paper currently in review</li></ul></div>
+  </div>
 </div>
 </section>
 
 <section class="sec" id="contact" style="background:var(--deep)">
 <div class="w">
-  <span class="sh-n rv">06 — Contact</span>
-  <h2 class="sh-t rv">Let's <em>connect.</em></h2>
-  <div class="ct-g">
-    <div class="ct-info rv">
-      <p>I'm actively looking for Fall 2026 co-op opportunities in FPGA design, embedded systems, firmware, and hardware engineering. Based in Cleveland, OH — happy to chat about any role that involves building real hardware.</p>
-      <div class="ct-ls">
-        <a href="mailto:athishvikraman22@gmail.com" class="ct-l"><span class="lb">Email</span>athishvikraman22@gmail.com</a>
-        <a href="https://www.linkedin.com/in/athish-vikraman-aa0147363" target="_blank" class="ct-l"><span class="lb">LinkedIn</span>linkedin.com/in/athish-vikraman-aa0147363</a>
-        <a href="https://github.com/athish22072003" target="_blank" class="ct-l"><span class="lb">GitHub</span>github.com/athish22072003</a>
-        <a href="tel:+12162144366" class="ct-l"><span class="lb">Phone</span>+1 (216) 214-4366</a>
-      </div>
-    </div>
-    <div class="rv d1">
-      <form class="ct-f" action="https://formspree.io/f/mlgpdgnb" method="POST">
-        <input type="text" name="name" placeholder="Your name" required>
-        <input type="email" name="email" placeholder="Your email" required>
-        <input type="text" name="subject" placeholder="Subject">
-        <textarea name="message" placeholder="Your message" required></textarea>
-        <button type="submit" class="btn btn-f" style="width:100%;justify-content:center">Send Message →</button>
-      </form>
-    </div>
-  </div>
+  <span class="sh-n rv">06 — Contact</span>
+  <h2 class="sh-t rv">Let's <em>connect.</em></h2>
+  <div class="ct-g">
+    <div class="ct-info rv">
+      <p>I'm actively looking for Fall 2026 co-op opportunities in FPGA design, embedded systems, firmware, and hardware engineering. Based in Cleveland, OH — happy to chat about any role that involves building real hardware.</p>
+      <div class="ct-ls">
+        <a href="mailto:athishvikraman22@gmail.com" class="ct-l"><span class="lb">Email</span>athishvikraman22@gmail.com</a>
+        <a href="https://www.linkedin.com/in/athish-vikraman-aa0147363" target="_blank" class="ct-l"><span class="lb">LinkedIn</span>linkedin.com/in/athish-vikraman-aa0147363</a>
+        <a href="https://github.com/athish22072003" target="_blank" class="ct-l"><span class="lb">GitHub</span>github.com/athish22072003</a>
+        <a href="tel:+12162144366" class="ct-l"><span class="lb">Phone</span>+1 (216) 214-4366</a>
+      </div>
+    </div>
+    <div class="rv d1">
+      <form class="ct-f" action="https://formspree.io/f/mlgpdgnb" method="POST">
+        <input type="text" name="name" placeholder="Your name" required>
+        <input type="email" name="email" placeholder="Your email" required>
+        <input type="text" name="subject" placeholder="Subject">
+        <textarea name="message" placeholder="Your message" required></textarea>
+        <button type="submit" class="btn btn-f" style="width:100%;justify-content:center">Send Message →</button>
+      </form>
+    </div>
+  </div>
 </div>
 </section>
 
@@ -516,143 +503,143 @@ code{font-family:var(--mono);font-size:.85em;color:var(--teal-lt);background:lin
 
 <script>
 (function(){
-  const C=document.getElementById('hc'),R=new THREE.WebGLRenderer({canvas:C,antialias:true,alpha:true});
-  R.setPixelRatio(Math.min(devicePixelRatio,2));R.setSize(innerWidth,innerHeight);
-  const S=new THREE.Scene(),cam=new THREE.PerspectiveCamera(50,innerWidth/innerHeight,.1,200);
-  cam.position.set(0,0,12); // Start far for zoom-in
+  const C=document.getElementById('hc'),R=new THREE.WebGLRenderer({canvas:C,antialias:true,alpha:true});
+  R.setPixelRatio(Math.min(devicePixelRatio,2));R.setSize(innerWidth,innerHeight);
+  const S=new THREE.Scene(),cam=new THREE.PerspectiveCamera(50,innerWidth/innerHeight,.1,200);
+  cam.position.set(0,0,12); // Start far for zoom-in
 
-  // Royal Colors
-  const tc=0xd4af37, tc2=0xfceda6, gc=0xffffff;
+  // Royal Colors
+  const tc=0xd4af37, tc2=0xfceda6, gc=0xffffff;
 
-  // Premium 3D Lighting Setup
-  const ambientLight = new THREE.AmbientLight(0xffffff, 0.4); S.add(ambientLight);
-  const pointLight = new THREE.PointLight(tc2, 2, 50); pointLight.position.set(5, 5, 5); S.add(pointLight);
-  const pointLight2 = new THREE.PointLight(tc, 1.5, 30); pointLight2.position.set(-5, -5, 2); S.add(pointLight2);
+  // Premium 3D Lighting Setup
+  const ambientLight = new THREE.AmbientLight(0xffffff, 0.4); S.add(ambientLight);
+  const pointLight = new THREE.PointLight(tc2, 2, 50); pointLight.position.set(5, 5, 5); S.add(pointLight);
+  const pointLight2 = new THREE.PointLight(tc, 1.5, 30); pointLight2.position.set(-5, -5, 2); S.add(pointLight2);
 
-  // Materials with physical volume & metalness
-  const goldWireMat = new THREE.MeshStandardMaterial({
-    color: tc, metalness: 0.9, roughness: 0.2, wireframe: true, transparent: true, opacity: 0.35
-  });
-  const innerGoldMat = new THREE.MeshStandardMaterial({
-    color: tc2, metalness: 1.0, roughness: 0.1, wireframe: true, transparent: true, opacity: 0.15
-  });
-  const coreMat = new THREE.MeshStandardMaterial({
-    color: gc, metalness: 0.5, roughness: 0.5, transparent: true, opacity: 0.08, emissive: tc2, emissiveIntensity: 0.2
-  });
-  const ringMat = new THREE.MeshStandardMaterial({
-    color: tc, metalness: 0.8, roughness: 0.3, transparent: true, opacity: 0.15
-  });
+  // Materials with physical volume & metalness
+  const goldWireMat = new THREE.MeshStandardMaterial({
+    color: tc, metalness: 0.9, roughness: 0.2, wireframe: true, transparent: true, opacity: 0.35
+  });
+  const innerGoldMat = new THREE.MeshStandardMaterial({
+    color: tc2, metalness: 1.0, roughness: 0.1, wireframe: true, transparent: true, opacity: 0.15
+  });
+  const coreMat = new THREE.MeshStandardMaterial({
+    color: gc, metalness: 0.5, roughness: 0.5, transparent: true, opacity: 0.08, emissive: tc2, emissiveIntensity: 0.2
+  });
+  const ringMat = new THREE.MeshStandardMaterial({
+    color: tc, metalness: 0.8, roughness: 0.3, transparent: true, opacity: 0.15
+  });
 
-  // Central structure
-  const main=new THREE.Mesh(new THREE.DodecahedronGeometry(2.4,0), goldWireMat);
-  main.position.set(1.5,0,0);S.add(main);
+  // Central structure
+  const main=new THREE.Mesh(new THREE.DodecahedronGeometry(2.4,0), goldWireMat);
+  main.position.set(1.5,0,0);S.add(main);
 
-  // Inner icosahedron
-  const inner=new THREE.Mesh(new THREE.IcosahedronGeometry(1.2,0), innerGoldMat);
-  inner.position.copy(main.position);S.add(inner);
+  // Inner icosahedron
+  const inner=new THREE.Mesh(new THREE.IcosahedronGeometry(1.2,0), innerGoldMat);
+  inner.position.copy(main.position);S.add(inner);
 
-  // Core glow sphere
-  const core=new THREE.Mesh(new THREE.SphereGeometry(.4,32,32), coreMat);
-  core.position.copy(main.position);S.add(core);
+  // Core glow sphere
+  const core=new THREE.Mesh(new THREE.SphereGeometry(.4,32,32), coreMat);
+  core.position.copy(main.position);S.add(core);
 
-  // Orbital rings
-  const ringGeo=new THREE.TorusGeometry(3.2,.015,16,100);
-  const rings=[];
-  [[Math.PI/3,0,0],[-.7,0,.9],[.4,.8,-.3],[Math.PI/2.5,Math.PI/6,0]].forEach(([rx,ry,rz])=>{
-    const r=new THREE.Mesh(ringGeo,ringMat);
-    r.position.copy(main.position);r.rotation.set(rx,ry,rz);
-    S.add(r);rings.push(r);
-  });
+  // Orbital rings
+  const ringGeo=new THREE.TorusGeometry(3.2,.015,16,100);
+  const rings=[];
+  [[Math.PI/3,0,0],[-.7,0,.9],[.4,.8,-.3],[Math.PI/2.5,Math.PI/6,0]].forEach(([rx,ry,rz])=>{
+    const r=new THREE.Mesh(ringGeo,ringMat);
+    r.position.copy(main.position);r.rotation.set(rx,ry,rz);
+    S.add(r);rings.push(r);
+  });
 
-  // Floating gold dust particles
-  const N=250,pGeo=new THREE.BufferGeometry();
-  const pos=new Float32Array(N*3),vel=new Float32Array(N*3);
-  for(let i=0;i<N;i++){
-    pos[i*3]=(Math.random()-.5)*20;
-    pos[i*3+1]=(Math.random()-.5)*14;
-    pos[i*3+2]=(Math.random()-.5)*12;
-    vel[i*3]=(Math.random()-.5)*.003;
-    vel[i*3+1]=(Math.random()-.5)*.003;
-    vel[i*3+2]=(Math.random()-.5)*.002;
-  }
-  pGeo.setAttribute('position',new THREE.BufferAttribute(pos,3));
-  const pts=new THREE.Points(pGeo,new THREE.PointsMaterial({color:tc2,size:.035,transparent:true,opacity:.6, sizeAttenuation: true}));
-  S.add(pts);
+  // Floating gold dust particles
+  const N=250,pGeo=new THREE.BufferGeometry();
+  const pos=new Float32Array(N*3),vel=new Float32Array(N*3);
+  for(let i=0;i<N;i++){
+    pos[i*3]=(Math.random()-.5)*20;
+    pos[i*3+1]=(Math.random()-.5)*14;
+    pos[i*3+2]=(Math.random()-.5)*12;
+    vel[i*3]=(Math.random()-.5)*.003;
+    vel[i*3+1]=(Math.random()-.5)*.003;
+    vel[i*3+2]=(Math.random()-.5)*.002;
+  }
+  pGeo.setAttribute('position',new THREE.BufferAttribute(pos,3));
+  const pts=new THREE.Points(pGeo,new THREE.PointsMaterial({color:tc2,size:.035,transparent:true,opacity:.6, sizeAttenuation: true}));
+  S.add(pts);
 
-  // Constellation lines
-  const lineGeo=new THREE.BufferGeometry();
-  const linePos=new Float32Array(600*6);
-  lineGeo.setAttribute('position',new THREE.BufferAttribute(linePos,3));
-  const lines=new THREE.LineSegments(lineGeo,new THREE.LineBasicMaterial({color:tc,transparent:true,opacity:.08}));
-  S.add(lines);
+  // Constellation lines
+  const lineGeo=new THREE.BufferGeometry();
+  const linePos=new Float32Array(600*6);
+  lineGeo.setAttribute('position',new THREE.BufferAttribute(linePos,3));
+  const lines=new THREE.LineSegments(lineGeo,new THREE.LineBasicMaterial({color:tc,transparent:true,opacity:.08}));
+  S.add(lines);
 
-  // Accents
-  const accents=[];
-  for(let i=0;i<6;i++){
-    const m=new THREE.Mesh(
-      new THREE.OctahedronGeometry(.18,0),
-      new THREE.MeshStandardMaterial({color:i<2?gc:tc2, metalness:0.8, roughness:0.2, wireframe:false, transparent:true, opacity:0.8})
-    );
-    m.position.set((Math.random()-.5)*12,(Math.random()-.5)*8,(Math.random()-.5)*6);
-    S.add(m);accents.push(m);
-  }
+  // Accents
+  const accents=[];
+  for(let i=0;i<6;i++){
+    const m=new THREE.Mesh(
+      new THREE.OctahedronGeometry(.18,0),
+      new THREE.MeshStandardMaterial({color:i<2?gc:tc2, metalness:0.8, roughness:0.2, wireframe:false, transparent:true, opacity:0.8})
+    );
+    m.position.set((Math.random()-.5)*12,(Math.random()-.5)*8,(Math.random()-.5)*6);
+    S.add(m);accents.push(m);
+  }
 
-  let mx=0,my=0,introT=0;
-  document.addEventListener('mousemove',e=>{mx=(e.clientX/innerWidth-.5)*2;my=(e.clientY/innerHeight-.5)*2});
-  addEventListener('resize',()=>{cam.aspect=innerWidth/innerHeight;cam.updateProjectionMatrix();R.setSize(innerWidth,innerHeight)});
+  let mx=0,my=0,introT=0;
+  document.addEventListener('mousemove',e=>{mx=(e.clientX/innerWidth-.5)*2;my=(e.clientY/innerHeight-.5)*2});
+  addEventListener('resize',()=>{cam.aspect=innerWidth/innerHeight;cam.updateProjectionMatrix();R.setSize(innerWidth,innerHeight)});
 
-  !function tick(){
-    requestAnimationFrame(tick);
-    const t=performance.now()*.001;
+  !function tick(){
+    requestAnimationFrame(tick);
+    const t=performance.now()*.001;
 
-    // Cinematic zoom
-    if(introT<1){introT=Math.min(1,introT+.008);
-      const ease=1-Math.pow(1-introT,3);
-      cam.position.z=12-ease*6.5;
-    }
+    // Cinematic zoom
+    if(introT<1){introT=Math.min(1,introT+.008);
+      const ease=1-Math.pow(1-introT,3);
+      cam.position.z=12-ease*6.5;
+    }
 
-    // Rotation
-    main.rotation.x=t*.03+my*.06;main.rotation.y=t*.05+mx*.06;
-    inner.rotation.x=-t*.05-my*.04;inner.rotation.y=-t*.07-mx*.04;
-    core.scale.setScalar(1+Math.sin(t*2)*.05);
+    // Rotation
+    main.rotation.x=t*.03+my*.06;main.rotation.y=t*.05+mx*.06;
+    inner.rotation.x=-t*.05-my*.04;inner.rotation.y=-t*.07-mx*.04;
+    core.scale.setScalar(1+Math.sin(t*2)*.05);
 
-    rings.forEach((r,i)=>{r.rotation.z=t*(.015+i*.005)*(i%2?1:-1)});
+    rings.forEach((r,i)=>{r.rotation.z=t*(.015+i*.005)*(i%2?1:-1)});
 
-    accents.forEach((a,i)=>{
-      a.rotation.x=t*(.3+i*.1);a.rotation.y=t*(.2+i*.08);
-      a.position.y+=Math.sin(t+i)*0.003;
-    });
+    accents.forEach((a,i)=>{
+      a.rotation.x=t*(.3+i*.1);a.rotation.y=t*(.2+i*.08);
+      a.position.y+=Math.sin(t+i)*0.003;
+    });
 
-    const p=pGeo.attributes.position.array;
-    for(let i=0;i<N;i++){
-      p[i*3]+=vel[i*3];p[i*3+1]+=vel[i*3+1];p[i*3+2]+=vel[i*3+2];
-      if(Math.abs(p[i*3])>10)vel[i*3]*=-1;
-      if(Math.abs(p[i*3+1])>7)vel[i*3+1]*=-1;
-      if(Math.abs(p[i*3+2])>6)vel[i*3+2]*=-1;
-    }
-    pGeo.attributes.position.needsUpdate=true;
+    const p=pGeo.attributes.position.array;
+    for(let i=0;i<N;i++){
+      p[i*3]+=vel[i*3];p[i*3+1]+=vel[i*3+1];p[i*3+2]+=vel[i*3+2];
+      if(Math.abs(p[i*3])>10)vel[i*3]*=-1;
+      if(Math.abs(p[i*3+1])>7)vel[i*3+1]*=-1;
+      if(Math.abs(p[i*3+2])>6)vel[i*3+2]*=-1;
+    }
+    pGeo.attributes.position.needsUpdate=true;
 
-    let lc=0;const lp=lineGeo.attributes.position.array;
-    for(let i=0;i<N&&lc<600;i++){
-      for(let j=i+1;j<N&&lc<600;j++){
-        const dx=p[i*3]-p[j*3],dy=p[i*3+1]-p[j*3+1],dz=p[i*3+2]-p[j*3+2];
-        const d=dx*dx+dy*dy+dz*dz;
-        if(d<5){
-          lp[lc*6]=p[i*3];lp[lc*6+1]=p[i*3+1];lp[lc*6+2]=p[i*3+2];
-          lp[lc*6+3]=p[j*3];lp[lc*6+4]=p[j*3+1];lp[lc*6+5]=p[j*3+2];
-          lc++;
-        }
-      }
-    }
-    for(let i=lc*6;i<600*6;i++)lp[i]=0;
-    lineGeo.attributes.position.needsUpdate=true;
-    lineGeo.setDrawRange(0,lc*2);
+    let lc=0;const lp=lineGeo.attributes.position.array;
+    for(let i=0;i<N&&lc<600;i++){
+      for(let j=i+1;j<N&&lc<600;j++){
+        const dx=p[i*3]-p[j*3],dy=p[i*3+1]-p[j*3+1],dz=p[i*3+2]-p[j*3+2];
+        const d=dx*dx+dy*dy+dz*dz;
+        if(d<5){
+          lp[lc*6]=p[i*3];lp[lc*6+1]=p[i*3+1];lp[lc*6+2]=p[i*3+2];
+          lp[lc*6+3]=p[j*3];lp[lc*6+4]=p[j*3+1];lp[lc*6+5]=p[j*3+2];
+          lc++;
+        }
+      }
+    }
+    for(let i=lc*6;i<600*6;i++)lp[i]=0;
+    lineGeo.attributes.position.needsUpdate=true;
+    lineGeo.setDrawRange(0,lc*2);
 
-    cam.position.x+=(mx*.4-cam.position.x)*.015;
-    cam.position.y+=(-my*.3-cam.position.y)*.015;
-    cam.lookAt(1.5,0,0);
-    R.render(S,cam);
-  }();
+    cam.position.x+=(mx*.4-cam.position.x)*.015;
+    cam.position.y+=(-my*.3-cam.position.y)*.015;
+    cam.lookAt(1.5,0,0);
+    R.render(S,cam);
+  }();
 })();
 const ob=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('v')})},{threshold:.04,rootMargin:'0px 0px -10px 0px'});
 document.querySelectorAll('.rv').forEach(el=>ob.observe(el));
@@ -660,8 +647,8 @@ addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('s
 document.getElementById('nM').addEventListener('click',()=>document.getElementById('nL').classList.toggle('open'));
 document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',function(e){e.preventDefault();const t=document.querySelector(this.getAttribute('href'));if(t){t.scrollIntoView({behavior:'smooth'});document.getElementById('nL').classList.remove('open')}})});
 document.querySelectorAll('.pc, .ac, .ct-l').forEach(c=>{
-  c.addEventListener('mousemove',e=>{const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.transform=`perspective(1200px) rotateX(${-y*4}deg) rotateY(${x*4}deg) translateY(-5px)`});
-  c.addEventListener('mouseleave',()=>{c.style.transform=''});
+  c.addEventListener('mousemove',e=>{const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.transform=`perspective(1200px) rotateX(${-y*4}deg) rotateY(${x*4}deg) translateY(-5px)`});
+  c.addEventListener('mouseleave',()=>{c.style.transform=''});
 });
 </script>
 </body>
