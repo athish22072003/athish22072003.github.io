@@ -257,15 +257,28 @@ code{font-family:var(--mono);font-size:.85em;color:var(--teal-lt);background:lin
 
 /* ═══ RESPONSIVE ═══ */
 @media(max-width:768px){
-  html{font-size:16px}
+  html, body { overflow-x: hidden; width: 100%; font-size: 16px; }
+  .w { padding: 0 20px; }
   .n-links{display:none}.n-mob{display:flex}.n-label{display:none}
-  .n-links.open{display:flex;flex-direction:column;position:absolute;top:70px;left:0;right:0;background:rgba(5,5,5,.98);backdrop-filter:blur(30px);padding:24px 36px;gap:20px;border-bottom:1px solid var(--bdr)}
-  .hero-strip{grid-template-columns:1fr 1fr}
+  .n-links.open{display:flex;flex-direction:column;position:absolute;top:70px;left:0;right:0;background:rgba(5,5,5,.98);backdrop-filter:blur(30px);padding:24px 20px;gap:20px;border-bottom:1px solid var(--bdr)}
+  .hero-strip{grid-template-columns:1fr 1fr; gap: 8px;}
+  .hero-strip-item { padding: 16px 12px; }
+  .hero-strip-item .num { font-size: 1.5rem; }
   .ab-grid,.ct-g,.cw-g{grid-template-columns:1fr}
-  .pg{grid-template-columns:1fr}.pc.feat{grid-template-columns:1fr}
-  .sec{padding:90px 0}.hero-name{letter-spacing:-1.5px}
+  .pg,.sk-grid{grid-template-columns:1fr}
+  .pc.feat{grid-template-columns:1fr; gap: 24px;}
+  .sec{padding:80px 0}
+  .hero-name{font-size: clamp(2.8rem, 11vw, 3.5rem); letter-spacing:-1.5px}
+  .hero-btns { margin-bottom: 40px; }
   .role-bar{gap:8px}.role-tag{font-size:.65rem;padding:6px 14px}
   .hero-glow{width:400px;height:400px}
+  .pc, .ac, .sk { padding: 20px; }
+  .pr { padding: 16px; margin-bottom: 16px;}
+  .btn { padding: 14px 24px; }
+  .divider { gap: 12px; }
+  .divider h3 { font-size: 1.1rem; white-space: normal; }
+  .ct-l { word-break: break-word; padding: 16px 20px; }
+  .ct-f input, .ct-f textarea { padding: 14px 16px; }
 }
 </style>
 </head>
