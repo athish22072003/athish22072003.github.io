@@ -660,4 +660,9 @@ addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('s
 document.getElementById('nM').addEventListener('click',()=>document.getElementById('nL').classList.toggle('open'));
 document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',function(e){e.preventDefault();const t=document.querySelector(this.getAttribute('href'));if(t){t.scrollIntoView({behavior:'smooth'});document.getElementById('nL').classList.remove('open')}})});
 document.querySelectorAll('.pc, .ac, .ct-l').forEach(c=>{
-  c.addEventListener('mousemove',e=>{const r=c.getBoundingClientRect()
+  c.addEventListener('mousemove',e=>{const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.transform=`perspective(1200px) rotateX(${-y*4}deg) rotateY(${x*4}deg) translateY(-5px)`});
+  c.addEventListener('mouseleave',()=>{c.style.transform=''});
+});
+</script>
+</body>
+</html>
