@@ -366,7 +366,7 @@ code{font-family:var(--mono);font-size:.85em;color:var(--teal-lt);background:lin
           <strong>Coprocessor:</strong> 16-PE weight-stationary systolic array with row-skewed activation input, INT32 accumulation, and 7-cycle compute latency. Controlled via 6 custom RoCC instructions.<br><br>
           <strong>Results:</strong> Synthesized at <strong>100 MHz</strong> on Zynq UltraScale+ (WNS +1.85 ns). 3,808 LUTs · 2,883 FFs · 10 DSPs. <strong>32/32 verification checks passed</strong> across 11 test categories.
         </div>
-        <div class="plinks"><a href="https://github.com/athish22072003/rv32im-systolic-coprocessor" target="_blank">GitHub →</a><a href="assets/RV32IM_Report.pdf" target="_blank">Full Report →</a></div>
+        <div class="plinks"><a href="assets/RV32IM_Report.pdf" target="_blank">Full Report →</a></div>
       </div>
     </div>
     <div class="pc gc rv">
@@ -375,7 +375,7 @@ code{font-family:var(--mono);font-size:.85em;color:var(--teal-lt);background:lin
       <p class="pd">Designed a streaming datapath computing y = (a×b) + (c×d) + e on signed 16-bit fixed-point inputs with a valid-ready handshake interface. Built both an unpipelined single-cycle version and a parameterized pipelined version with configurable depth (2–5 stages).</p>
       <div class="pr"><strong>Results:</strong> Swept pipeline depths 2–5 and analyzed Fmax vs. resource tradeoffs. Peak <strong>346 MHz</strong> at depth 4 (32 LUTs, 148 FFs, 2 DSPs). Unpipelined achieved 291 MHz. Verified with a self-checking testbench using 200+ seeded random vectors.</div>
       <div class="pt"><span>Verilog</span><span>Vivado</span><span>Pipelining</span><span>Timing Analysis</span><span>Valid-Ready</span><span>Testbench</span></div>
-      <div class="plinks"><a href="#">GitHub →</a><a href="assets/Lab1_Report.pdf" target="_blank">Lab Report →</a></div>
+      <div class="plinks"><a href="assets/Lab1_Report.pdf" target="_blank">Lab Report →</a></div>
     </div>
     <div class="pc gc rv">
       <div class="pl">ECSE 417 · Verilog · Lab 2</div>
@@ -383,7 +383,7 @@ code{font-family:var(--mono);font-size:.85em;color:var(--teal-lt);background:lin
       <p class="pd">Three compute modes — sequential MAC, 4-way parallel MAC with an adder tree, and early-exit with a magnitude comparator. Controlled by a 5-state hybrid Moore/Mealy FSM with stall handling, output backpressure, and built-in hardware performance counters.</p>
       <div class="pr"><strong>Results:</strong> Synthesized at <strong>121.4 MHz</strong>, 496 LUTs, 241 FFs, zero DSP blocks. Verified across 7 automated testcases including random stall injection and backpressure hold.</div>
       <div class="pt"><span>Verilog</span><span>Vivado</span><span>FSM Design</span><span>MAC Unit</span><span>Stall Logic</span><span>Perf Counters</span></div>
-      <div class="plinks"><a href="#">GitHub →</a><a href="assets/Lab2_Report.pdf" target="_blank">Lab Report →</a></div>
+      <div class="plinks"><a href="assets/Lab2_Report.pdf" target="_blank">Lab Report →</a></div>
     </div>
     <div class="pc gc rv">
       <div class="pl">ECSE 488 · C · Embedded Linux</div>
@@ -391,7 +391,6 @@ code{font-family:var(--mono);font-size:.85em;color:var(--teal-lt);background:lin
       <p class="pd">An event-driven surveillance system running on a Raspberry Pi. A 4-state finite state machine classifies motion into four activity levels using frame-differencing and adaptive thresholds, then automatically adjusts the recording mode.</p>
       <div class="pr"><strong>Features:</strong> JPEG and H.264 video recording, GPIO-triggered alerts, remote manual override, and timestamped file indexing with a searchable log.</div>
       <div class="pt"><span>Raspberry Pi</span><span>C</span><span>OpenCV</span><span>FSM</span><span>H.264</span><span>GPIO</span></div>
-      <div class="plinks"><a href="#">GitHub →</a></div>
     </div>
     <div class="pc gc rv">
       <div class="pl">ECSE 422 · Semiconductor Devices</div>
@@ -418,28 +417,24 @@ code{font-family:var(--mono);font-size:.85em;color:var(--teal-lt);background:lin
       <p class="pd">A hand-soldered analog signal conditioning circuit — op-amp gain stage plus LDR voltage divider — interfaced to an 8051 microcontroller via ADC. Built for fluid-level detection in medical IV bottles.</p>
       <div class="pr"><strong>How I verified it:</strong> Oscilloscope for waveform analysis, DMM for DC bias measurements. Components selected from datasheets. Fixed noise issues with bypass capacitors.</div>
       <div class="pt"><span>8051</span><span>Op-Amp</span><span>Soldering</span><span>Oscilloscope</span><span>DMM</span></div>
-      <div class="plinks"><a href="#">GitHub →</a></div>
     </div>
     <div class="pc uc rv">
       <div class="pl">IoT Platform · ESP32</div>
       <h3>Cloud Control Hub</h3>
       <p class="pd">A remote monitoring system that publishes sensor data over MQTT with TLS encryption to AWS IoT. Supports actuator control through cloud-triggered GPIO callbacks and I²C sensor interfacing.</p>
       <div class="pt"><span>ESP32</span><span>AWS IoT</span><span>MQTT/TLS</span><span>I²C</span><span>GPIO</span></div>
-      <div class="plinks"><a href="#">GitHub →</a></div>
     </div>
     <div class="pc uc rv">
       <div class="pl">IoT · ESP8266</div>
       <h3>E-Smart Board</h3>
       <p class="pd">A Wi-Fi-enabled notice board that receives messages through a web interface and displays them on an LCD screen in real time. Uses ThingSpeak for cloud-based logging.</p>
       <div class="pt"><span>ESP8266</span><span>ThingSpeak</span><span>LCD</span><span>Wi-Fi</span></div>
-      <div class="plinks"><a href="#">GitHub →</a></div>
     </div>
     <div class="pc uc rv">
       <div class="pl">Embedded Control · Arduino</div>
       <h3>Temperature-Controlled Fan</h3>
       <p class="pd">A closed-loop fan speed controller built with an Arduino and an LM35 temperature sensor. PWM-regulated. Hand-soldered on a breadboard.</p>
       <div class="pt"><span>Arduino</span><span>LM35</span><span>PWM</span><span>Soldering</span></div>
-      <div class="plinks"><a href="#">GitHub →</a></div>
     </div>
   </div>
 </div>
@@ -493,7 +488,7 @@ code{font-family:var(--mono);font-size:.85em;color:var(--teal-lt);background:lin
     <div class="ct-info rv">
       <p>I'm actively looking for Fall 2026 co-op opportunities in FPGA design, embedded systems, firmware, and hardware engineering. Based in Cleveland, OH — happy to chat about any role that involves building real hardware.</p>
       <div class="ct-ls">
-        <a href="/cdn-cgi/l/email-protection#7e1f0a16170d160817150c1f131f104c4c3e19131f1712501d1113" class="ct-l"><span class="lb">Email</span><span class="__cf_email__" data-cfemail="0f6e7b67667c677966647d6e626e613d3d4f68626e6663216c6062">[email&#160;protected]</span></a>
+        <a href="mailto:athishvikraman22@gmail.com" class="ct-l"><span class="lb">Email</span>athishvikraman22@gmail.com</a>
         <a href="https://www.linkedin.com/in/athishvikraman" target="_blank" class="ct-l"><span class="lb">LinkedIn</span>linkedin.com/in/athishvikraman</a>
         <a href="https://github.com/athish22072003" target="_blank" class="ct-l"><span class="lb">GitHub</span>github.com/athish22072003</a>
         <a href="tel:+12162144366" class="ct-l"><span class="lb">Phone</span>+1 (216) 214-4366</a>
@@ -514,7 +509,7 @@ code{font-family:var(--mono);font-size:.85em;color:var(--teal-lt);background:lin
  
 <footer class="footer"><div class="w"><p>© 2026 Athish Vikraman</p></div></footer>
  
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 (function(){
   const C=document.getElementById('hc'),R=new THREE.WebGLRenderer({canvas:C,antialias:true,alpha:true});
   R.setPixelRatio(Math.min(devicePixelRatio,2));R.setSize(innerWidth,innerHeight);
