@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Athish Vikraman — FPGA · Embedded · Firmware · Hardware</title>
-<meta name="description" content="Athish Vikraman — FPGA/SoC design, embedded firmware, hardware engineering.">
+<title>Athish Vikraman — Hardware · Embedded · FPGA · Firmware</title>
+<meta name="description" content="Athish Vikraman — Hardware engineer. Embedded firmware, FPGA/RTL design, pipelined RISC-V CPUs, register-level STM32 drivers.">
 <meta name="theme-color" content="#050505">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,300;1,9..144,500&family=Manrope:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -127,7 +127,6 @@ code{font-family:var(--mono);font-size:.85em;color:var(--teal-lt);background:lin
 .plinks{display:flex;gap:20px;flex-wrap:wrap}
 .plinks a{font-size:.85rem;font-weight:700;letter-spacing:1px; text-transform:uppercase; display:inline-flex; align-items:center; gap:5px; color:var(--teal-lt); transition:all .3s}
 .plinks a:hover{color:var(--wht); text-shadow: 0 0 10px rgba(252,237,166,.5)}
-/* GitHub link style */
 .plinks a.gh{color:var(--dim); border:1px solid var(--bdr); padding:6px 14px; border-radius:6px; background:var(--surf); font-size:.75rem; transition:all .3s}
 .plinks a.gh:hover{border-color:var(--teal); color:var(--teal-lt); background:var(--teal-g); transform:translateY(-2px)}
 .sk-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:24px}
@@ -137,7 +136,7 @@ code{font-family:var(--mono);font-size:.85em;color:var(--teal-lt);background:lin
 .sk-t{font-family:var(--dsp);font-size:1.2rem;color:var(--teal-lt);letter-spacing:1px;margin-bottom:20px;font-weight:500; border-bottom: 1px solid var(--bdr); padding-bottom:12px}
 .sk ul{list-style:none}
 .sk li{font-size:.95rem;color:var(--txt);padding:8px 0;font-weight:300; display:flex; align-items:center}
-.sk li::before{content:'♦'; color:var(--teal); font-size:.6rem; margin-right:12px}
+.sk li::before{content:'&#9670;'; color:var(--teal); font-size:.6rem; margin-right:12px}
 .cw-g{display:grid;grid-template-columns:1fr 1fr;gap:60px}
 .cw-b h4{font-family:var(--dsp); font-size:1.3rem;font-weight:500;margin-bottom:8px;display:flex;align-items:center;gap:12px; color:var(--wht)}
 .cw-b .dot{width:10px;height:10px;border-radius:2px;flex-shrink:0; transform:rotate(45deg); box-shadow: 0 0 10px currentColor}
@@ -214,17 +213,16 @@ code{font-family:var(--mono);font-size:.85em;color:var(--teal-lt);background:lin
   <div class="hero-vignette"></div>
   <div class="w hero-c">
     <div class="role-bar">
-      <span class="role-tag primary">FPGA / SoC Design</span>
-      <span class="role-tag">Embedded Systems</span>
+      <span class="role-tag primary">Embedded Systems</span>
       <span class="role-tag">Firmware Engineering</span>
+      <span class="role-tag">FPGA / RTL Design</span>
       <span class="role-tag">Hardware Design</span>
     </div>
     <h1 class="hero-name">Athish<br><span class="it">Vikraman</span></h1>
     <p class="hero-desc">
-      I'm a graduate Electrical Engineering student who loves building things
-      that actually work — from designing a <strong>RISC-V processor</strong> on
-      an FPGA to soldering circuits on a bench and debugging them with an oscilloscope.
-      Currently looking for co-op roles where I can contribute to real hardware and firmware teams.
+      I design and build hardware — from <strong>pipelined RISC-V processors</strong> validated on real FPGA silicon
+      to <strong>register-level firmware</strong> on STM32 with FreeRTOS and CAN bus.
+      Currently seeking co-op roles where I can contribute to a real hardware or firmware team.
     </p>
     <div class="hero-btns">
       <a href="https://www.linkedin.com/in/athishvikraman" target="_blank" class="btn btn-f">LinkedIn</a>
@@ -245,14 +243,14 @@ code{font-family:var(--mono);font-size:.85em;color:var(--teal-lt);background:lin
   <h2 class="sh-t rv">A bit about <em>me.</em></h2>
   <div class="ab-grid">
     <div class="ab-text rv">
-      <p>I'm Athish — M.S. Electrical Engineering at <strong>Case Western Reserve University</strong>. I enjoy debugging timing paths in Vivado just as much as tracing signals on an oscilloscope.</p>
-      <p>At CWRU, I designed a <strong>pipelined RISC-V CPU with a systolic array coprocessor</strong> in SystemVerilog, built dot-product accelerators, embedded surveillance systems, and ran device simulations in <strong>COMSOL Multiphysics</strong>. Before that, I did my B.Tech at <strong>Manipal Institute of Technology</strong> — microcontrollers, analog circuits, IoT, and a lot of soldering. That's where I decided I wanted to build hardware, not just study it.</p>
-      <p>Looking for a <strong>Fall 2026 co-op</strong> in FPGA design, embedded firmware, or hardware engineering. I learn fast and I care about getting things right.</p>
+      <p>I'm Athish — M.S. Electrical Engineering at <strong>Case Western Reserve University</strong>. I work across the full hardware stack, from bare-metal firmware on ARM Cortex-M to pipelined processor design in SystemVerilog on Xilinx FPGAs.</p>
+      <p>At CWRU, I designed a <strong>5-stage pipelined RISC-V CPU with a custom systolic array coprocessor</strong> and validated it on real Zynq UltraScale+ silicon — 138 MHz, 4,777 LUTs, 36/36 tests passing, correct output confirmed on board LEDs. Right now I'm building <strong>register-level I2C and SPI drivers on an STM32F446RE</strong> with CAN bus and FreeRTOS — no libraries, just datasheets and registers. Before grad school, I was at <strong>Manipal Institute of Technology</strong> building 8051-based medical monitors, ESP32 IoT systems, and hand-soldering analog circuits.</p>
+      <p>Looking for a <strong>Fall 2026 co-op</strong> in hardware engineering, embedded firmware, FPGA design, or anything where the work ends up on a board or in silicon.</p>
     </div>
     <div class="ab-cards rv d2">
       <div class="ac"><span class="mono">2025 — Present</span><h4>Case Western Reserve University</h4><p>M.S. Electrical Engineering · GPA: 3.25/4.0</p></div>
       <div class="ac"><span class="mono">2021 — 2025</span><h4>Manipal Institute of Technology</h4><p>B.Tech Electronics &amp; Instrumentation · GPA: 3.30/4.0</p></div>
-      <div class="ac"><span class="mono">Seeking</span><h4>Fall 2026 Co-op</h4><p>FPGA · Embedded · Firmware · Hardware</p></div>
+      <div class="ac"><span class="mono">Seeking</span><h4>Fall 2026 Co-op</h4><p>Hardware · Embedded · FPGA · Firmware</p></div>
     </div>
   </div>
 </div>
@@ -271,7 +269,7 @@ code{font-family:var(--mono);font-size:.85em;color:var(--teal-lt);background:lin
     <div class="pc feat gc rv">
       <div>
         <div class="fb">★ Featured Project</div>
-        <div class="pl">ECSE 417 · SystemVerilog</div>
+        <div class="pl">SystemVerilog · Zynq UltraScale+</div>
         <h3>RV32IM Pipelined CPU + 4×4 INT8 Systolic Array</h3>
         <p class="pd">A complete SoC — 5-stage pipelined RISC-V processor with the full RV32IM instruction set, zero-penalty data forwarding, load-use stall detection, branch flush, and a custom <code>md_result_captured</code> latch that solves a tricky M-extension pipeline timing hazard.</p>
         <div class="pt"><span>SystemVerilog</span><span>Vivado</span><span>Zynq UltraScale+</span><span>RISC-V</span><span>RoCC ISA</span></div>
@@ -279,13 +277,20 @@ code{font-family:var(--mono);font-size:.85em;color:var(--teal-lt);background:lin
       <div>
         <div class="pr">
           <strong>Coprocessor:</strong> 16-PE weight-stationary systolic array with row-skewed activation input, INT32 accumulation, and 7-cycle compute latency. Controlled via 6 custom RoCC instructions.<br><br>
-          <strong>Results:</strong> Synthesized at <strong>100 MHz</strong> on Zynq UltraScale+ (WNS +1.85 ns). 3,808 LUTs · 2,883 FFs · 10 DSPs. <strong>32/32 verification checks passed</strong> across 11 test categories.
+          <strong>Results:</strong> Hardware validated on AUP-ZU3 (Zynq UltraScale+ ZU3EG). <strong>138 MHz</strong> achievable (WNS +2.754 ns at 100 MHz). 4,777 LUTs · 2,985 FFs · 10 DSPs. <strong>36/36 verification checks passed</strong> across 12 test categories.
         </div>
         <div class="plinks">
-          <a href="https://github.com/athish22072003/rv32im-systolic-coprocessor" target="_blank" class="gh">⬡ GitHub Repository →</a>
-          <a href="assets/RV32IM_Report.pdf" target="_blank">Full Report →</a>
+          <a href="https://github.com/athish22072003/rv32im-systolic-coprocessor" target="_blank" class="gh">GitHub Repository →</a>
         </div>
       </div>
+    </div>
+ 
+    <!-- STM32 Multi-Sensor DAQ -->
+    <div class="pc gc rv">
+      <div class="pl">C · FreeRTOS · STM32F446RE · In Progress</div>
+      <h3>STM32 Multi-Sensor Data Acquisition System</h3>
+      <p class="pd">Register-level I2C driver for BME280, register-level SPI driver for ADXL345 accelerometer, CAN 2.0B transmission via SN65HVD230. FreeRTOS managing four concurrent tasks through queues and mutexes. Python host-side visualization via UART. No HAL, no Arduino — datasheets and peripheral registers.</p>
+      <div class="pt"><span>STM32</span><span>FreeRTOS</span><span>C</span><span>I2C</span><span>SPI</span><span>CAN</span><span>ARM Cortex-M4</span></div>
     </div>
  
     <!-- Lab 1: Parameterized Pipelined Datapath -->
@@ -296,7 +301,7 @@ code{font-family:var(--mono);font-size:.85em;color:var(--teal-lt);background:lin
       <div class="pr"><strong>Results:</strong> Swept pipeline depths 2–5 and analyzed Fmax vs. resource tradeoffs. Peak <strong>346 MHz</strong> at depth 4 (32 LUTs, 148 FFs, 2 DSPs). Unpipelined achieved 291 MHz. Verified with a self-checking testbench using 200+ seeded random vectors.</div>
       <div class="pt"><span>Verilog</span><span>Vivado</span><span>Pipelining</span><span>Timing Analysis</span><span>Valid-Ready</span><span>Testbench</span></div>
       <div class="plinks">
-        <a href="FPGA_Lab_1.pdf" target="_blank">Lab Report →</a>
+        <a href="https://drive.google.com/file/d/1yaW0gwg0VYzmaqkierBz46deAIGUYlLY/view?usp=drive_link" target="_blank">Lab Report →</a>
       </div>
     </div>
  
@@ -308,13 +313,13 @@ code{font-family:var(--mono);font-size:.85em;color:var(--teal-lt);background:lin
       <div class="pr"><strong>Results:</strong> Synthesized at <strong>121.4 MHz</strong>, 496 LUTs, 241 FFs, zero DSP blocks. Verified across 7 automated testcases including random stall injection and backpressure hold.</div>
       <div class="pt"><span>Verilog</span><span>Vivado</span><span>FSM Design</span><span>MAC Unit</span><span>Stall Logic</span><span>Perf Counters</span></div>
       <div class="plinks">
-        <a href="Lab2_Report_Final.pdf" target="_blank">Lab Report →</a>
+        <a href="https://drive.google.com/file/d/1PjPri-5Fe-Gxrf7GXwMmIg4jJzUHt4Xb/view?usp=sharing" target="_blank">Lab Report →</a>
       </div>
     </div>
  
     <!-- Surveillance System -->
     <div class="pc gc rv">
-      <div class="pl">ECSE 488 · C · Embedded Linux</div>
+      <div class="pl">C · Embedded Linux · Raspberry Pi</div>
       <h3>Warehouse Video Surveillance System</h3>
       <p class="pd">An event-driven surveillance system running on a Raspberry Pi. A 4-state finite state machine classifies motion into four activity levels using frame-differencing and adaptive thresholds, then automatically adjusts the recording mode.</p>
       <div class="pr"><strong>Features:</strong> JPEG and H.264 video recording, GPIO-triggered alerts, remote manual override, and timestamped file indexing with a searchable log.</div>
@@ -325,34 +330,34 @@ code{font-family:var(--mono);font-size:.85em;color:var(--teal-lt);background:lin
     <div class="pc gc rv">
       <div class="pl">ECSE 422 · Semiconductor Devices</div>
       <h3>HfO₂ Ferroelectric Devices for Memory &amp; Logic</h3>
-      <p class="pd">A research project exploring hafnium-oxide-based ferroelectric architectures — FeRAM, FeFET, and NCFET — for next-generation non-volatile memory and steep-slope logic applications. Covers material physics, phase transitions, polarization mechanisms, and CMOS fabrication compatibility.</p>
+      <p class="pd">A research project exploring hafnium-oxide-based ferroelectric architectures — FeRAM, FeFET, and NCFET — for next-generation non-volatile memory and steep-slope logic applications.</p>
       <div class="pt"><span>Solid-State Physics</span><span>FeRAM</span><span>FeFET</span><span>NCFET</span><span>CMOS Scaling</span></div>
       <div class="plinks">
-        <a href="Final_Project_Proposal.pdf" target="_blank">Project Proposal →</a>
+        <a href="https://drive.google.com/file/d/1bCp_NvGiAzCZboNNAAuBR8JaTa0OmzjA/view?usp=sharing" target="_blank">Project Proposal →</a>
       </div>
     </div>
  
     <!-- COMSOL Report 1: 1D P-N Junction -->
     <div class="pc gc rv">
-      <div class="pl">ECSE 422 · COMSOL Multiphysics · Report 1</div>
+      <div class="pl">ECSE 422 · COMSOL Multiphysics</div>
       <h3>1D Abrupt P-N Junction Simulation</h3>
-      <p class="pd">Modeled a one-dimensional abrupt p-n junction using COMSOL Multiphysics. Simulated electrostatic potential, electron/hole concentration profiles, net charge density, and electric field under equilibrium, forward bias (0 to +0.5 V), and reverse bias (0 to −1.5 V). Parametric sweep over donor concentration Nₐ ∈ {1, 2, 5} × 10¹⁶ cm⁻³.</p>
-      <div class="pr"><strong>Analysis:</strong> Analytically verified built-in voltage, depletion width (scales ∝ 1/√N), and peak electric field (scales ∝ √N). All COMSOL numerical results matched standard semiconductor theory exactly.</div>
-      <div class="pt"><span>COMSOL Multiphysics</span><span>Semiconductor Physics</span><span>P-N Junction</span><span>Device Modeling</span><span>Parametric Sweep</span></div>
+      <p class="pd">Modeled a one-dimensional abrupt p-n junction using COMSOL Multiphysics, simulating carrier concentration profiles, electric field distribution, and built-in potential across the depletion region for asymmetric doping.</p>
+      <div class="pr"><strong>Analysis:</strong> Computed theoretical built-in voltage analytically and validated against COMSOL numerical results. Studied the effect of doping asymmetry on depletion width and electric field peak.</div>
+      <div class="pt"><span>COMSOL Multiphysics</span><span>Semiconductor Physics</span><span>P-N Junction</span><span>Device Modeling</span></div>
       <div class="plinks">
-        <a href="ECSE422_modelling_report_1.pdf" target="_blank">Full Report →</a>
+        <a href="https://drive.google.com/file/d/1SRkHyIqR4FkCdKB9Pg3khgYHuO0KmPRk/view?usp=sharing" target="_blank">Full Report →</a>
       </div>
     </div>
  
     <!-- COMSOL Report 2: 2D p-i-n Junction -->
     <div class="pc gc rv">
-      <div class="pl">ECSE 422 · COMSOL Multiphysics · Report 2</div>
+      <div class="pl">ECSE 422 · COMSOL Multiphysics</div>
       <h3>2D P-I-N Junction — Light Response &amp; Quasi-Fermi Levels</h3>
-      <p class="pd">Extended the 1D model to a full 2D p-i-n junction (12×6 µm) solved via coupled drift-diffusion PDEs in COMSOL. Studied photodetector and solar-cell behavior by sweeping optical generation rate G₀ under zero and −2 V reverse bias. Derived the logarithmic scaling of quasi-Fermi level splitting: ΔEf ≈ 2Vt · ln(G₀τ / nᵢ).</p>
-      <div class="pr"><strong>Results:</strong> Carrier concentration in the intrinsic region climbed from ~10¹⁰ cm⁻³ at G₀ = 0 to ~10¹⁶ cm⁻³ at peak generation. Under −2 V reverse bias, estimated electron transit time ≈ 0.46 ns — far below SRH recombination lifetime, explaining high quantum efficiency.</div>
-      <div class="pt"><span>COMSOL Multiphysics</span><span>2D Drift-Diffusion</span><span>P-I-N Junction</span><span>Quasi-Fermi Levels</span><span>Photodetector</span><span>Solar Cell</span></div>
+      <p class="pd">Extended the 1D model to a full 2D p-i-n junction solved via coupled drift-diffusion PDEs. Studied photodetector and solar-cell behavior by sweeping optical generation rate under zero and reverse bias.</p>
+      <div class="pr"><strong>Results:</strong> Carrier concentration in the intrinsic region climbed from ~10&#185;&#8304; to ~10&#185;&#8310; cm&#8315;&#179; at peak generation. Under reverse bias, estimated electron transit time of 0.46 ns — far below SRH recombination lifetime.</div>
+      <div class="pt"><span>COMSOL Multiphysics</span><span>2D Drift-Diffusion</span><span>P-I-N Junction</span><span>Quasi-Fermi Levels</span><span>Photodetector</span></div>
       <div class="plinks">
-        <a href="ECSE422_Modeling_Report_2_final.pdf" target="_blank">Full Report →</a>
+        <a href="https://drive.google.com/file/d/1fKSHtm6QrpAps4OaB4yLwuHDp0d5o4-N/view?usp=sharing" target="_blank">Full Report →</a>
       </div>
     </div>
  
@@ -398,8 +403,8 @@ code{font-family:var(--mono);font-size:.85em;color:var(--teal-lt);background:lin
     <div class="sk rv"><div class="sk-t">Languages</div><ul><li>C / C++</li><li>Python</li><li>SystemVerilog / Verilog / VHDL</li><li>RISC-V Assembly</li><li>Assembly (8051, ARM)</li></ul></div>
     <div class="sk rv d1"><div class="sk-t">FPGA &amp; EDA</div><ul><li>Xilinx Vivado</li><li>XSim (simulation)</li><li>Zynq UltraScale+ / 7-series</li><li>COMSOL Multiphysics</li><li>LTSpice / Multisim</li><li>MATLAB / Simulink</li></ul></div>
     <div class="sk rv d2"><div class="sk-t">Architecture</div><ul><li>RISC-V RV32IM pipeline</li><li>Systolic arrays</li><li>Custom ISA (RoCC)</li><li>Forwarding / hazard logic</li><li>FSM design</li></ul></div>
-    <div class="sk rv d3"><div class="sk-t">Embedded</div><ul><li>8051 / LPC2148 (ARM7)</li><li>Arduino / ESP32 / ESP8266</li><li>Raspberry Pi</li></ul></div>
-    <div class="sk rv d4"><div class="sk-t">Protocols</div><ul><li>I²C, SPI, UART, AXI4-Lite</li><li>GPIO / ADC / PWM</li><li>MQTT / TLS</li></ul></div>
+    <div class="sk rv d3"><div class="sk-t">Embedded</div><ul><li>STM32 / ARM Cortex-M4</li><li>FreeRTOS</li><li>8051 / LPC2148 (ARM7)</li><li>Arduino / ESP32 / ESP8266</li><li>Raspberry Pi</li></ul></div>
+    <div class="sk rv d4"><div class="sk-t">Protocols</div><ul><li>I²C, SPI, UART, CAN</li><li>AXI4-Lite</li><li>GPIO / ADC / PWM</li><li>MQTT / TLS</li></ul></div>
     <div class="sk rv d5"><div class="sk-t">Lab &amp; Fabrication</div><ul><li>Oscilloscopes / Logic Analyzers</li><li>Digital Multimeters</li><li>SMD &amp; through-hole soldering</li><li>Breadboard / PCB prototyping</li></ul></div>
   </div>
 </div>
@@ -410,7 +415,7 @@ code{font-family:var(--mono);font-size:.85em;color:var(--teal-lt);background:lin
   <span class="sh-n rv">04 — Coursework</span>
   <h2 class="sh-t rv">Academic <em>foundation.</em></h2>
   <div class="cw-g">
-    <div class="cw-b rv"><h4><span class="dot dot-g"></span>Graduate — CWRU</h4><p class="sub">M.S. Electrical Engineering</p><div class="cw-p"><span>Computer Design — FPGAs</span><span>Embedded System Design</span><span>Solid-State Electronics II</span><span>Robotics I</span></div></div>
+    <div class="cw-b rv"><h4><span class="dot dot-g"></span>Graduate — CWRU</h4><p class="sub">M.S. Electrical Engineering</p><div class="cw-p"><span>Computer Design — FPGAs</span><span>Embedded System Design</span><span>Solid-State Electronics II</span></div></div>
     <div class="cw-b rv d1"><h4><span class="dot dot-u"></span>Undergraduate — MIT Manipal</h4><p class="sub">B.Tech Electronics &amp; Instrumentation</p><div class="cw-p"><span>Microcontrollers</span><span>Analog Circuits</span><span>Digital Circuits</span><span>Sensors &amp; Transducers</span><span>Control Systems</span><span>DSP</span><span>Linear ICs</span><span>Industrial Automation</span><span>Cyber-Physical Systems</span><span>Industrial IoT</span></div></div>
   </div>
 </div>
@@ -421,9 +426,9 @@ code{font-family:var(--mono);font-size:.85em;color:var(--teal-lt);background:lin
   <span class="sh-n rv">05 — Experience</span>
   <h2 class="sh-t rv">Professional <em>path.</em></h2>
   <div class="tl">
-    <div class="ti rv"><div class="dt">Jun — Jul 2023</div><h3>Instrumentation &amp; Control Engineering Intern</h3><h4>Oil and Natural Gas Corporation (ONGC) — Karaikal, India</h4><ul><li>Designed industrial control circuits in Multisim and selected components through datasheet analysis</li><li>Troubleshot live instrumentation using oscilloscopes and DMMs in an active petroleum plant</li><li>Calibrated temperature and pressure transducers; performed analog signal conditioning</li></ul></div>
-    <div class="ti rv"><div class="dt">Dec 2023 — Apr 2025</div><h3>Software Engineering Intern</h3><h4>Hiranya Pathaye Technologies — Coimbatore, India</h4><ul><li>Built a full-stack CRM platform using ReactJS, Django, and MySQL with automated lead tracking</li><li>Wrote Python test scripts to validate backend data integrity</li></ul></div>
-    <div class="ti rv"><div class="dt">Jan 2023</div><h3>PLC Workshop Instructor</h3><h4>Manipal Institute of Technology</h4><ul><li>Led a 3-day hands-on workshop on Programmable Logic Controllers for 30+ undergraduates</li></ul></div>
+    <div class="ti rv"><div class="dt">Jun — Jul 2023</div><h3>Instrumentation &amp; Control Engineering Intern</h3><h4>Oil and Natural Gas Corporation (ONGC) — Karaikal, India</h4><ul><li>Debugged live instrumentation in an active petroleum plant using oscilloscopes and DMMs — resolved grounding noise on a 4-20mA transducer loop with bypass capacitor placement</li><li>Designed analog signal conditioning circuits in Multisim — op-amp gain stages, voltage dividers, transducer interfaces</li><li>Calibrated 12+ temperature and pressure transducers; documented linearity, offset, and uncertainty procedures</li></ul></div>
+    <div class="ti rv"><div class="dt">Dec 2024 — Apr 2025</div><h3>Software Engineering Intern</h3><h4>Hiranya Pathaye Technologies — Coimbatore, India</h4><ul><li>Wrote Python scripts that automated backend data validation across 500+ records — cut manual QA time in half</li></ul></div>
+    <div class="ti rv"><div class="dt">Jan 2023</div><h3>PLC Workshop Instructor</h3><h4>Manipal Institute of Technology</h4><ul><li>Led a 3-day hands-on PLC programming workshop for 30+ undergraduates — ladder logic, sequential control, industrial I/O interfacing</li></ul></div>
     <div class="ti rv"><div class="dt">2023</div><h3>CISCON 2023 — Key Speaker</h3><h4>Control Instrumentation Systems Conference</h4><ul><li>Presented research on power IC applications; paper currently in review</li></ul></div>
   </div>
 </div>
@@ -435,7 +440,7 @@ code{font-family:var(--mono);font-size:.85em;color:var(--teal-lt);background:lin
   <h2 class="sh-t rv">Let's <em>connect.</em></h2>
   <div class="ct-g">
     <div class="ct-info rv">
-      <p>I'm actively looking for Fall 2026 co-op opportunities in FPGA design, embedded systems, firmware, and hardware engineering. Based in Cleveland, OH — happy to chat about any role that involves building real hardware.</p>
+      <p>I'm actively looking for Fall 2026 co-op opportunities in hardware engineering, embedded firmware, FPGA design, and digital design. Based in Cleveland, OH — happy to chat about any role that involves building real hardware.</p>
       <div class="ct-ls">
         <a href="mailto:athishvikraman22@gmail.com" class="ct-l"><span class="lb">Email</span>athishvikraman22@gmail.com</a>
         <a href="https://www.linkedin.com/in/athishvikraman" target="_blank" class="ct-l"><span class="lb">LinkedIn</span>linkedin.com/in/athishvikraman</a>
@@ -456,7 +461,7 @@ code{font-family:var(--mono);font-size:.85em;color:var(--teal-lt);background:lin
 </div>
 </section>
  
-<footer class="footer"><div class="w"><p>© 2026 Athish Vikraman</p></div></footer>
+<footer class="footer"><div class="w"><p>&copy; 2026 Athish Vikraman</p></div></footer>
  
 <script>
 (function(){
@@ -554,3 +559,4 @@ document.querySelectorAll('.pc, .ac, .ct-l').forEach(c=>{
 </script>
 </body>
 </html>
+ 
