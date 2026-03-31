@@ -3,191 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Athish Vikraman — FPGA · Embedded · Firmware · Hardware</title>
-<meta name="description" content="Athish Vikraman — FPGA/SoC design, embedded firmware, hardware engineering.">
+<title>Athish Vikraman — Hardware Validation · Characterization · Embedded</title>
+<meta name="description" content="Athish Vikraman — Hardware Validation & Characterization, Signal Integrity, Embedded Systems Engineering.">
 <meta name="theme-color" content="#050505">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,300;1,9..144,500&family=Manrope:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <style>
-:root{
-  --void:#050505;--deep:#0a0a0a;--surf:#121212;--card:#181818;
-  --bdr:#3a2e16;--wht:#fdfbf7;--txt:#c2b9aa;--dim:#8c8270;--faint:#544c40;
-  --teal:#d4af37;--teal-lt:#fceda6;--teal-g:rgba(212,175,55,.08);--teal-g2:rgba(212,175,55,.18);
-  --gold:#e6c57a;--gold-dim:#a68c4a;--purp:#8a1c1c;
-  --dsp:'Fraunces',Georgia,serif;--sans:'Manrope',system-ui,sans-serif;--mono:'JetBrains Mono',monospace;
-  --mx:1080px;--r:16px;
-}
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth;font-size:17.5px;-webkit-font-smoothing:antialiased}
-body{font-family:var(--sans);background:var(--void);color:var(--wht);line-height:1.8;overflow-x:hidden}
-body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.035;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
-::selection{background:var(--teal);color:#000}
-a{color:var(--teal-lt);text-decoration:none;transition:color .3s,text-shadow .3s}
-a:hover{color:var(--wht);text-shadow:0 0 10px rgba(252,237,166,.5)}
-code{font-family:var(--mono);font-size:.85em;color:var(--teal-lt);background:linear-gradient(145deg,var(--card),var(--surf));border:1px solid var(--bdr);padding:2px 8px;border-radius:6px;box-shadow:inset 0 1px 3px rgba(0,0,0,.5)}
-.w{max-width:var(--mx);margin:0 auto;padding:0 36px}
-.sec{padding:130px 0}
-.rv{opacity:0;transform:translateY(24px);transition:opacity 1s cubic-bezier(.22,1,.36,1),transform 1s cubic-bezier(.22,1,.36,1)}
-.rv.v{opacity:1;transform:none}
-.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}.d5{transition-delay:.5s}
-.sh-n{font-family:var(--mono);font-size:.7rem;letter-spacing:5px;text-transform:uppercase;color:var(--teal);display:block;margin-bottom:18px;text-shadow:0 0 15px rgba(212,175,55,.3)}
-.sh-t{font-family:var(--dsp);font-size:clamp(2.2rem,5vw,3.2rem);font-weight:500;line-height:1.15;margin-bottom:20px;letter-spacing:-.5px;text-shadow:0 4px 12px rgba(0,0,0,.8)}
-.sh-t em{font-style:italic;color:var(--teal-lt);font-weight:300}
-.sh-d{color:var(--txt);font-size:1.05rem;max-width:540px;margin-bottom:64px;font-weight:300;line-height:1.9}
-.divider{display:flex;align-items:center;gap:20px;margin-bottom:48px}
-.divider .pill{padding:6px 20px;border-radius:20px;font-size:.7rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#fff;flex-shrink:0;box-shadow:0 4px 15px rgba(0,0,0,.5),inset 0 1px 1px rgba(255,255,255,.2)}
-.divider .pill-g{background:linear-gradient(135deg,#e6c57a,#a68c4a);color:#000}
-.divider .pill-u{background:linear-gradient(135deg,#a32222,#5c0f0f)}
-.divider h3{font-family:var(--dsp);font-size:1.3rem;font-weight:500;white-space:nowrap;color:var(--wht);letter-spacing:.5px}
-.divider .rule{flex:1;height:2px;background:linear-gradient(90deg,var(--bdr),transparent)}
-.nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:24px 0;transition:all .4s ease}
-.nav.stuck{background:rgba(5,5,5,.75);backdrop-filter:blur(35px) saturate(1.2);border-bottom:1px solid rgba(212,175,55,.15);padding:14px 0;box-shadow:0 10px 30px rgba(0,0,0,.6)}
-.nav .w{display:flex;justify-content:space-between;align-items:center}
-.n-logo{display:flex;align-items:center;gap:12px;text-decoration:none}
-.n-mark{font-family:var(--dsp);font-size:1.1rem;font-weight:500;color:var(--void);background:linear-gradient(135deg,var(--teal-lt),var(--gold-dim));letter-spacing:2px;border:1px solid rgba(255,255,255,.3);padding:6px 12px;border-radius:4px;line-height:1;transition:all .4s;box-shadow:0 4px 15px rgba(212,175,55,.2)}
-.n-logo:hover .n-mark{transform:scale(1.05);box-shadow:0 6px 20px rgba(212,175,55,.4),inset 0 0 10px rgba(255,255,255,.5)}
-.n-label{font-family:var(--dsp);font-size:.85rem;font-weight:300;color:var(--wht);letter-spacing:2px;text-transform:uppercase}
-.n-links{display:flex;gap:35px;list-style:none}
-.n-links a{color:var(--dim);font-size:.75rem;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;transition:all .3s}
-.n-links a:hover{color:var(--teal-lt);text-shadow:0 0 8px rgba(212,175,55,.4)}
-.n-mob{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:6px}
-.n-mob span{display:block;width:24px;height:2px;background:var(--wht);transition:all .3s}
-.hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;padding-top:80px}
-#hc{position:absolute;inset:0;z-index:0}
-.hero-fade{position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse 80% 60% at 50% 50%,transparent 0%,rgba(5,5,5,.6) 50%,var(--void) 100%)}
-.hero-vignette{position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(to bottom,rgba(5,5,5,.8) 0%,transparent 20%,transparent 80%,var(--void) 100%)}
-.hero-c{position:relative;z-index:2;padding-top:130px;text-shadow:0 4px 15px rgba(0,0,0,.9)}
-@keyframes heroIn{0%{opacity:0;transform:translateY(50px) scale(0.98)}100%{opacity:1;transform:none}}
-.hero-c .role-bar{animation:heroIn 1.2s cubic-bezier(.22,1,.36,1) .3s both}
-.hero-c .hero-name{animation:heroIn 1.2s cubic-bezier(.22,1,.36,1) .5s both}
-.hero-c .hero-desc{animation:heroIn 1.2s cubic-bezier(.22,1,.36,1) .7s both}
-.hero-c .hero-btns{animation:heroIn 1.2s cubic-bezier(.22,1,.36,1) .9s both}
-.hero-c .hero-strip{animation:heroIn 1.2s cubic-bezier(.22,1,.36,1) 1.1s both}
-.hero-glow{position:absolute;top:50%;left:50%;width:800px;height:800px;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(212,175,55,.05) 0%,transparent 70%);z-index:0;pointer-events:none;animation:glowPulse 8s ease-in-out infinite}
-@keyframes glowPulse{0%,100%{opacity:.4;transform:translate(-50%,-50%) scale(1)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.1)}}
-.role-bar{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:36px}
-.role-tag{padding:8px 20px;border-radius:6px;font-family:var(--mono);font-size:.7rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;background:rgba(20,20,20,.6);border:1px solid rgba(212,175,55,.2);color:var(--txt);transition:all .3s;backdrop-filter:blur(10px);box-shadow:0 4px 10px rgba(0,0,0,.3)}
-.role-tag:hover{border-color:var(--teal);background:rgba(212,175,55,.1);color:var(--wht);transform:translateY(-2px)}
-.role-tag.primary{background:linear-gradient(135deg,var(--teal),var(--gold-dim));border-color:var(--teal-lt);color:#000;font-weight:700;box-shadow:0 6px 20px rgba(212,175,55,.3),inset 0 1px 2px rgba(255,255,255,.4)}
-.hero-name{font-family:var(--dsp);font-size:clamp(3.5rem,9vw,6rem);font-weight:500;line-height:1.02;letter-spacing:-2.5px;margin-bottom:32px;color:var(--wht)}
-.hero-name .it{font-style:italic;color:var(--teal);font-weight:300;background:-webkit-linear-gradient(0deg,var(--teal-lt),var(--gold-dim));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.hero-desc{font-size:1.15rem;color:var(--txt);max-width:580px;margin-bottom:50px;font-weight:300;line-height:2}
-.hero-desc strong{color:var(--teal-lt);font-weight:500}
-.hero-btns{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:90px}
-.btn{display:inline-flex;align-items:center;gap:10px;padding:16px 36px;border-radius:8px;font-size:.85rem;font-weight:700;font-family:var(--sans);cursor:pointer;transition:all .4s cubic-bezier(.22,1,.36,1);border:none;letter-spacing:.8px;text-transform:uppercase}
-.btn-f{background:linear-gradient(135deg,var(--teal),var(--gold-dim));color:#000;box-shadow:0 8px 25px rgba(212,175,55,.25),inset 0 1px 1px rgba(255,255,255,.4);border:1px solid var(--teal-lt)}
-.btn-f:hover{background:linear-gradient(135deg,var(--teal-lt),var(--teal));transform:translateY(-4px);box-shadow:0 15px 35px rgba(212,175,55,.4),inset 0 1px 1px rgba(255,255,255,.6)}
-.btn-o{background:rgba(10,10,10,.6);color:var(--wht);border:1px solid var(--bdr);backdrop-filter:blur(10px);box-shadow:0 8px 25px rgba(0,0,0,.3)}
-.btn-o:hover{border-color:var(--teal);color:var(--teal-lt);transform:translateY(-4px);background:rgba(212,175,55,.05);box-shadow:0 15px 35px rgba(0,0,0,.5),inset 0 0 15px rgba(212,175,55,.1)}
-.hero-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--bdr);border-radius:var(--r);overflow:hidden;border:1px solid rgba(212,175,55,.3);box-shadow:0 20px 50px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.1)}
-.hero-strip-item{background:linear-gradient(180deg,var(--card),var(--void));padding:30px 24px;text-align:center;transition:background .4s;position:relative}
-.hero-strip-item::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at top,rgba(212,175,55,.1),transparent 70%);opacity:0;transition:opacity .4s}
-.hero-strip-item:hover::before{opacity:1}
-.hero-strip-item .num{font-family:var(--dsp);font-size:1.9rem;font-weight:500;color:var(--teal-lt);line-height:1.2;letter-spacing:-.5px;position:relative;z-index:1;text-shadow:0 2px 10px rgba(212,175,55,.3)}
-.hero-strip-item .lbl{font-size:.75rem;color:var(--dim);font-weight:600;margin-top:8px;letter-spacing:.8px;line-height:1.5;text-transform:uppercase;position:relative;z-index:1}
-.ab-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:70px;align-items:start}
-.ab-text p{color:var(--txt);margin-bottom:24px;font-weight:300;font-size:1.05rem;line-height:2.1}
-.ab-text strong{color:var(--teal-lt);font-weight:500}
-.ab-cards{display:flex;flex-direction:column;gap:20px}
-.ac{background:linear-gradient(145deg,var(--card),var(--deep));border:1px solid var(--bdr);border-radius:var(--r);padding:32px;transition:all .5s cubic-bezier(.22,1,.36,1);transform-style:preserve-3d;box-shadow:0 10px 30px rgba(0,0,0,.6),inset 0 1px 2px rgba(255,255,255,.05);position:relative;overflow:hidden}
-.ac::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--teal),transparent);opacity:0;transition:opacity .5s}
-.ac:hover{border-color:var(--teal);transform:perspective(1000px) rotateY(-3deg) translateX(8px);box-shadow:-12px 15px 40px rgba(0,0,0,.7),0 0 25px rgba(212,175,55,.1),inset 0 1px 2px rgba(255,255,255,.1)}
-.ac:hover::after{opacity:1}
-.ac .mono{font-family:var(--mono);font-size:.65rem;color:var(--teal);letter-spacing:2px;text-transform:uppercase;background:var(--teal-g);padding:4px 10px;border-radius:4px}
-.ac h4{font-family:var(--dsp);font-size:1.2rem;font-weight:500;margin:16px 0 6px;color:var(--wht)}
-.ac p{font-size:.9rem;color:var(--dim);font-weight:400}
-.pg{display:grid;grid-template-columns:repeat(auto-fill,minmax(350px,1fr));gap:32px;perspective:1500px}
-.pc{background:linear-gradient(160deg,var(--card),var(--deep));border:1px solid var(--bdr);border-radius:var(--r);padding:36px;position:relative;overflow:hidden;transform-style:preserve-3d;transition:transform .5s cubic-bezier(.22,1,.36,1),border-color .4s,box-shadow .5s;box-shadow:0 15px 35px rgba(0,0,0,.5),inset 0 1px 2px rgba(255,255,255,.03)}
-.pc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;opacity:0;transition:opacity .4s}
-.pc.gc::before{background:linear-gradient(90deg,var(--teal),var(--teal-lt))}
-.pc.uc::before{background:linear-gradient(90deg,var(--purp),#ff4d4d)}
-.pc:hover{border-color:rgba(212,175,55,.5);transform:translateY(-8px);box-shadow:0 25px 60px rgba(0,0,0,.7),0 0 50px rgba(212,175,55,.08),inset 0 1px 3px rgba(255,255,255,.1)}
-.pc:hover::before{opacity:1}
-.pc.feat{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:48px;border-color:rgba(212,175,55,.3);background:linear-gradient(135deg,var(--card) 0%,rgba(30,24,10,.8) 100%);box-shadow:0 20px 40px rgba(0,0,0,.6),inset 0 1px 2px rgba(255,255,255,.08)}
-.pc.feat::before{opacity:1;height:3px;background:linear-gradient(90deg,var(--gold),var(--teal-lt),var(--gold))}
-.pc.feat:hover{border-color:var(--teal);box-shadow:0 30px 70px rgba(0,0,0,.8),0 0 60px rgba(212,175,55,.15),inset 0 1px 3px rgba(255,255,255,.15)}
-.fb{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;background:linear-gradient(90deg,var(--teal-g2),transparent);border-left:2px solid var(--teal-lt);border-radius:0 6px 6px 0;font-size:.65rem;font-weight:700;color:var(--teal-lt);letter-spacing:2px;text-transform:uppercase;margin-bottom:20px;text-shadow:0 0 8px rgba(212,175,55,.4)}
-.pl{font-family:var(--mono);font-size:.68rem;color:var(--dim);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px}
-.pc h3{font-family:var(--dsp);font-size:1.35rem;font-weight:500;margin-bottom:16px;line-height:1.3;color:var(--wht)}
-.pd{font-size:.95rem;color:var(--txt);margin-bottom:24px;line-height:1.9;font-weight:300}
-.pr{font-size:.9rem;color:var(--txt);line-height:1.9;font-weight:300;padding:24px;background:linear-gradient(145deg,rgba(20,20,20,.8),rgba(10,10,10,.8));border:1px solid var(--bdr);border-left:3px solid var(--teal);border-radius:4px var(--r) var(--r) 4px;margin-bottom:24px;box-shadow:inset 0 2px 10px rgba(0,0,0,.5)}
-.pc.feat .pr{border-left-color:var(--teal-lt);background:linear-gradient(145deg,rgba(212,175,55,.05),rgba(10,10,10,.8))}
-.pr strong{color:var(--teal-lt);font-weight:500}
-.pt{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:24px}
-.pt span{padding:6px 14px;background:var(--surf);border:1px solid var(--bdr);border-radius:6px;font-family:var(--mono);font-size:.7rem;color:var(--txt);letter-spacing:.5px;box-shadow:0 2px 5px rgba(0,0,0,.4)}
-.plinks{display:flex;gap:20px;flex-wrap:wrap}
-.plinks a{font-size:.85rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;display:inline-flex;align-items:center;gap:5px;color:var(--teal-lt);transition:all .3s}
-.plinks a:hover{color:var(--wht);text-shadow:0 0 10px rgba(252,237,166,.5)}
-.plinks a.gh{color:var(--dim);border:1px solid var(--bdr);padding:6px 14px;border-radius:6px;background:var(--surf);font-size:.75rem;transition:all .3s}
-.plinks a.gh:hover{border-color:var(--teal);color:var(--teal-lt);background:var(--teal-g);transform:translateY(-2px)}
-.sk-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:24px}
-.sk{background:linear-gradient(180deg,var(--card),var(--deep));border:1px solid var(--bdr);border-radius:var(--r);padding:32px;transition:all .4s;position:relative;overflow:hidden;box-shadow:0 10px 25px rgba(0,0,0,.5),inset 0 1px 1px rgba(255,255,255,.03)}
-.sk::after{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(212,175,55,.08) 0%,transparent 60%);opacity:0;transition:opacity .5s;pointer-events:none}
-.sk:hover{border-color:var(--teal);transform:translateY(-5px);box-shadow:0 15px 40px rgba(0,0,0,.6),inset 0 1px 2px rgba(255,255,255,.1)}.sk:hover::after{opacity:1}
-.sk-t{font-family:var(--dsp);font-size:1.2rem;color:var(--teal-lt);letter-spacing:1px;margin-bottom:20px;font-weight:500;border-bottom:1px solid var(--bdr);padding-bottom:12px}
-.sk ul{list-style:none}
-.sk li{font-size:.95rem;color:var(--txt);padding:8px 0;font-weight:300;display:flex;align-items:center}
-.sk li::before{content:'♦';color:var(--teal);font-size:.6rem;margin-right:12px}
-.cw-g{display:grid;grid-template-columns:1fr 1fr;gap:60px}
-.cw-b h4{font-family:var(--dsp);font-size:1.3rem;font-weight:500;margin-bottom:8px;display:flex;align-items:center;gap:12px;color:var(--wht)}
-.cw-b .dot{width:10px;height:10px;border-radius:2px;flex-shrink:0;transform:rotate(45deg);box-shadow:0 0 10px currentColor}
-.cw-b .dot-g{background:var(--teal-lt);color:var(--teal-lt)}.cw-b .dot-u{background:var(--purp);color:var(--purp)}
-.cw-b .sub{font-size:.9rem;color:var(--teal);margin-bottom:24px;font-family:var(--mono);letter-spacing:1px}
-.cw-p{display:flex;flex-wrap:wrap;gap:12px}
-.cw-p span{padding:8px 18px;background:linear-gradient(145deg,var(--card),var(--deep));border:1px solid var(--bdr);border-radius:8px;font-size:.85rem;color:var(--txt);transition:all .3s;box-shadow:0 4px 10px rgba(0,0,0,.3)}
-.cw-p span:hover{border-color:var(--teal);color:var(--wht);transform:translateY(-2px);box-shadow:0 8px 15px rgba(212,175,55,.15)}
-.tl{position:relative;padding-left:40px}
-.tl::before{content:'';position:absolute;left:5px;top:10px;bottom:10px;width:2px;background:linear-gradient(180deg,transparent,var(--teal),transparent)}
-.ti{position:relative;padding-bottom:48px}.ti:last-child{padding-bottom:0}
-.ti::before{content:'';position:absolute;left:-40px;top:8px;width:12px;height:12px;border-radius:2px;transform:rotate(45deg);background:var(--void);border:2px solid var(--teal-lt);box-shadow:0 0 12px var(--teal)}
-.ti .dt{font-family:var(--mono);font-size:.75rem;color:var(--teal);letter-spacing:1.5px;margin-bottom:8px;text-transform:uppercase}
-.ti h3{font-family:var(--dsp);font-size:1.4rem;font-weight:500;margin-bottom:6px;color:var(--wht)}
-.ti h4{font-size:.95rem;color:var(--dim);font-weight:400;font-style:italic;margin-bottom:16px}
-.ti ul{list-style:none}
-.ti li{font-size:.95rem;color:var(--txt);padding:6px 0 6px 20px;position:relative;font-weight:300;line-height:1.9}
-.ti li::before{content:'—';position:absolute;left:0;color:var(--teal);font-weight:700}
-.ct-g{display:grid;grid-template-columns:1fr 1fr;gap:70px}
-.ct-info p{color:var(--txt);margin-bottom:40px;font-weight:300;line-height:2.1;font-size:1.05rem}
-.ct-ls{display:flex;flex-direction:column;gap:16px}
-.ct-l{display:block;padding:22px 28px;background:linear-gradient(145deg,var(--card),var(--deep));border:1px solid var(--bdr);border-radius:var(--r);color:var(--wht);font-size:.95rem;transition:all .4s;box-shadow:0 8px 20px rgba(0,0,0,.4)}
-.ct-l:hover{border-color:var(--teal);transform:translateX(8px);color:var(--teal-lt);box-shadow:10px 10px 30px rgba(0,0,0,.6),inset 0 1px 2px rgba(255,255,255,.1)}
-.ct-l .lb{font-family:var(--mono);font-size:.7rem;color:var(--teal);display:block;font-weight:600;margin-bottom:6px;text-transform:uppercase;letter-spacing:2px}
-.ct-f{display:flex;flex-direction:column;gap:20px}
-.ct-f input,.ct-f textarea{padding:18px 24px;background:var(--deep);border:1px solid var(--bdr);border-radius:8px;color:var(--wht);font-family:var(--sans);font-size:.95rem;transition:all .3s;outline:none;box-shadow:inset 0 2px 8px rgba(0,0,0,.8)}
-.ct-f input:focus,.ct-f textarea:focus{border-color:var(--teal-lt);box-shadow:0 0 0 1px var(--teal-lt),inset 0 2px 8px rgba(0,0,0,.8)}
-.ct-f textarea{min-height:160px;resize:vertical}
-.ct-f input::placeholder,.ct-f textarea::placeholder{color:var(--faint)}
-.footer{padding:60px 0;border-top:1px solid var(--bdr);text-align:center;background:var(--void)}
-.footer p{font-family:var(--mono);font-size:.8rem;color:var(--dim);letter-spacing:1px;text-transform:uppercase}
-@media(max-width:768px){
-  html,body{overflow-x:hidden;width:100%;font-size:16px}
-  .w{padding:0 20px}
-  .n-links{display:none}.n-mob{display:flex}.n-label{display:none}
-  .n-links.open{display:flex;flex-direction:column;position:absolute;top:70px;left:0;right:0;background:rgba(5,5,5,.98);backdrop-filter:blur(30px);padding:24px 20px;gap:20px;border-bottom:1px solid var(--bdr)}
-  .hero-strip{grid-template-columns:1fr 1fr;gap:8px}
-  .hero-strip-item{padding:16px 12px}
-  .hero-strip-item .num{font-size:1.5rem}
-  .ab-grid,.ct-g,.cw-g{grid-template-columns:1fr}
-  .pg,.sk-grid{grid-template-columns:1fr}
-  .pc.feat{grid-template-columns:1fr;gap:24px}
-  .sec{padding:80px 0}
-  .hero-name{font-size:clamp(2.8rem,11vw,3.5rem);letter-spacing:-1.5px}
-  .hero-btns{margin-bottom:40px}
-  .role-bar{gap:8px}.role-tag{font-size:.65rem;padding:6px 14px}
-  .hero-glow{width:400px;height:400px}
-  .pc,.ac,.sk{padding:20px}
-  .pr{padding:16px;margin-bottom:16px}
-  .btn{padding:14px 24px}
-  .divider{gap:12px}
-  .divider h3{font-size:1.1rem;white-space:normal}
-  .ct-l{word-break:break-word;padding:16px 20px}
-  .ct-f input,.ct-f textarea{padding:14px 16px}
-}
+:root{--void:#050505;--deep:#0a0a0a;--surf:#121212;--card:#181818;--bdr:#3a2e16;--wht:#fdfbf7;--txt:#c2b9aa;--dim:#8c8270;--faint:#544c40;--teal:#d4af37;--teal-lt:#fceda6;--teal-g:rgba(212,175,55,.08);--teal-g2:rgba(212,175,55,.18);--gold:#e6c57a;--gold-dim:#a68c4a;--purp:#8a1c1c;--dsp:'Fraunces',Georgia,serif;--sans:'Manrope',system-ui,sans-serif;--mono:'JetBrains Mono',monospace;--mx:1080px;--r:16px}*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth;font-size:17.5px;-webkit-font-smoothing:antialiased}body{font-family:var(--sans);background:var(--void);color:var(--wht);line-height:1.8;overflow-x:hidden}body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.035;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}::selection{background:var(--teal);color:#000}a{color:var(--teal-lt);text-decoration:none;transition:color .3s,text-shadow .3s}a:hover{color:var(--wht);text-shadow:0 0 10px rgba(252,237,166,.5)}code{font-family:var(--mono);font-size:.85em;color:var(--teal-lt);background:linear-gradient(145deg,var(--card),var(--surf));border:1px solid var(--bdr);padding:2px 8px;border-radius:6px;box-shadow:inset 0 1px 3px rgba(0,0,0,.5)}.w{max-width:var(--mx);margin:0 auto;padding:0 36px}.sec{padding:130px 0}.rv{opacity:0;transform:translateY(24px);transition:opacity 1s cubic-bezier(.22,1,.36,1),transform 1s cubic-bezier(.22,1,.36,1)}.rv.v{opacity:1;transform:none}.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}.d5{transition-delay:.5s}.sh-n{font-family:var(--mono);font-size:.7rem;letter-spacing:5px;text-transform:uppercase;color:var(--teal);display:block;margin-bottom:18px;text-shadow:0 0 15px rgba(212,175,55,.3)}.sh-t{font-family:var(--dsp);font-size:clamp(2.2rem,5vw,3.2rem);font-weight:500;line-height:1.15;margin-bottom:20px;letter-spacing:-.5px;text-shadow:0 4px 12px rgba(0,0,0,.8)}.sh-t em{font-style:italic;color:var(--teal-lt);font-weight:300}.sh-d{color:var(--txt);font-size:1.05rem;max-width:540px;margin-bottom:64px;font-weight:300;line-height:1.9}.divider{display:flex;align-items:center;gap:20px;margin-bottom:48px}.divider .pill{padding:6px 20px;border-radius:20px;font-size:.7rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#fff;flex-shrink:0;box-shadow:0 4px 15px rgba(0,0,0,.5),inset 0 1px 1px rgba(255,255,255,.2)}.divider .pill-g{background:linear-gradient(135deg,#e6c57a,#a68c4a);color:#000}.divider .pill-u{background:linear-gradient(135deg,#a32222,#5c0f0f)}.divider h3{font-family:var(--dsp);font-size:1.3rem;font-weight:500;white-space:nowrap;color:var(--wht);letter-spacing:.5px}.divider .rule{flex:1;height:2px;background:linear-gradient(90deg,var(--bdr),transparent)}.nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:24px 0;transition:all .4s ease}.nav.stuck{background:rgba(5,5,5,.75);backdrop-filter:blur(35px) saturate(1.2);border-bottom:1px solid rgba(212,175,55,.15);padding:14px 0;box-shadow:0 10px 30px rgba(0,0,0,.6)}.nav .w{display:flex;justify-content:space-between;align-items:center}.n-logo{display:flex;align-items:center;gap:12px;text-decoration:none}.n-mark{font-family:var(--dsp);font-size:1.1rem;font-weight:500;color:var(--void);background:linear-gradient(135deg,var(--teal-lt),var(--gold-dim));letter-spacing:2px;border:1px solid rgba(255,255,255,.3);padding:6px 12px;border-radius:4px;line-height:1;transition:all .4s;box-shadow:0 4px 15px rgba(212,175,55,.2)}.n-logo:hover .n-mark{transform:scale(1.05);box-shadow:0 6px 20px rgba(212,175,55,.4),inset 0 0 10px rgba(255,255,255,.5)}.n-label{font-family:var(--dsp);font-size:.85rem;font-weight:300;color:var(--wht);letter-spacing:2px;text-transform:uppercase}.n-links{display:flex;gap:35px;list-style:none}.n-links a{color:var(--dim);font-size:.75rem;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;transition:all .3s}.n-links a:hover{color:var(--teal-lt);text-shadow:0 0 8px rgba(212,175,55,.4)}.n-mob{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:6px}.n-mob span{display:block;width:24px;height:2px;background:var(--wht);transition:all .3s}.hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;padding-top:80px}#hc{position:absolute;inset:0;z-index:0}.hero-fade{position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse 80% 60% at 50% 50%,transparent 0%,rgba(5,5,5,.6) 50%,var(--void) 100%)}.hero-vignette{position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(to bottom,rgba(5,5,5,.8) 0%,transparent 20%,transparent 80%,var(--void) 100%)}.hero-c{position:relative;z-index:2;padding-top:130px;text-shadow:0 4px 15px rgba(0,0,0,.9)}@keyframes heroIn{0%{opacity:0;transform:translateY(50px) scale(0.98)}100%{opacity:1;transform:none}}.hero-c .role-bar{animation:heroIn 1.2s cubic-bezier(.22,1,.36,1) .3s both}.hero-c .hero-name{animation:heroIn 1.2s cubic-bezier(.22,1,.36,1) .5s both}.hero-c .hero-desc{animation:heroIn 1.2s cubic-bezier(.22,1,.36,1) .7s both}.hero-c .hero-btns{animation:heroIn 1.2s cubic-bezier(.22,1,.36,1) .9s both}.hero-c .hero-strip{animation:heroIn 1.2s cubic-bezier(.22,1,.36,1) 1.1s both}.hero-glow{position:absolute;top:50%;left:50%;width:800px;height:800px;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(212,175,55,.05) 0%,transparent 70%);z-index:0;pointer-events:none;animation:glowPulse 8s ease-in-out infinite}@keyframes glowPulse{0%,100%{opacity:.4;transform:translate(-50%,-50%) scale(1)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.1)}}.role-bar{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:36px}.role-tag{padding:8px 20px;border-radius:6px;font-family:var(--mono);font-size:.7rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;background:rgba(20,20,20,.6);border:1px solid rgba(212,175,55,.2);color:var(--txt);transition:all .3s;backdrop-filter:blur(10px);box-shadow:0 4px 10px rgba(0,0,0,.3)}.role-tag:hover{border-color:var(--teal);background:rgba(212,175,55,.1);color:var(--wht);transform:translateY(-2px)}.role-tag.primary{background:linear-gradient(135deg,var(--teal),var(--gold-dim));border-color:var(--teal-lt);color:#000;font-weight:700;box-shadow:0 6px 20px rgba(212,175,55,.3),inset 0 1px 2px rgba(255,255,255,.4)}.hero-name{font-family:var(--dsp);font-size:clamp(3.5rem,9vw,6rem);font-weight:500;line-height:1.02;letter-spacing:-2.5px;margin-bottom:32px;color:var(--wht)}.hero-name .it{font-style:italic;color:var(--teal);font-weight:300;background:-webkit-linear-gradient(0deg,var(--teal-lt),var(--gold-dim));-webkit-background-clip:text;-webkit-text-fill-color:transparent}.hero-desc{font-size:1.15rem;color:var(--txt);max-width:580px;margin-bottom:50px;font-weight:300;line-height:2}.hero-desc strong{color:var(--teal-lt);font-weight:500}.hero-btns{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:90px}.btn{display:inline-flex;align-items:center;gap:10px;padding:16px 36px;border-radius:8px;font-size:.85rem;font-weight:700;font-family:var(--sans);cursor:pointer;transition:all .4s cubic-bezier(.22,1,.36,1);border:none;letter-spacing:.8px;text-transform:uppercase}.btn-f{background:linear-gradient(135deg,var(--teal),var(--gold-dim));color:#000;box-shadow:0 8px 25px rgba(212,175,55,.25),inset 0 1px 1px rgba(255,255,255,.4);border:1px solid var(--teal-lt)}.btn-f:hover{background:linear-gradient(135deg,var(--teal-lt),var(--teal));transform:translateY(-4px);box-shadow:0 15px 35px rgba(212,175,55,.4),inset 0 1px 1px rgba(255,255,255,.6)}.btn-o{background:rgba(10,10,10,.6);color:var(--wht);border:1px solid var(--bdr);backdrop-filter:blur(10px);box-shadow:0 8px 25px rgba(0,0,0,.3)}.btn-o:hover{border-color:var(--teal);color:var(--teal-lt);transform:translateY(-4px);background:rgba(212,175,55,.05);box-shadow:0 15px 35px rgba(0,0,0,.5),inset 0 0 15px rgba(212,175,55,.1)}.hero-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--bdr);border-radius:var(--r);overflow:hidden;border:1px solid rgba(212,175,55,.3);box-shadow:0 20px 50px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.1)}.hero-strip-item{background:linear-gradient(180deg,var(--card),var(--void));padding:30px 24px;text-align:center;transition:background .4s;position:relative}.hero-strip-item::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at top,rgba(212,175,55,.1),transparent 70%);opacity:0;transition:opacity .4s}.hero-strip-item:hover::before{opacity:1}.hero-strip-item .num{font-family:var(--dsp);font-size:1.9rem;font-weight:500;color:var(--teal-lt);line-height:1.2;letter-spacing:-.5px;position:relative;z-index:1;text-shadow:0 2px 10px rgba(212,175,55,.3)}.hero-strip-item .lbl{font-size:.75rem;color:var(--dim);font-weight:600;margin-top:8px;letter-spacing:.8px;line-height:1.5;text-transform:uppercase;position:relative;z-index:1}.ab-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:70px;align-items:start}.ab-text p{color:var(--txt);margin-bottom:24px;font-weight:300;font-size:1.05rem;line-height:2.1}.ab-text strong{color:var(--teal-lt);font-weight:500}.ab-cards{display:flex;flex-direction:column;gap:20px}.ac{background:linear-gradient(145deg,var(--card),var(--deep));border:1px solid var(--bdr);border-radius:var(--r);padding:32px;transition:all .5s cubic-bezier(.22,1,.36,1);transform-style:preserve-3d;box-shadow:0 10px 30px rgba(0,0,0,.6),inset 0 1px 2px rgba(255,255,255,.05);position:relative;overflow:hidden}.ac::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--teal),transparent);opacity:0;transition:opacity .5s}.ac:hover{border-color:var(--teal);transform:perspective(1000px) rotateY(-3deg) translateX(8px);box-shadow:-12px 15px 40px rgba(0,0,0,.7),0 0 25px rgba(212,175,55,.1),inset 0 1px 2px rgba(255,255,255,.1)}.ac:hover::after{opacity:1}.ac .mono{font-family:var(--mono);font-size:.65rem;color:var(--teal);letter-spacing:2px;text-transform:uppercase;background:var(--teal-g);padding:4px 10px;border-radius:4px}.ac h4{font-family:var(--dsp);font-size:1.2rem;font-weight:500;margin:16px 0 6px;color:var(--wht)}.ac p{font-size:.9rem;color:var(--dim);font-weight:400}.pg{display:grid;grid-template-columns:repeat(auto-fill,minmax(350px,1fr));gap:32px;perspective:1500px}.pc{background:linear-gradient(160deg,var(--card),var(--deep));border:1px solid var(--bdr);border-radius:var(--r);padding:36px;position:relative;overflow:hidden;transform-style:preserve-3d;transition:transform .5s cubic-bezier(.22,1,.36,1),border-color .4s,box-shadow .5s;box-shadow:0 15px 35px rgba(0,0,0,.5),inset 0 1px 2px rgba(255,255,255,.03)}.pc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;opacity:0;transition:opacity .4s}.pc.gc::before{background:linear-gradient(90deg,var(--teal),var(--teal-lt))}.pc.uc::before{background:linear-gradient(90deg,var(--purp),#ff4d4d)}.pc:hover{border-color:rgba(212,175,55,.5);transform:translateY(-8px);box-shadow:0 25px 60px rgba(0,0,0,.7),0 0 50px rgba(212,175,55,.08),inset 0 1px 3px rgba(255,255,255,.1)}.pc:hover::before{opacity:1}.pc.feat{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:48px;border-color:rgba(212,175,55,.3);background:linear-gradient(135deg,var(--card) 0%,rgba(30,24,10,.8) 100%);box-shadow:0 20px 40px rgba(0,0,0,.6),inset 0 1px 2px rgba(255,255,255,.08)}.pc.feat::before{opacity:1;height:3px;background:linear-gradient(90deg,var(--gold),var(--teal-lt),var(--gold))}.pc.feat:hover{border-color:var(--teal);box-shadow:0 30px 70px rgba(0,0,0,.8),0 0 60px rgba(212,175,55,.15),inset 0 1px 3px rgba(255,255,255,.15)}.fb{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;background:linear-gradient(90deg,var(--teal-g2),transparent);border-left:2px solid var(--teal-lt);border-radius:0 6px 6px 0;font-size:.65rem;font-weight:700;color:var(--teal-lt);letter-spacing:2px;text-transform:uppercase;margin-bottom:20px;text-shadow:0 0 8px rgba(212,175,55,.4)}.pl{font-family:var(--mono);font-size:.68rem;color:var(--dim);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px}.pc h3{font-family:var(--dsp);font-size:1.35rem;font-weight:500;margin-bottom:16px;line-height:1.3;color:var(--wht)}.pd{font-size:.95rem;color:var(--txt);margin-bottom:24px;line-height:1.9;font-weight:300}.pr{font-size:.9rem;color:var(--txt);line-height:1.9;font-weight:300;padding:24px;background:linear-gradient(145deg,rgba(20,20,20,.8),rgba(10,10,10,.8));border:1px solid var(--bdr);border-left:3px solid var(--teal);border-radius:4px var(--r) var(--r) 4px;margin-bottom:24px;box-shadow:inset 0 2px 10px rgba(0,0,0,.5)}.pc.feat .pr{border-left-color:var(--teal-lt);background:linear-gradient(145deg,rgba(212,175,55,.05),rgba(10,10,10,.8))}.pr strong{color:var(--teal-lt);font-weight:500}.pt{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:24px}.pt span{padding:6px 14px;background:var(--surf);border:1px solid var(--bdr);border-radius:6px;font-family:var(--mono);font-size:.7rem;color:var(--txt);letter-spacing:.5px;box-shadow:0 2px 5px rgba(0,0,0,.4)}.plinks{display:flex;gap:20px;flex-wrap:wrap}.plinks a{font-size:.85rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;display:inline-flex;align-items:center;gap:5px;color:var(--teal-lt);transition:all .3s}.plinks a:hover{color:var(--wht);text-shadow:0 0 10px rgba(252,237,166,.5)}.plinks a.gh{color:var(--dim);border:1px solid var(--bdr);padding:6px 14px;border-radius:6px;background:var(--surf);font-size:.75rem;transition:all .3s}.plinks a.gh:hover{border-color:var(--teal);color:var(--teal-lt);background:var(--teal-g);transform:translateY(-2px)}.sk-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:24px}.sk{background:linear-gradient(180deg,var(--card),var(--deep));border:1px solid var(--bdr);border-radius:var(--r);padding:32px;transition:all .4s;position:relative;overflow:hidden;box-shadow:0 10px 25px rgba(0,0,0,.5),inset 0 1px 1px rgba(255,255,255,.03)}.sk::after{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(212,175,55,.08) 0%,transparent 60%);opacity:0;transition:opacity .5s;pointer-events:none}.sk:hover{border-color:var(--teal);transform:translateY(-5px);box-shadow:0 15px 40px rgba(0,0,0,.6),inset 0 1px 2px rgba(255,255,255,.1)}.sk:hover::after{opacity:1}.sk-t{font-family:var(--dsp);font-size:1.2rem;color:var(--teal-lt);letter-spacing:1px;margin-bottom:20px;font-weight:500;border-bottom:1px solid var(--bdr);padding-bottom:12px}.sk ul{list-style:none}.sk li{font-size:.95rem;color:var(--txt);padding:8px 0;font-weight:300;display:flex;align-items:center}.sk li::before{content:'♦';color:var(--teal);font-size:.6rem;margin-right:12px}.cw-g{display:grid;grid-template-columns:1fr 1fr;gap:60px}.cw-b h4{font-family:var(--dsp);font-size:1.3rem;font-weight:500;margin-bottom:8px;display:flex;align-items:center;gap:12px;color:var(--wht)}.cw-b .dot{width:10px;height:10px;border-radius:2px;flex-shrink:0;transform:rotate(45deg);box-shadow:0 0 10px currentColor}.cw-b .dot-g{background:var(--teal-lt);color:var(--teal-lt)}.cw-b .dot-u{background:var(--purp);color:var(--purp)}.cw-b .sub{font-size:.9rem;color:var(--teal);margin-bottom:24px;font-family:var(--mono);letter-spacing:1px}.cw-p{display:flex;flex-wrap:wrap;gap:12px}.cw-p span{padding:8px 18px;background:linear-gradient(145deg,var(--card),var(--deep));border:1px solid var(--bdr);border-radius:8px;font-size:.85rem;color:var(--txt);transition:all .3s;box-shadow:0 4px 10px rgba(0,0,0,.3)}.cw-p span:hover{border-color:var(--teal);color:var(--wht);transform:translateY(-2px);box-shadow:0 8px 15px rgba(212,175,55,.15)}.tl{position:relative;padding-left:40px}.tl::before{content:'';position:absolute;left:5px;top:10px;bottom:10px;width:2px;background:linear-gradient(180deg,transparent,var(--teal),transparent)}.ti{position:relative;padding-bottom:48px}.ti:last-child{padding-bottom:0}.ti::before{content:'';position:absolute;left:-40px;top:8px;width:12px;height:12px;border-radius:2px;transform:rotate(45deg);background:var(--void);border:2px solid var(--teal-lt);box-shadow:0 0 12px var(--teal)}.ti .dt{font-family:var(--mono);font-size:.75rem;color:var(--teal);letter-spacing:1.5px;margin-bottom:8px;text-transform:uppercase}.ti h3{font-family:var(--dsp);font-size:1.4rem;font-weight:500;margin-bottom:6px;color:var(--wht)}.ti h4{font-size:.95rem;color:var(--dim);font-weight:400;font-style:italic;margin-bottom:16px}.ti ul{list-style:none}.ti li{font-size:.95rem;color:var(--txt);padding:6px 0 6px 20px;position:relative;font-weight:300;line-height:1.9}.ti li::before{content:'—';position:absolute;left:0;color:var(--teal);font-weight:700}.ct-g{display:grid;grid-template-columns:1fr 1fr;gap:70px}.ct-info p{color:var(--txt);margin-bottom:40px;font-weight:300;line-height:2.1;font-size:1.05rem}.ct-ls{display:flex;flex-direction:column;gap:16px}.ct-l{display:block;padding:22px 28px;background:linear-gradient(145deg,var(--card),var(--deep));border:1px solid var(--bdr);border-radius:var(--r);color:var(--wht);font-size:.95rem;transition:all .4s;box-shadow:0 8px 20px rgba(0,0,0,.4)}.ct-l:hover{border-color:var(--teal);transform:translateX(8px);color:var(--teal-lt);box-shadow:10px 10px 30px rgba(0,0,0,.6),inset 0 1px 2px rgba(255,255,255,.1)}.ct-l .lb{font-family:var(--mono);font-size:.7rem;color:var(--teal);display:block;font-weight:600;margin-bottom:6px;text-transform:uppercase;letter-spacing:2px}.ct-f{display:flex;flex-direction:column;gap:20px}.ct-f input,.ct-f textarea{padding:18px 24px;background:var(--deep);border:1px solid var(--bdr);border-radius:8px;color:var(--wht);font-family:var(--sans);font-size:.95rem;transition:all .3s;outline:none;box-shadow:inset 0 2px 8px rgba(0,0,0,.8)}.ct-f input:focus,.ct-f textarea:focus{border-color:var(--teal-lt);box-shadow:0 0 0 1px var(--teal-lt),inset 0 2px 8px rgba(0,0,0,.8)}.ct-f textarea{min-height:160px;resize:vertical}.ct-f input::placeholder,.ct-f textarea::placeholder{color:var(--faint)}.footer{padding:60px 0;border-top:1px solid var(--bdr);text-align:center;background:var(--void)}.footer p{font-family:var(--mono);font-size:.8rem;color:var(--dim);letter-spacing:1px;text-transform:uppercase}@media(max-width:768px){html,body{overflow-x:hidden;width:100%;font-size:16px}.w{padding:0 20px}.n-links{display:none}.n-mob{display:flex}.n-label{display:none}.n-links.open{display:flex;flex-direction:column;position:absolute;top:70px;left:0;right:0;background:rgba(5,5,5,.98);backdrop-filter:blur(30px);padding:24px 20px;gap:20px;border-bottom:1px solid var(--bdr)}.hero-strip{grid-template-columns:1fr 1fr;gap:8px}.hero-strip-item{padding:16px 12px}.hero-strip-item .num{font-size:1.5rem}.ab-grid,.ct-g,.cw-g{grid-template-columns:1fr}.pg,.sk-grid{grid-template-columns:1fr}.pc.feat{grid-template-columns:1fr;gap:24px}.sec{padding:80px 0}.hero-name{font-size:clamp(2.8rem,11vw,3.5rem);letter-spacing:-1.5px}.hero-btns{margin-bottom:40px}.role-bar{gap:8px}.role-tag{font-size:.65rem;padding:6px 14px}.hero-glow{width:400px;height:400px}.pc,.ac,.sk{padding:20px}.pr{padding:16px;margin-bottom:16px}.btn{padding:14px 24px}.divider{gap:12px}.divider h3{font-size:1.1rem;white-space:normal}.ct-l{word-break:break-word;padding:16px 20px}.ct-f input,.ct-f textarea{padding:14px 16px}}
 </style>
 </head>
 <body>
- 
 <nav class="nav" id="nav"><div class="w">
   <a href="#" class="n-logo"><span class="n-mark">AV</span><span class="n-label">Athish Vikraman</span></a>
   <ul class="n-links" id="nL">
@@ -207,14 +33,14 @@ code{font-family:var(--mono);font-size:.85em;color:var(--teal-lt);background:lin
   <div class="hero-vignette"></div>
   <div class="w hero-c">
     <div class="role-bar">
-      <span class="role-tag primary">Embedded Systems</span>
-      <span class="role-tag">Firmware Engineering</span>
-      <span class="role-tag">FPGA / RTL Design</span>
-      <span class="role-tag">Hardware Design</span>
+      <span class="role-tag primary">Hardware Validation</span>
+      <span class="role-tag">PVT Characterization</span>
+      <span class="role-tag">Signal Integrity</span>
+      <span class="role-tag">Embedded Systems</span>
     </div>
     <h1 class="hero-name">Athish<br><span class="it">Vikraman</span></h1>
     <p class="hero-desc">
-      I design and build hardware — from <strong>pipelined RISC-V processors</strong> validated on a real FPGA to <strong>register-level firmware</strong> on STM32 with FreeRTOS and CAN bus. Currently seeking co-op roles where I can contribute to a real hardware or firmware team.
+      I validate and characterize hardware at the bench — from <strong>PVT corner sweeps and signal integrity analysis</strong> to <strong>bare-metal firmware on STM32</strong> with statistical methodology and oscilloscope-driven debug. Currently seeking co-op or full-time roles in hardware validation, platform validation, or characterization engineering.
     </p>
     <div class="hero-btns">
       <a href="https://www.linkedin.com/in/athishvikraman" target="_blank" class="btn btn-f">LinkedIn</a>
@@ -223,7 +49,7 @@ code{font-family:var(--mono);font-size:.85em;color:var(--teal-lt);background:lin
     <div class="hero-strip">
       <div class="hero-strip-item"><div class="num">M.S. EE</div><div class="lbl">Case Western Reserve University</div></div>
       <div class="hero-strip-item"><div class="num">2</div><div class="lbl">Engineering Internships</div></div>
-      <div class="hero-strip-item"><div class="num">10+</div><div class="lbl">Hardware &amp; FPGA Projects</div></div>
+      <div class="hero-strip-item"><div class="num">25+</div><div class="lbl">Oscilloscope Captures &amp; RCAs</div></div>
       <div class="hero-strip-item"><div class="num">F-1 CPT</div><div class="lbl">Work Authorized for Co-op</div></div>
     </div>
   </div>
@@ -235,14 +61,14 @@ code{font-family:var(--mono);font-size:.85em;color:var(--teal-lt);background:lin
   <h2 class="sh-t rv">A bit about <em>me.</em></h2>
   <div class="ab-grid">
     <div class="ab-text rv">
-      <p>I'm Athish — M.S. Electrical Engineering at <strong>Case Western Reserve University</strong>. I work across the full hardware stack, from bare-metal firmware on ARM Cortex-M to pipelined processor design in SystemVerilog on Xilinx FPGAs.</p>
-      <p>At CWRU, I designed a <strong>5-stage pipelined RISC-V CPU with a custom systolic array coprocessor</strong> and validated it on real Zynq UltraScale+ silicon — 138 MHz, 4,777 LUTs, 36/36 tests passing, correct output confirmed on board LEDs. Right now I'm building <strong>register-level I2C and SPI drivers on an STM32F446RE</strong> with CAN bus and FreeRTOS — no libraries, just datasheets and registers. Before grad school, I was at <strong>Manipal Institute of Technology</strong> building 8051-based medical monitors, ESP32 IoT systems, and hand-soldering analog circuits. That's where I figured out I wanted to work in hardware — not just study it.</p>
-      <p>Looking for a <strong>Fall 2026 co-op</strong> in hardware engineering, embedded firmware, FPGA design, or anything where the work ends up on a board or in silicon.</p>
+      <p>I'm Athish — M.S. Electrical Engineering at <strong>Case Western Reserve University</strong>. I validate and characterize hardware using oscilloscopes, DMMs, logic analyzers, and bare-metal firmware written at the register level. My work follows semiconductor-industry PVT methodology — every measurement includes sample count, mean, and standard deviation.</p>
+      <p>Right now I'm running a <strong>full platform validation campaign on an STM32F446RE</strong> — characterizing GPIO timing determinism, power rail integrity, and communication bus signal quality across voltage corners from 2.8V to 3.6V. I've also built a <strong>5-stage pipelined RISC-V CPU with a custom systolic array coprocessor</strong>, hardware-validated on Zynq UltraScale+ at 138 MHz with 36/36 tests passing. Before grad school, I was debugging live transducer signals in a petroleum plant at <strong>ONGC</strong> — oscilloscope on noisy lines, root-causing grounding faults, calibrating field instruments. That hands-on instinct carries into every bench session.</p>
+      <p>Looking for a <strong>Fall 2026 co-op or full-time role</strong> in hardware validation, platform validation, characterization engineering, or system-level test.</p>
     </div>
     <div class="ab-cards rv d2">
       <div class="ac"><span class="mono">2025 — Present</span><h4>Case Western Reserve University</h4><p>M.S. Electrical Engineering · GPA: 3.25/4.0</p></div>
       <div class="ac"><span class="mono">2021 — 2025</span><h4>Manipal Institute of Technology</h4><p>B.Tech Electronics &amp; Instrumentation · GPA: 3.30/4.0</p></div>
-      <div class="ac"><span class="mono">Seeking</span><h4>Fall 2026 Co-op</h4><p>Hardware · Embedded · FPGA · Firmware</p></div>
+      <div class="ac"><span class="mono">Seeking</span><h4>Fall 2026 Co-op</h4><p>Hardware Validation · Characterization · Platform Test</p></div>
     </div>
   </div>
 </div>
@@ -253,130 +79,23 @@ code{font-family:var(--mono);font-size:.85em;color:var(--teal-lt);background:lin
   <span class="sh-n rv">02 — Projects</span>
   <h2 class="sh-t rv">What I've <em>built.</em></h2>
   <p class="sh-d rv">Every project below is verified, synthesized, or deployed. The results are real.</p>
- 
   <div class="divider rv"><span class="pill pill-g">Graduate</span><h3>Graduate-Level Work</h3><span class="rule"></span></div>
   <div class="pg">
- 
-    <div class="pc feat gc rv">
-      <div>
-        <div class="fb">★ Featured Project</div>
-        <div class="pl">ECSE 417 · SystemVerilog</div>
-        <h3>RV32IM Pipelined CPU + 4×4 INT8 Systolic Array</h3>
-        <p class="pd">A complete SoC — 5-stage pipelined RISC-V processor with the full RV32IM instruction set, zero-penalty data forwarding, load-use stall detection, branch flush, and a custom <code>md_result_captured</code> latch that solves a tricky M-extension pipeline timing hazard.</p>
-        <div class="pt"><span>SystemVerilog</span><span>Vivado</span><span>Zynq UltraScale+</span><span>RISC-V</span><span>RoCC ISA</span></div>
-      </div>
-      <div>
-        <div class="pr">
-          <strong>Coprocessor:</strong> 16-PE weight-stationary systolic array with row-skewed activation input, INT32 accumulation, and 7-cycle compute latency. Controlled via 6 custom RoCC instructions.<br><br>
-          <strong>Results:</strong> Hardware validated on AUP-ZU3 (Zynq UltraScale+ ZU3EG). <strong>138 MHz</strong> achievable (WNS +2.754 ns at 100 MHz). 4,777 LUTs · 2,985 FFs · 10 DSPs. <strong>36/36 verification checks passed</strong> across 12 test categories.
-        </div>
-        <div class="plinks">
-          <a href="https://github.com/athish22072003/rv32im-systolic-coprocessor" target="_blank" class="gh">⬡ GitHub Repository →</a>
-        </div>
-      </div>
-    </div>
- 
-    <div class="pc gc rv">
-      <div class="pl">C · FreeRTOS · STM32F446RE · In Progress</div>
-      <h3>STM32 Multi-Sensor Data Acquisition System</h3>
-      <p class="pd">Register-level I2C driver for BME280, register-level SPI driver for ADXL345 accelerometer, CAN 2.0B transmission via SN65HVD230. FreeRTOS managing four concurrent tasks through queues and mutexes. Python host-side visualization via UART. No HAL, no Arduino — datasheets and peripheral registers.</p>
-      <div class="pt"><span>STM32</span><span>FreeRTOS</span><span>C</span><span>I2C</span><span>SPI</span><span>CAN</span><span>ARM Cortex-M4</span></div>
-    </div>
- 
-    <div class="pc gc rv">
-      <div class="pl">ECSE 488 · C · Embedded Linux</div>
-      <h3>Warehouse Video Surveillance System</h3>
-      <p class="pd">An event-driven surveillance system running on a Raspberry Pi. A 4-state finite state machine classifies motion into four activity levels using frame-differencing and adaptive thresholds, then automatically adjusts the recording mode.</p>
-      <div class="pr"><strong>Features:</strong> JPEG and H.264 video recording, GPIO-triggered alerts, remote manual override, and timestamped file indexing with a searchable log.</div>
-      <div class="pt"><span>Raspberry Pi</span><span>C</span><span>OpenCV</span><span>FSM</span><span>H.264</span><span>GPIO</span></div>
-      <div class="plinks">
-        <a href="https://drive.google.com/file/d/1eDpATYPq5mxNyq8hgnfpOdOlRFS5u2Vb/view?usp=sharing" target="_blank">Midterm Progress Report →</a>
-      </div>
-    </div>
- 
-    <div class="pc gc rv">
-      <div class="pl">ECSE 422 · Semiconductor Devices</div>
-      <h3>HfO₂ Ferroelectric Devices for Memory &amp; Logic</h3>
-      <p class="pd">A research project exploring hafnium-oxide-based ferroelectric architectures — FeRAM, FeFET, and NCFET — for next-generation non-volatile memory and steep-slope logic applications. Covers material physics, phase transitions, polarization mechanisms, and CMOS fabrication compatibility.</p>
-      <div class="pt"><span>Solid-State Physics</span><span>FeRAM</span><span>FeFET</span><span>NCFET</span><span>CMOS Scaling</span></div>
-      <div class="plinks">
-        <a href="https://drive.google.com/file/d/1bCp_NvGiAzCZboNNAAuBR8JaTa0OmzjA/view?usp=sharing" target="_blank">Project Proposal →</a>
-      </div>
-    </div>
- 
-    <div class="pc gc rv">
-      <div class="pl">ECSE 417 · Verilog · Lab 1</div>
-      <h3>Parameterized Pipelined Arithmetic Datapath</h3>
-      <p class="pd">Designed a streaming datapath computing y = (a×b) + (c×d) + e on signed 16-bit fixed-point inputs with a valid-ready handshake interface. Built both an unpipelined single-cycle version and a parameterized pipelined version with configurable depth (2–5 stages).</p>
-      <div class="pr"><strong>Results:</strong> Swept pipeline depths 2–5 and analyzed Fmax vs. resource tradeoffs. Peak <strong>346 MHz</strong> at depth 4 (32 LUTs, 148 FFs, 2 DSPs). Unpipelined achieved 291 MHz. Verified with a self-checking testbench using 200+ seeded random vectors.</div>
-      <div class="pt"><span>Verilog</span><span>Vivado</span><span>Pipelining</span><span>Timing Analysis</span><span>Valid-Ready</span><span>Testbench</span></div>
-      <div class="plinks">
-        <a href="https://drive.google.com/file/d/1yaW0gwg0VYzmaqkierBz46deAIGUYlLY/view?usp=drive_link" target="_blank">Lab Report →</a>
-      </div>
-    </div>
- 
-    <div class="pc gc rv">
-      <div class="pl">ECSE 417 · Verilog · Lab 2</div>
-      <h3>Dot-Product Accelerator with Multi-Mode FSM</h3>
-      <p class="pd">Three compute modes — sequential MAC, 4-way parallel MAC with an adder tree, and early-exit with a magnitude comparator. Controlled by a 5-state hybrid Moore/Mealy FSM with stall handling, output backpressure, and built-in hardware performance counters.</p>
-      <div class="pr"><strong>Results:</strong> Synthesized at <strong>121.4 MHz</strong>, 496 LUTs, 241 FFs, zero DSP blocks. Verified across 7 automated testcases including random stall injection and backpressure hold.</div>
-      <div class="pt"><span>Verilog</span><span>Vivado</span><span>FSM Design</span><span>MAC Unit</span><span>Stall Logic</span><span>Perf Counters</span></div>
-      <div class="plinks">
-        <a href="https://drive.google.com/file/d/1PjPri-5Fe-Gxrf7GXwMmIg4jJzUHt4Xb/view?usp=sharing" target="_blank">Lab Report →</a>
-      </div>
-    </div>
- 
-    <div class="pc gc rv">
-      <div class="pl">ECSE 422 · COMSOL Multiphysics · Report 1</div>
-      <h3>1D Abrupt P-N Junction Simulation</h3>
-      <p class="pd">Modeled a one-dimensional abrupt p-n junction using COMSOL Multiphysics. Simulated electrostatic potential, electron/hole concentration profiles, net charge density, and electric field under equilibrium, forward bias (0 to +0.5 V), and reverse bias (0 to −1.5 V). Parametric sweep over donor concentration Nₐ ∈ {1, 2, 5} × 10¹⁶ cm⁻³.</p>
-      <div class="pr"><strong>Analysis:</strong> Analytically verified built-in voltage, depletion width (scales ∝ 1/√N), and peak electric field (scales ∝ √N). All COMSOL numerical results matched standard semiconductor theory exactly.</div>
-      <div class="pt"><span>COMSOL Multiphysics</span><span>Semiconductor Physics</span><span>P-N Junction</span><span>Device Modeling</span><span>Parametric Sweep</span></div>
-      <div class="plinks">
-        <a href="https://drive.google.com/file/d/1SRkHyIqR4FkCdKB9Pg3khgYHuO0KmPRk/view?usp=sharing" target="_blank">Full Report →</a>
-      </div>
-    </div>
- 
-    <div class="pc gc rv">
-      <div class="pl">ECSE 422 · COMSOL Multiphysics · Report 2</div>
-      <h3>2D P-I-N Junction — Light Response &amp; Quasi-Fermi Levels</h3>
-      <p class="pd">Extended the 1D model to a full 2D p-i-n junction (12×6 µm) solved via coupled drift-diffusion PDEs in COMSOL. Studied photodetector and solar-cell behavior by sweeping optical generation rate G₀ under zero and −2 V reverse bias. Derived the logarithmic scaling of quasi-Fermi level splitting: ΔEf ≈ 2Vt · ln(G₀τ / nᵢ).</p>
-      <div class="pr"><strong>Results:</strong> Carrier concentration in the intrinsic region climbed from ~10¹⁰ cm⁻³ at G₀ = 0 to ~10¹⁶ cm⁻³ at peak generation. Under −2 V reverse bias, estimated electron transit time ≈ 0.46 ns — far below SRH recombination lifetime, explaining high quantum efficiency.</div>
-      <div class="pt"><span>COMSOL Multiphysics</span><span>2D Drift-Diffusion</span><span>P-I-N Junction</span><span>Quasi-Fermi Levels</span><span>Photodetector</span><span>Solar Cell</span></div>
-      <div class="plinks">
-        <a href="https://drive.google.com/file/d/1fKSHtm6QrpAps4OaB4yLwuHDp0d5o4-N/view?usp=sharing" target="_blank">Full Report →</a>
-      </div>
-    </div>
- 
+    <div class="pc feat gc rv"><div><div class="fb">★ Featured Project</div><div class="pl">ECSE 417 · SystemVerilog</div><h3>RV32IM Pipelined CPU + 4×4 INT8 Systolic Array</h3><p class="pd">A complete SoC — 5-stage pipelined RISC-V processor with the full RV32IM instruction set, zero-penalty data forwarding, load-use stall detection, branch flush, and a custom <code>md_result_captured</code> latch that solves a tricky M-extension pipeline timing hazard.</p><div class="pt"><span>SystemVerilog</span><span>Vivado</span><span>Zynq UltraScale+</span><span>RISC-V</span><span>RoCC ISA</span></div></div><div><div class="pr"><strong>Coprocessor:</strong> 16-PE weight-stationary systolic array with row-skewed activation input, INT32 accumulation, and 7-cycle compute latency. Controlled via 6 custom RoCC instructions.<br><br><strong>Results:</strong> Hardware validated on AUP-ZU3 (Zynq UltraScale+ ZU3EG). <strong>138 MHz</strong> achievable (WNS +2.754 ns at 100 MHz). 4,777 LUTs · 2,985 FFs · 10 DSPs. <strong>36/36 verification checks passed</strong> across 12 test categories.</div><div class="plinks"><a href="https://github.com/athish22072003/rv32im-systolic-coprocessor" target="_blank" class="gh">⬡ GitHub Repository →</a></div></div></div>
+    <div class="pc gc rv"><div class="pl">C · FreeRTOS · STM32F446RE · In Progress</div><h3>STM32 Multi-Sensor Data Acquisition System</h3><p class="pd">Register-level I2C driver for BME280, register-level SPI driver for ADXL345 accelerometer, CAN 2.0B transmission via SN65HVD230. FreeRTOS managing four concurrent tasks through queues and mutexes. Python host-side visualization via UART. No HAL, no Arduino — datasheets and peripheral registers.</p><div class="pt"><span>STM32</span><span>FreeRTOS</span><span>C</span><span>I2C</span><span>SPI</span><span>CAN</span><span>ARM Cortex-M4</span></div></div>
+    <div class="pc gc rv"><div class="pl">ECSE 488 · C · Embedded Linux</div><h3>Warehouse Video Surveillance System</h3><p class="pd">An event-driven surveillance system running on a Raspberry Pi. A 4-state finite state machine classifies motion into four activity levels using frame-differencing and adaptive thresholds, then automatically adjusts the recording mode.</p><div class="pr"><strong>Features:</strong> JPEG and H.264 video recording, GPIO-triggered alerts, remote manual override, and timestamped file indexing with a searchable log.</div><div class="pt"><span>Raspberry Pi</span><span>C</span><span>OpenCV</span><span>FSM</span><span>H.264</span><span>GPIO</span></div><div class="plinks"><a href="https://drive.google.com/file/d/1eDpATYPq5mxNyq8hgnfpOdOlRFS5u2Vb/view?usp=sharing" target="_blank">Midterm Progress Report →</a></div></div>
+    <div class="pc gc rv"><div class="pl">ECSE 422 · Semiconductor Devices</div><h3>HfO₂ Ferroelectric Devices for Memory &amp; Logic</h3><p class="pd">A research project exploring hafnium-oxide-based ferroelectric architectures — FeRAM, FeFET, and NCFET — for next-generation non-volatile memory and steep-slope logic applications. Covers material physics, phase transitions, polarization mechanisms, and CMOS fabrication compatibility.</p><div class="pt"><span>Solid-State Physics</span><span>FeRAM</span><span>FeFET</span><span>NCFET</span><span>CMOS Scaling</span></div><div class="plinks"><a href="https://drive.google.com/file/d/1bCp_NvGiAzCZboNNAAuBR8JaTa0OmzjA/view?usp=sharing" target="_blank">Project Proposal →</a></div></div>
+    <div class="pc gc rv"><div class="pl">ECSE 417 · Verilog · Lab 1</div><h3>Parameterized Pipelined Arithmetic Datapath</h3><p class="pd">Designed a streaming datapath computing y = (a×b) + (c×d) + e on signed 16-bit fixed-point inputs with a valid-ready handshake interface. Built both an unpipelined single-cycle version and a parameterized pipelined version with configurable depth (2–5 stages).</p><div class="pr"><strong>Results:</strong> Swept pipeline depths 2–5 and analyzed Fmax vs. resource tradeoffs. Peak <strong>346 MHz</strong> at depth 4 (32 LUTs, 148 FFs, 2 DSPs). Unpipelined achieved 291 MHz. Verified with a self-checking testbench using 200+ seeded random vectors.</div><div class="pt"><span>Verilog</span><span>Vivado</span><span>Pipelining</span><span>Timing Analysis</span><span>Valid-Ready</span><span>Testbench</span></div><div class="plinks"><a href="https://drive.google.com/file/d/1yaW0gwg0VYzmaqkierBz46deAIGUYlLY/view?usp=drive_link" target="_blank">Lab Report →</a></div></div>
+    <div class="pc gc rv"><div class="pl">ECSE 417 · Verilog · Lab 2</div><h3>Dot-Product Accelerator with Multi-Mode FSM</h3><p class="pd">Three compute modes — sequential MAC, 4-way parallel MAC with an adder tree, and early-exit with a magnitude comparator. Controlled by a 5-state hybrid Moore/Mealy FSM with stall handling, output backpressure, and built-in hardware performance counters.</p><div class="pr"><strong>Results:</strong> Synthesized at <strong>121.4 MHz</strong>, 496 LUTs, 241 FFs, zero DSP blocks. Verified across 7 automated testcases including random stall injection and backpressure hold.</div><div class="pt"><span>Verilog</span><span>Vivado</span><span>FSM Design</span><span>MAC Unit</span><span>Stall Logic</span><span>Perf Counters</span></div><div class="plinks"><a href="https://drive.google.com/file/d/1PjPri-5Fe-Gxrf7GXwMmIg4jJzUHt4Xb/view?usp=sharing" target="_blank">Lab Report →</a></div></div>
+    <div class="pc gc rv"><div class="pl">ECSE 422 · COMSOL Multiphysics · Report 1</div><h3>1D Abrupt P-N Junction Simulation</h3><p class="pd">Modeled a one-dimensional abrupt p-n junction using COMSOL Multiphysics. Simulated electrostatic potential, electron/hole concentration profiles, net charge density, and electric field under equilibrium, forward bias (0 to +0.5 V), and reverse bias (0 to −1.5 V). Parametric sweep over donor concentration Nₐ ∈ {1, 2, 5} × 10¹⁶ cm⁻³.</p><div class="pr"><strong>Analysis:</strong> Analytically verified built-in voltage, depletion width (scales ∝ 1/√N), and peak electric field (scales ∝ √N). All COMSOL numerical results matched standard semiconductor theory exactly.</div><div class="pt"><span>COMSOL Multiphysics</span><span>Semiconductor Physics</span><span>P-N Junction</span><span>Device Modeling</span><span>Parametric Sweep</span></div><div class="plinks"><a href="https://drive.google.com/file/d/1SRkHyIqR4FkCdKB9Pg3khgYHuO0KmPRk/view?usp=sharing" target="_blank">Full Report →</a></div></div>
+    <div class="pc gc rv"><div class="pl">ECSE 422 · COMSOL Multiphysics · Report 2</div><h3>2D P-I-N Junction — Light Response &amp; Quasi-Fermi Levels</h3><p class="pd">Extended the 1D model to a full 2D p-i-n junction (12×6 µm) solved via coupled drift-diffusion PDEs in COMSOL. Studied photodetector and solar-cell behavior by sweeping optical generation rate G₀ under zero and −2 V reverse bias. Derived the logarithmic scaling of quasi-Fermi level splitting: ΔEf ≈ 2Vt · ln(G₀τ / nᵢ).</p><div class="pr"><strong>Results:</strong> Carrier concentration in the intrinsic region climbed from ~10¹⁰ cm⁻³ at G₀ = 0 to ~10¹⁶ cm⁻³ at peak generation. Under −2 V reverse bias, estimated electron transit time ≈ 0.46 ns — far below SRH recombination lifetime, explaining high quantum efficiency.</div><div class="pt"><span>COMSOL Multiphysics</span><span>2D Drift-Diffusion</span><span>P-I-N Junction</span><span>Quasi-Fermi Levels</span><span>Photodetector</span><span>Solar Cell</span></div><div class="plinks"><a href="https://drive.google.com/file/d/1fKSHtm6QrpAps4OaB4yLwuHDp0d5o4-N/view?usp=sharing" target="_blank">Full Report →</a></div></div>
   </div>
- 
   <div class="divider rv" style="margin-top:72px"><span class="pill pill-u">Undergrad</span><h3>Undergraduate Work</h3><span class="rule"></span></div>
   <div class="pg">
-    <div class="pc uc rv">
-      <div class="pl">Hardware · 8051 Microcontroller</div>
-      <h3>Blood Level Monitoring System</h3>
-      <p class="pd">A hand-soldered analog signal conditioning circuit — op-amp gain stage plus LDR voltage divider — interfaced to an 8051 microcontroller via ADC. Built for fluid-level detection in medical IV bottles.</p>
-      <div class="pr"><strong>How I verified it:</strong> Oscilloscope for waveform analysis, DMM for DC bias measurements. Components selected from datasheets. Fixed noise issues with bypass capacitors.</div>
-      <div class="pt"><span>8051</span><span>Op-Amp</span><span>Soldering</span><span>Oscilloscope</span><span>DMM</span></div>
-    </div>
-    <div class="pc uc rv">
-      <div class="pl">IoT Platform · ESP32</div>
-      <h3>Cloud Control Hub</h3>
-      <p class="pd">A remote monitoring system that publishes sensor data over MQTT with TLS encryption to AWS IoT. Supports actuator control through cloud-triggered GPIO callbacks and I²C sensor interfacing.</p>
-      <div class="pt"><span>ESP32</span><span>AWS IoT</span><span>MQTT/TLS</span><span>I²C</span><span>GPIO</span></div>
-    </div>
-    <div class="pc uc rv">
-      <div class="pl">IoT · ESP8266</div>
-      <h3>E-Smart Board</h3>
-      <p class="pd">A Wi-Fi-enabled notice board that receives messages through a web interface and displays them on an LCD screen in real time. Uses ThingSpeak for cloud-based logging.</p>
-      <div class="pt"><span>ESP8266</span><span>ThingSpeak</span><span>LCD</span><span>Wi-Fi</span></div>
-    </div>
-    <div class="pc uc rv">
-      <div class="pl">Embedded Control · Arduino</div>
-      <h3>Temperature-Controlled Fan</h3>
-      <p class="pd">A closed-loop fan speed controller built with an Arduino and an LM35 temperature sensor. PWM-regulated. Hand-soldered on a breadboard.</p>
-      <div class="pt"><span>Arduino</span><span>LM35</span><span>PWM</span><span>Soldering</span></div>
-    </div>
+    <div class="pc uc rv"><div class="pl">Hardware · 8051 Microcontroller</div><h3>Blood Level Monitoring System</h3><p class="pd">A hand-soldered analog signal conditioning circuit — op-amp gain stage plus LDR voltage divider — interfaced to an 8051 microcontroller via ADC. Built for fluid-level detection in medical IV bottles.</p><div class="pr"><strong>How I verified it:</strong> Oscilloscope for waveform analysis, DMM for DC bias measurements. Components selected from datasheets. Fixed noise issues with bypass capacitors.</div><div class="pt"><span>8051</span><span>Op-Amp</span><span>Soldering</span><span>Oscilloscope</span><span>DMM</span></div></div>
+    <div class="pc uc rv"><div class="pl">IoT Platform · ESP32</div><h3>Cloud Control Hub</h3><p class="pd">A remote monitoring system that publishes sensor data over MQTT with TLS encryption to AWS IoT. Supports actuator control through cloud-triggered GPIO callbacks and I²C sensor interfacing.</p><div class="pt"><span>ESP32</span><span>AWS IoT</span><span>MQTT/TLS</span><span>I²C</span><span>GPIO</span></div></div>
+    <div class="pc uc rv"><div class="pl">IoT · ESP8266</div><h3>E-Smart Board</h3><p class="pd">A Wi-Fi-enabled notice board that receives messages through a web interface and displays them on an LCD screen in real time. Uses ThingSpeak for cloud-based logging.</p><div class="pt"><span>ESP8266</span><span>ThingSpeak</span><span>LCD</span><span>Wi-Fi</span></div></div>
+    <div class="pc uc rv"><div class="pl">Embedded Control · Arduino</div><h3>Temperature-Controlled Fan</h3><p class="pd">A closed-loop fan speed controller built with an Arduino and an LM35 temperature sensor. PWM-regulated. Hand-soldered on a breadboard.</p><div class="pt"><span>Arduino</span><span>LM35</span><span>PWM</span><span>Soldering</span></div></div>
   </div>
 </div>
 </section>
@@ -427,7 +146,7 @@ code{font-family:var(--mono);font-size:.85em;color:var(--teal-lt);background:lin
   <h2 class="sh-t rv">Let's <em>connect.</em></h2>
   <div class="ct-g">
     <div class="ct-info rv">
-      <p>I'm actively looking for Fall 2026 co-op opportunities in FPGA design, embedded systems, firmware, and hardware engineering. Based in Cleveland, OH — happy to chat about any role that involves building real hardware.</p>
+      <p>I'm actively looking for Fall 2026 co-op or full-time opportunities in hardware validation, platform validation, characterization engineering, or system-level test. Based in Cleveland, OH — happy to chat about any role that involves bench work, oscilloscopes, and quantitative hardware characterization.</p>
       <div class="ct-ls">
         <a href="mailto:athishvikraman22@gmail.com" class="ct-l"><span class="lb">Email</span>athishvikraman22@gmail.com</a>
         <a href="https://www.linkedin.com/in/athishvikraman" target="_blank" class="ct-l"><span class="lb">LinkedIn</span>linkedin.com/in/athishvikraman</a>
@@ -451,98 +170,8 @@ code{font-family:var(--mono);font-size:.85em;color:var(--teal-lt);background:lin
 <footer class="footer"><div class="w"><p>© 2026 Athish Vikraman</p></div></footer>
  
 <script>
-(function(){
-  const C=document.getElementById('hc'),R=new THREE.WebGLRenderer({canvas:C,antialias:true,alpha:true});
-  R.setPixelRatio(Math.min(devicePixelRatio,2));R.setSize(innerWidth,innerHeight);
-  const S=new THREE.Scene(),cam=new THREE.PerspectiveCamera(50,innerWidth/innerHeight,.1,200);
-  cam.position.set(0,0,12);
-  const tc=0xd4af37,tc2=0xfceda6,gc=0xffffff;
-  const aL=new THREE.AmbientLight(0xffffff,0.4);S.add(aL);
-  const pL=new THREE.PointLight(tc2,2,50);pL.position.set(5,5,5);S.add(pL);
-  const pL2=new THREE.PointLight(tc,1.5,30);pL2.position.set(-5,-5,2);S.add(pL2);
-  const gWM=new THREE.MeshStandardMaterial({color:tc,metalness:0.9,roughness:0.2,wireframe:true,transparent:true,opacity:0.35});
-  const iGM=new THREE.MeshStandardMaterial({color:tc2,metalness:1.0,roughness:0.1,wireframe:true,transparent:true,opacity:0.15});
-  const cM=new THREE.MeshStandardMaterial({color:gc,metalness:0.5,roughness:0.5,transparent:true,opacity:0.08,emissive:tc2,emissiveIntensity:0.2});
-  const rM=new THREE.MeshStandardMaterial({color:tc,metalness:0.8,roughness:0.3,transparent:true,opacity:0.15});
-  const main=new THREE.Mesh(new THREE.DodecahedronGeometry(2.4,0),gWM);
-  main.position.set(1.5,0,0);S.add(main);
-  const inner=new THREE.Mesh(new THREE.IcosahedronGeometry(1.2,0),iGM);
-  inner.position.copy(main.position);S.add(inner);
-  const core=new THREE.Mesh(new THREE.SphereGeometry(.4,32,32),cM);
-  core.position.copy(main.position);S.add(core);
-  const rG=new THREE.TorusGeometry(3.2,.015,16,100);
-  const rings=[];
-  [[Math.PI/3,0,0],[-.7,0,.9],[.4,.8,-.3],[Math.PI/2.5,Math.PI/6,0]].forEach(([rx,ry,rz])=>{
-    const r=new THREE.Mesh(rG,rM);
-    r.position.copy(main.position);r.rotation.set(rx,ry,rz);
-    S.add(r);rings.push(r);
-  });
-  const N=250,pGeo=new THREE.BufferGeometry();
-  const pos=new Float32Array(N*3),vel=new Float32Array(N*3);
-  for(let i=0;i<N;i++){
-    pos[i*3]=(Math.random()-.5)*20;pos[i*3+1]=(Math.random()-.5)*14;pos[i*3+2]=(Math.random()-.5)*12;
-    vel[i*3]=(Math.random()-.5)*.003;vel[i*3+1]=(Math.random()-.5)*.003;vel[i*3+2]=(Math.random()-.5)*.002;
-  }
-  pGeo.setAttribute('position',new THREE.BufferAttribute(pos,3));
-  const pts=new THREE.Points(pGeo,new THREE.PointsMaterial({color:tc2,size:.035,transparent:true,opacity:.6,sizeAttenuation:true}));
-  S.add(pts);
-  const lGeo=new THREE.BufferGeometry();
-  const lPos=new Float32Array(600*6);
-  lGeo.setAttribute('position',new THREE.BufferAttribute(lPos,3));
-  const lines=new THREE.LineSegments(lGeo,new THREE.LineBasicMaterial({color:tc,transparent:true,opacity:.08}));
-  S.add(lines);
-  const accents=[];
-  for(let i=0;i<6;i++){
-    const m=new THREE.Mesh(new THREE.OctahedronGeometry(.18,0),new THREE.MeshStandardMaterial({color:i<2?gc:tc2,metalness:0.8,roughness:0.2,transparent:true,opacity:0.8}));
-    m.position.set((Math.random()-.5)*12,(Math.random()-.5)*8,(Math.random()-.5)*6);
-    S.add(m);accents.push(m);
-  }
-  let mx=0,my=0,introT=0;
-  document.addEventListener('mousemove',e=>{mx=(e.clientX/innerWidth-.5)*2;my=(e.clientY/innerHeight-.5)*2});
-  addEventListener('resize',()=>{cam.aspect=innerWidth/innerHeight;cam.updateProjectionMatrix();R.setSize(innerWidth,innerHeight)});
-  !function tick(){
-    requestAnimationFrame(tick);
-    const t=performance.now()*.001;
-    if(introT<1){introT=Math.min(1,introT+.008);const ease=1-Math.pow(1-introT,3);cam.position.z=12-ease*6.5;}
-    main.rotation.x=t*.03+my*.06;main.rotation.y=t*.05+mx*.06;
-    inner.rotation.x=-t*.05-my*.04;inner.rotation.y=-t*.07-mx*.04;
-    core.scale.setScalar(1+Math.sin(t*2)*.05);
-    rings.forEach((r,i)=>{r.rotation.z=t*(.015+i*.005)*(i%2?1:-1)});
-    accents.forEach((a,i)=>{a.rotation.x=t*(.3+i*.1);a.rotation.y=t*(.2+i*.08);a.position.y+=Math.sin(t+i)*0.003;});
-    const p=pGeo.attributes.position.array;
-    for(let i=0;i<N;i++){
-      p[i*3]+=vel[i*3];p[i*3+1]+=vel[i*3+1];p[i*3+2]+=vel[i*3+2];
-      if(Math.abs(p[i*3])>10)vel[i*3]*=-1;
-      if(Math.abs(p[i*3+1])>7)vel[i*3+1]*=-1;
-      if(Math.abs(p[i*3+2])>6)vel[i*3+2]*=-1;
-    }
-    pGeo.attributes.position.needsUpdate=true;
-    let lc=0;const lp=lGeo.attributes.position.array;
-    for(let i=0;i<N&&lc<600;i++){
-      for(let j=i+1;j<N&&lc<600;j++){
-        const dx=p[i*3]-p[j*3],dy=p[i*3+1]-p[j*3+1],dz=p[i*3+2]-p[j*3+2];
-        const d=dx*dx+dy*dy+dz*dz;
-        if(d<5){lp[lc*6]=p[i*3];lp[lc*6+1]=p[i*3+1];lp[lc*6+2]=p[i*3+2];lp[lc*6+3]=p[j*3];lp[lc*6+4]=p[j*3+1];lp[lc*6+5]=p[j*3+2];lc++;}
-      }
-    }
-    for(let i=lc*6;i<600*6;i++)lp[i]=0;
-    lGeo.attributes.position.needsUpdate=true;
-    lGeo.setDrawRange(0,lc*2);
-    cam.position.x+=(mx*.4-cam.position.x)*.015;
-    cam.position.y+=(-my*.3-cam.position.y)*.015;
-    cam.lookAt(1.5,0,0);
-    R.render(S,cam);
-  }();
-})();
-const ob=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('v')})},{threshold:.04,rootMargin:'0px 0px -10px 0px'});
-document.querySelectorAll('.rv').forEach(el=>ob.observe(el));
-addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('stuck',scrollY>40));
-document.getElementById('nM').addEventListener('click',()=>document.getElementById('nL').classList.toggle('open'));
-document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',function(e){e.preventDefault();const t=document.querySelector(this.getAttribute('href'));if(t){t.scrollIntoView({behavior:'smooth'});document.getElementById('nL').classList.remove('open')}})});
-document.querySelectorAll('.pc, .ac, .ct-l').forEach(c=>{
-  c.addEventListener('mousemove',e=>{const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.transform=`perspective(1200px) rotateX(${-y*4}deg) rotateY(${x*4}deg) translateY(-5px)`});
-  c.addEventListener('mouseleave',()=>{c.style.transform=''});
-});
+(function(){const C=document.getElementById('hc'),R=new THREE.WebGLRenderer({canvas:C,antialias:true,alpha:true});R.setPixelRatio(Math.min(devicePixelRatio,2));R.setSize(innerWidth,innerHeight);const S=new THREE.Scene(),cam=new THREE.PerspectiveCamera(50,innerWidth/innerHeight,.1,200);cam.position.set(0,0,12);const tc=0xd4af37,tc2=0xfceda6,gc=0xffffff;const aL=new THREE.AmbientLight(0xffffff,0.4);S.add(aL);const pL=new THREE.PointLight(tc2,2,50);pL.position.set(5,5,5);S.add(pL);const pL2=new THREE.PointLight(tc,1.5,30);pL2.position.set(-5,-5,2);S.add(pL2);const gWM=new THREE.MeshStandardMaterial({color:tc,metalness:0.9,roughness:0.2,wireframe:true,transparent:true,opacity:0.35});const iGM=new THREE.MeshStandardMaterial({color:tc2,metalness:1.0,roughness:0.1,wireframe:true,transparent:true,opacity:0.15});const cM=new THREE.MeshStandardMaterial({color:gc,metalness:0.5,roughness:0.5,transparent:true,opacity:0.08,emissive:tc2,emissiveIntensity:0.2});const rM=new THREE.MeshStandardMaterial({color:tc,metalness:0.8,roughness:0.3,transparent:true,opacity:0.15});const main=new THREE.Mesh(new THREE.DodecahedronGeometry(2.4,0),gWM);main.position.set(1.5,0,0);S.add(main);const inner=new THREE.Mesh(new THREE.IcosahedronGeometry(1.2,0),iGM);inner.position.copy(main.position);S.add(inner);const core=new THREE.Mesh(new THREE.SphereGeometry(.4,32,32),cM);core.position.copy(main.position);S.add(core);const rG=new THREE.TorusGeometry(3.2,.015,16,100);const rings=[];[[Math.PI/3,0,0],[-.7,0,.9],[.4,.8,-.3],[Math.PI/2.5,Math.PI/6,0]].forEach(([rx,ry,rz])=>{const r=new THREE.Mesh(rG,rM);r.position.copy(main.position);r.rotation.set(rx,ry,rz);S.add(r);rings.push(r)});const N=250,pGeo=new THREE.BufferGeometry();const pos=new Float32Array(N*3),vel=new Float32Array(N*3);for(let i=0;i<N;i++){pos[i*3]=(Math.random()-.5)*20;pos[i*3+1]=(Math.random()-.5)*14;pos[i*3+2]=(Math.random()-.5)*12;vel[i*3]=(Math.random()-.5)*.003;vel[i*3+1]=(Math.random()-.5)*.003;vel[i*3+2]=(Math.random()-.5)*.002}pGeo.setAttribute('position',new THREE.BufferAttribute(pos,3));const pts=new THREE.Points(pGeo,new THREE.PointsMaterial({color:tc2,size:.035,transparent:true,opacity:.6,sizeAttenuation:true}));S.add(pts);const lGeo=new THREE.BufferGeometry();const lPos=new Float32Array(600*6);lGeo.setAttribute('position',new THREE.BufferAttribute(lPos,3));const lines=new THREE.LineSegments(lGeo,new THREE.LineBasicMaterial({color:tc,transparent:true,opacity:.08}));S.add(lines);const accents=[];for(let i=0;i<6;i++){const m=new THREE.Mesh(new THREE.OctahedronGeometry(.18,0),new THREE.MeshStandardMaterial({color:i<2?gc:tc2,metalness:0.8,roughness:0.2,transparent:true,opacity:0.8}));m.position.set((Math.random()-.5)*12,(Math.random()-.5)*8,(Math.random()-.5)*6);S.add(m);accents.push(m)}let mx=0,my=0,introT=0;document.addEventListener('mousemove',e=>{mx=(e.clientX/innerWidth-.5)*2;my=(e.clientY/innerHeight-.5)*2});addEventListener('resize',()=>{cam.aspect=innerWidth/innerHeight;cam.updateProjectionMatrix();R.setSize(innerWidth,innerHeight)});!function tick(){requestAnimationFrame(tick);const t=performance.now()*.001;if(introT<1){introT=Math.min(1,introT+.008);const ease=1-Math.pow(1-introT,3);cam.position.z=12-ease*6.5}main.rotation.x=t*.03+my*.06;main.rotation.y=t*.05+mx*.06;inner.rotation.x=-t*.05-my*.04;inner.rotation.y=-t*.07-mx*.04;core.scale.setScalar(1+Math.sin(t*2)*.05);rings.forEach((r,i)=>{r.rotation.z=t*(.015+i*.005)*(i%2?1:-1)});accents.forEach((a,i)=>{a.rotation.x=t*(.3+i*.1);a.rotation.y=t*(.2+i*.08);a.position.y+=Math.sin(t+i)*0.003});const p=pGeo.attributes.position.array;for(let i=0;i<N;i++){p[i*3]+=vel[i*3];p[i*3+1]+=vel[i*3+1];p[i*3+2]+=vel[i*3+2];if(Math.abs(p[i*3])>10)vel[i*3]*=-1;if(Math.abs(p[i*3+1])>7)vel[i*3+1]*=-1;if(Math.abs(p[i*3+2])>6)vel[i*3+2]*=-1}pGeo.attributes.position.needsUpdate=true;let lc=0;const lp=lGeo.attributes.position.array;for(let i=0;i<N&&lc<600;i++){for(let j=i+1;j<N&&lc<600;j++){const dx=p[i*3]-p[j*3],dy=p[i*3+1]-p[j*3+1],dz=p[i*3+2]-p[j*3+2];const d=dx*dx+dy*dy+dz*dz;if(d<5){lp[lc*6]=p[i*3];lp[lc*6+1]=p[i*3+1];lp[lc*6+2]=p[i*3+2];lp[lc*6+3]=p[j*3];lp[lc*6+4]=p[j*3+1];lp[lc*6+5]=p[j*3+2];lc++}}}for(let i=lc*6;i<600*6;i++)lp[i]=0;lGeo.attributes.position.needsUpdate=true;lGeo.setDrawRange(0,lc*2);cam.position.x+=(mx*.4-cam.position.x)*.015;cam.position.y+=(-my*.3-cam.position.y)*.015;cam.lookAt(1.5,0,0);R.render(S,cam)}()})();
+const ob=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('v')})},{threshold:.04,rootMargin:'0px 0px -10px 0px'});document.querySelectorAll('.rv').forEach(el=>ob.observe(el));addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('stuck',scrollY>40));document.getElementById('nM').addEventListener('click',()=>document.getElementById('nL').classList.toggle('open'));document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',function(e){e.preventDefault();const t=document.querySelector(this.getAttribute('href'));if(t){t.scrollIntoView({behavior:'smooth'});document.getElementById('nL').classList.remove('open')}})});document.querySelectorAll('.pc, .ac, .ct-l').forEach(c=>{c.addEventListener('mousemove',e=>{const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.transform=`perspective(1200px) rotateX(${-y*4}deg) rotateY(${x*4}deg) translateY(-5px)`});c.addEventListener('mouseleave',()=>{c.style.transform=''})});
 </script>
 </body>
 </html>
